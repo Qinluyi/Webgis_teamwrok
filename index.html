@@ -1,52 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"
-			maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-		<title>指尖上的苗绣</title>
-		<link rel="stylesheet" href="./css/Mainpage.css">
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/Mainpage.css" />
+    <title>首页布局</title>
+  </head>
+  <body>
+    <!--放首页的地方-->
     <body>
-        <div class="header">
-            <h1>头部区域</h1>
-            <p>重置浏览器大小查看效果。</p>
-          </div>
-          
-          <nav class="navbar">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
+        <div class="container">
+          <div class="navbar">
+            
+            <nav>
+              <ul>
                 <li class="dropdown">
-                    <a href="#">Services</a>
-                    <div class="dropdown-content">
-                        <a href="#">Service 1</a>
-                        <a href="#">Service 2</a>
-                        <a href="#">Service 3</a>
-                    </div>
-                </li>
-                <li><a href="#">Contact</a></li>
-                <li class="icon"><a href="#"><img src="../imgs/登录.png" alt="Login"></a></li>
-                <li class="icon"><a href="#"><img src="../imgs/购物车.png" alt="shopping cart"></a></li>
-            </ul>
-            
-        </nav>
-          
+                  <a href="#" class="nav_text_big">绣娘社区</a>
+                  <div class="dropdown-content">
+                      <a href="#">上传作品</a>
+                      <a href="#">绣娘论坛</a>
+                      <a href="#">加入合作社</a>
+                  </div>
+              </li>
+              <li class="dropdown">
+                  <a href="#" class="nav_text_big">走进苗绣</a>
+                  <div class="dropdown-content">
+                      <a href="#">绣娘的一天</a>
+                      <a href="#">周边推荐</a>
+                  </div>
+              </li>
+              <li><a href="#" class="nav_text_big">产业概览</a></li>
+              </ul>
+            </nav>
+            <a href="购物车网页">
+              <img src="./imgs/登录.png" class="menu-icon shopcar"/>
+            </a> 
+            <a href="购物车网页">
+                <img src="./imgs/_购物车.png" class="menu-icon shopcar"/>
+            </a> 
+
+          </div>
           <div class="row">
-            <div class="column">
-              <h2>第一列</h2>
-              <p>菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！</p>
+            <div class="col">
+              <div class="big_title">指尖上的苗绣</div>
+              <div class="small_title">
+                2006年5月，苗绣进入第一批国家级非物质文化遗产名录。其图案中记录的族群历史、纹饰中流露的朴素哲学，已经让人们惊叹不已，
+                而艺术呈现和工艺造诣上的精妙绝伦，更令外界叹为观止。
+              </div>
             </div>
-            
-            <div class="column">
-              <h2>第二列</h2>
-              <p>菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！</p>
-            </div>
-            
-            <div class="column">
-              <h2>第三列</h2>
-              <p>菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！菜鸟教程 - 学的不仅是技术，更是梦想！</p>
+            <div class="col">
+              <div class="card1 card">
+                <h5>Western Desert</h5>
+                <p>no other member state of the United Nations had ever officially recognized</p>
+              </div>
+              <div class="card2 card">
+                <h5>AI Bagawat</h5>
+                <p>no other member state of the United Nations had ever officially recognized</p>
+              </div>
+              <div class="card3 card">
+                <h5>Pyramid of Giza</h5>
+                <p>no other member state of the United Nations had ever officially recognized</p>
+              </div>
+              <div class="card4 card">
+                <h5>Kalahari Desert</h5>
+                <p>no other member state of the United Nations had ever officially recognized</p>
+              </div>
+    
             </div>
           </div>
-    </body>
+        </div>
