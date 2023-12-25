@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DO<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,30 +11,76 @@
     <style>
         /* 样式用于设置地图容器和侧边栏的布局 */
         body {
-            background-color: white;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
+            font-family: 'Arial', sans-serif;
         }
 
         .container {
-            width: 100%;
-            height: 100%;
+            display: flex;
+            height: 100vh;
         }
 
         .sidebar {
-            width: 15%;
-            height: 100vh;
+            width: 25%;
+            height: 100%;
             text-align: center;
-            float: left;
-            background-color: #f0f0f0;
-            /* padding: 20px; */
-            /* box-sizing: border-box; */
+            background-color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            color: #333333;
+        }
+
+        .sidebar label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .sidebar input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .sidebar button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .locationList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .locationItem {
+            text-decoration: none;
+            color: #333333;
+            display: block;
+            padding: 10px;
+            border-bottom: 1px solid #dddddd;
+            transition: background-color 0.3s;
+        }
+
+        .locationItem:hover {
+            background-color: #f2f2f2;
         }
 
         .map {
-            width: 85%;
+            flex: 1;
             height: 100vh;
-            float: left;
         }
     </style>
 </head>
@@ -47,13 +93,29 @@
             <input type="text" id="startPoint" />
             <label for="endPoint">终点：</label>
             <input type="text" id="endPoint" />
-            <!-- <button onclick="searchRoute()">规划路径</button> -->
             <button id="routeButton">规划路径</button>
 
+            <!-- 地点列表 -->
+            <ul class="locationList" id="locationList">
+                <li><a href="#" class="locationItem" data-location="凯里市梅香手工刺绣厂(非遗苗绣工作室)">凯里市梅香手工刺绣厂(非遗苗绣工作室)</a></li>
+                <li><a href="#" class="locationItem" data-location="凯里市苗乡锦绣刺绣农民专业合作社">凯里市苗乡锦绣刺绣农民专业合作社</a></li>
+                <li><a href="#" class="locationItem" data-location="黔苗绣艺">黔苗绣艺</a></li>
+                <li><a href="#" class="locationItem" data-location="凯里妹旺刺绣农民专业合作社">凯里妹旺刺绣农民专业合作社</a></li>
+                <li><a href="#" class="locationItem" data-location="锦屏县杉乡苗绣有限公司">锦屏县杉乡苗绣有限公司</a></li>
+                <li><a href="#" class="locationItem" data-location="黔东南州阿科里绣娘农民专业合作社">黔东南州阿科里绣娘农民专业合作社</a></li>
+                <li><a href="#" class="locationItem" data-location="黔东南阿绣娘民族服饰有限公司">黔东南阿绣娘民族服饰有限公司</a></li>
+                <li><a href="#" class="locationItem" data-location="贵州古苗疆刺绣工贸有限公司">贵州古苗疆刺绣工贸有限公司</a></li>
+                <li><a href="#" class="locationItem" data-location="贵州绣娘卡乌苗乡工坊">贵州绣娘卡乌苗乡工坊</a></li>
+                <li><a href="#" class="locationItem" data-location="丽丽苗装苗布厂锦绣计划">丽丽苗装苗布厂锦绣计划</a></li>
+                <li><a href="#" class="locationItem" data-location="苗岭民族服饰店">苗岭民族服饰店</a></li>
+                <li><a href="#" class="locationItem" data-location="家秀苗装">家秀苗装</a></li>
+                <li><a href="#" class="locationItem" data-location="黔民绣花厂">黔民绣花厂</a></li>
+                <li><a href="#" class="locationItem" data-location="苗韵风采民族服饰博物馆">苗韵风采民族服饰博物馆</a></li>
+            </ul>
         </div>
         <div class="map" id="map"></div>
     </div>
-    
+
     <script>
         // 初始化地图
         var map = new BMap.Map("map");
@@ -85,11 +147,12 @@
         });
         map.addControl(geolocationControl);
 
-        // 初始化地图
-        geolocationControl.location();
-
-
-
+        // 获取当前位置并设置为起点输入框的值
+        var startInput = document.getElementById("startPoint");
+        geolocationControl.addEventListener("locationSuccess", function (e) {
+            var address = e.addressComponent;
+            startInput.value = address.province + address.city + address.district + address.street + address.streetNumber;
+        });
 
         // 初始化搜索框
         var startAutocomplete = new BMap.Autocomplete({
@@ -99,6 +162,15 @@
         var endAutocomplete = new BMap.Autocomplete({
             "input": "endPoint",
             "location": map
+        });
+
+        // 地点列表点击事件
+        var locationList = document.getElementById("locationList");
+        locationList.addEventListener("click", function (e) {
+            if (e.target.classList.contains("locationItem")) {
+                var locationName = e.target.dataset.location;
+                document.getElementById("endPoint").value = locationName;
+            }
         });
 
         // 路径规划
@@ -118,6 +190,8 @@
                     var endSearch = new BMap.LocalSearch(map, {
                         onSearchComplete: function (results) {
                             var endPoint = results.getPoi(0).point;
+                            // 清除之前的覆盖物（折线）
+                            map.clearOverlays();
 
                             var driving = new BMap.DrivingRoute(map, {
                                 renderOptions: { map: map, autoViewport: true },

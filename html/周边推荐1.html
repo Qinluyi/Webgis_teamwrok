@@ -7,7 +7,7 @@
     <title>周边推荐</title>
     <!-- 引入百度地图API -->
     <script type="text/javascript"
-        src="https://api.map.baidu.com/api?v=3.0&ak=EcsnNhOfA5uKn6iwi1pAkkDGCQuGLHkC"></script>
+        src="http://api.map.baidu.com/api?v=3.0&ak=EcsnNhOfA5uKn6iwi1pAkkDGCQuGLHkC"></script>
     <style>
         /* 样式用于设置地图容器和侧边栏的布局 */
         body {
@@ -19,21 +19,22 @@
         .container {
             width: 100%;
             height: 100%;
-            display: flex;
         }
 
         .sidebar {
-            width: 25%;
+            width: 15%;
             height: 100vh;
             text-align: center;
+            float: left;
             background-color: #f0f0f0;
-            padding: 20px;
-            box-sizing: border-box;
+            /* padding: 20px; */
+            /* box-sizing: border-box; */
         }
 
         .map {
-            flex: 1;
+            width: 85%;
             height: 100vh;
+            float: left;
         }
     </style>
 </head>
@@ -43,9 +44,7 @@
         <div class="sidebar" id="sidebar">
             <h2>周边服务</h2>
             <label for="startPoint">起点：</label>
-            <select id="startPoint">
-                <option value="currentLocation">当前位置</option>
-            </select>
+            <input type="text" id="startPoint" />
             <label for="endPoint">终点：</label>
             <input type="text" id="endPoint" />
             <button id="routeButton">规划路径</button>
@@ -54,11 +53,15 @@
     </div>
 
     <script>
+        // 初始化地图
         var map = new BMap.Map("map");
+        // 设置地图中心点和缩放级别
         var point = new BMap.Point(116.404, 39.915);
         map.centerAndZoom(point, 15);
 
+        // 添加默认缩放平移控件
         map.addControl(new BMap.NavigationControl());
+        // 启用滚轮缩放
         map.enableScrollWheelZoom(true);
 
         var geolocation = new BMap.Geolocation();
@@ -72,60 +75,54 @@
             }
         }, { enableHighAccuracy: true });
 
+        // 添加定位控件
         var geolocationControl = new BMap.GeolocationControl({
             anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
             showAddressBar: true,
             enableAutoLocation: true
         });
         map.addControl(geolocationControl);
-        geolocationControl.location();
-
-        var startSelect = document.getElementById("startPoint");
-        startSelect.addEventListener("change", function () {
-            if (startSelect.value === "currentLocation") {
-                getCurrentLocationAndSetAsStart();
-            }
+        // 获取当前位置并设置为起点输入框的值
+        var startInput = document.getElementById("startPoint");
+        geolocationControl.addEventListener("locationSuccess", function (e) {
+            var address = e.addressComponent;
+            startInput.value = address.province + address.city + address.district + address.street + address.streetNumber;
         });
 
+        // 当用户开始输入时清空起点输入框的值
+        startInput.addEventListener("input", function () {
+            startInput.value = "";
+        });
+        // 初始化搜索框
         var startAutocomplete = new BMap.Autocomplete({
             "input": "startPoint",
             "location": map
         });
-
         var endAutocomplete = new BMap.Autocomplete({
             "input": "endPoint",
             "location": map
         });
 
-        function getCurrentLocationAndSetAsStart() {
-            geolocation.getCurrentPosition(function (r) {
-                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-                    var mk = new BMap.Marker(r.point);
-                    map.addOverlay(mk);
-                    map.panTo(r.point);
-                    startSelect.value = "currentLocation";
-                } else {
-                    alert('定位失败：' + this.getStatus());
-                }
-            }, { enableHighAccuracy: true });
-        }
-
+        // 路径规划
         function searchRoute() {
-            var startPointValue = document.getElementById("startPoint").value;
+            var startPointName = document.getElementById("startPoint").value;
             var endPointName = document.getElementById("endPoint").value;
 
-            if (startPointValue === "currentLocation") {
-                getCurrentLocationAndSetAsStart();
+            if (!startPointName || !endPointName) {
+                alert("请输入起点和终点");
                 return;
             }
 
+            // 使用百度地图的getPoint方法获取经纬度坐标
             var startSearch = new BMap.LocalSearch(map, {
                 onSearchComplete: function (results) {
                     var startPoint = results.getPoi(0).point;
                     var endSearch = new BMap.LocalSearch(map, {
                         onSearchComplete: function (results) {
                             var endPoint = results.getPoi(0).point;
-
+                            // 清除之前的覆盖物（折线）
+                            map.clearOverlays();
+                            
                             var driving = new BMap.DrivingRoute(map, {
                                 renderOptions: { map: map, autoViewport: true },
                                 onSearchComplete: function (results) {
@@ -144,10 +141,10 @@
                     endSearch.search(endPointName);
                 }
             });
-            startSearch.search(startPointValue);
+            startSearch.search(startPointName);
         }
-
         document.getElementById("routeButton").addEventListener("click", searchRoute);
+
     </script>
 </body>
 
