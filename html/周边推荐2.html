@@ -61,7 +61,9 @@
             cursor: pointer;
             border: 1px solid #ccc;
         }
-
+        .sidebar button:hover {
+            background-color: #a6bfa7;
+        }
         .locationList {
             list-style: none;
             padding: 0;
@@ -128,6 +130,19 @@
             border: 0;
             overflow: hidden;
         }
+        .info-window-button {
+        background-color: #81b183;
+        color: white;
+        /* padding: 8px 12px; */
+        border: none;
+        margin-top: 20px;
+        margin-right: 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .info-window-button:hover {
+            background-color: #a6bfa7;
+        }
     </style>
 </head>
 
@@ -161,8 +176,7 @@
             </ul>
         </div>
 
-        <button id="toggleSidebar1" class="sidebar-toggle-btn"><i
-                class="fa fa-bars"></i><br>周<br>边<br>推<br>荐</button>
+        <button id="toggleSidebar1" class="sidebar-toggle-btn"><i class="fa fa-bars"></i><br>周<br>边<br>推<br>荐</button>
         <div class="sidebar" id="sidebar1">
             <h2>周边推荐</h2>
             <label for="centerPoint">中心点：</label>
@@ -193,6 +207,8 @@
     <script src="http://api.map.baidu.com/api?v=3.0&ak=EcsnNhOfA5uKn6iwi1pAkkDGCQuGLHkC"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+
 
     <script>
         document.getElementById("toggleSidebar").addEventListener("click", function () {
@@ -216,16 +232,16 @@
         // 启用滚轮缩放
         map.enableScrollWheelZoom(true);
 
-        var geolocation = new BMap.Geolocation();
-        geolocation.getCurrentPosition(function (r) {
-            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-                var mk = new BMap.Marker(r.point);
-                map.addOverlay(mk);
-                map.panTo(r.point);
-            } else {
-                alert('定位失败：' + this.getStatus());
-            }
-        }, { enableHighAccuracy: true });
+        // var geolocation = new BMap.Geolocation();
+        // geolocation.getCurrentPosition(function (r) {
+        //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+        //         var mk = new BMap.Marker(r.point);
+        //         map.addOverlay(mk);
+        //         map.panTo(r.point);
+        //     } else {
+        //         alert('定位失败：' + this.getStatus());
+        //     }
+        // }, { enableHighAccuracy: true });
 
         // 添加定位控件
         var geolocationControl = new BMap.GeolocationControl({
@@ -323,8 +339,8 @@
         function searchHotel() {
             var centerPointName = document.getElementById("centerPoint").value;
             // 将地图缩小
-            var nationalCenter = new BMap.Point(107.98228, 26.58356);
-            map.centerAndZoom(nationalCenter, 10);
+            var nationalCenter = new BMap.Point(104.1954, 35.8617);
+            map.centerAndZoom(nationalCenter, 5);
 
             if (!centerPointName) {
                 alert("请输入中心点");
@@ -342,6 +358,7 @@
                         var points = [];
                         for (var i = 0; i < results.getCurrentNumPois(); i++) {
                             var poi = results.getPoi(i);
+                            console.log(poi);
                             var point = poi.point;
                             points.push(point);
                             // 在地图上添加一个标记
@@ -349,7 +366,7 @@
                             map.addOverlay(marker);
                             // 添加信息窗口
                             var content = poi.title;
-                            addInfoWindow(marker, content, point);
+                            addInfoWindow(marker, content, point, poi);
                         }
                         // 将地图中心设置为检索结果的位置
                         map.setViewport(points);
@@ -367,26 +384,97 @@
                 } else {
                     alert("无法获取中心点坐标，请检查输入地址是否正确");
                 }
-            }, "中国"); 
+            }, "中国");
         }
 
-        // 在标记点上添加信息窗口
-        function addInfoWindow(marker, content, point) {
-            var infoWindow = new BMap.InfoWindow(content, {
-                enableMessage: false
-            });
-            marker.addEventListener("click", function () {
-                map.openInfoWindow(infoWindow, point);
-            });
-        }
+        
+
+//         function addInfoWindow(marker, content, point, poi) {
+//     // 创建信息窗口
+//     var infoWindow = new BMap.InfoWindow(content);
+
+//     // 创建一个查看详情的按钮
+//     var openLinkButton = document.createElement("button");
+//     openLinkButton.appendChild(document.createTextNode("查看详情"));
+
+//     // 绑定点击事件，打开链接
+//     openLinkButton.addEventListener("click", function () {
+//         window.open(poi.url, "_blank"); // 在新窗口中打开链接
+//     });
+
+//     // 创建一个到这去的按钮
+//     var goToButton = document.createElement("button");
+//     goToButton.appendChild(document.createTextNode("到这去"));
+
+//     // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
+//     goToButton.addEventListener("click", function () {
+//         document.getElementById("endPoint").value = poi.title;
+//         searchRoute(); // 触发路径规划
+//     });
+
+//     // 创建一个 div 包含两个按钮
+//     var contentDiv = document.createElement('div');
+//     contentDiv.innerHTML = content + "<br>";
+//     contentDiv.appendChild(openLinkButton);
+//     contentDiv.appendChild(goToButton);
+
+//     // 将按钮添加到信息窗口内容中
+//     infoWindow.setContent(contentDiv);
+
+//     // 绑定标记点击事件，打开信息窗口
+//     marker.addEventListener("click", function () {
+//         map.openInfoWindow(infoWindow, point);
+//     });
+// }
+
+function addInfoWindow(marker, content, point, poi) {
+    // 创建信息窗口
+    var infoWindow = new BMap.InfoWindow(content);
+
+    // 创建一个查看详情的按钮
+    var openLinkButton = document.createElement("button");
+    openLinkButton.appendChild(document.createTextNode("查看详情"));
+    openLinkButton.className = "info-window-button"; // 添加样式类
+
+    // 绑定点击事件，打开链接
+    openLinkButton.addEventListener("click", function () {
+        window.open(poi.url, "_blank"); // 在新窗口中打开链接
+    });
+
+    // 创建一个到这去的按钮
+    var goToButton = document.createElement("button");
+    goToButton.appendChild(document.createTextNode("到这去"));
+    goToButton.className = "info-window-button"; // 添加样式类
+
+    // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
+    goToButton.addEventListener("click", function () {
+        document.getElementById("endPoint").value = poi.title;
+        searchRoute(); // 触发路径规划
+    });
+
+    // 创建一个 div 包含两个按钮
+    var contentDiv = document.createElement('div');
+    contentDiv.innerHTML = content + "<br>";
+    contentDiv.appendChild(openLinkButton);
+    contentDiv.appendChild(goToButton);
+
+    // 将按钮添加到信息窗口内容中
+    infoWindow.setContent(contentDiv);
+
+    // 绑定标记点击事件，打开信息窗口
+    marker.addEventListener("click", function () {
+        map.openInfoWindow(infoWindow, point);
+    });
+}
+
         document.getElementById("hotelButton").addEventListener("click", searchHotel);
 
         //饭店推荐
         // 饭店推荐按钮点击事件
         function searchRestaurant() {
             var centerPointName = document.getElementById("centerPoint").value;
-            var nationalCenter = new BMap.Point(107.98228, 26.58356);
-            map.centerAndZoom(nationalCenter, 10);
+            var nationalCenter = new BMap.Point(104.1954, 35.8617);
+            map.centerAndZoom(nationalCenter, 5);
 
             if (!centerPointName) {
                 alert("请输入中心点");
@@ -411,7 +499,7 @@
                             map.addOverlay(marker);
                             // 添加信息窗口
                             var content = poi.title;
-                            addInfoWindow(marker, content, point);
+                            addInfoWindow(marker, content, point, poi);
                         }
                         // 将地图中心设置为检索结果的位置
                         map.setViewport(points);
@@ -429,18 +517,9 @@
                 } else {
                     alert("无法获取中心点坐标，请检查输入地址是否正确");
                 }
-            }, "中国"); 
+            }, "中国");
         }
 
-        // 在标记点上添加信息窗口
-        // function addInfoWindow(marker, content, point) {
-        //     var infoWindow = new BMap.InfoWindow(content, {
-        //         enableMessage: false
-        //     });
-        //     marker.addEventListener("click", function () {
-        //         map.openInfoWindow(infoWindow, point);
-        //     });
-        // }
         document.getElementById("restaurantButton").addEventListener("click", searchRestaurant);
     </script>
 </body>
