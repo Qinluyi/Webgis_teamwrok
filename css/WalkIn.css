@@ -1,0 +1,268 @@
+
+ .big_title{
+  color: #fff;
+  font-size: 100px;
+  font-family: 华文行楷;
+  margin-top: 55%;
+  text-align: center;
+}
+
+#map{
+    height: 350px;
+    width: 700px;
+    border: 1px solid #999;
+    margin-left: 25px;
+    margin-right: 10px;
+    margin: 0 auto;
+    
+}
+  .hidden-img {
+    display: none;
+    visibility: hidden;
+}
+
+
+/*三个商品展示框*/
+.my_image-container{
+    display: flex;
+    margin:auto 0;/*居中*/
+    margin-top: 1%;
+}
+.my_image-container .myimg{
+    transition: transform 0.5s;
+    padding: 5px;
+    /* height:240px;
+    width:300px; */
+    border: 1px solid #999;
+    margin:3%;
+    flex: 1;/*父元素是display:flex,子元素如果是flex:1的话就是平分父元素*/
+}
+
+.my_image-container .myimg:hover{
+    transform: translateY(3px);
+    box-shadow:0 8px 16px 0 rgba(36, 122, 164, 0.2);
+}
+.my_image-container img{
+    width: 100%; 
+    /* max-height: 200px; 设置图片最大宽度 */
+    
+    height:150px
+}
+
+
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left:14% ;
+    padding-right: 14%;
+    margin:auto 0;/*居中*/
+}
+
+
+.image-container div{
+    height:200px;
+    border: 1px solid #999;
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 30%;
+    padding: 2%;
+    align-items: center;
+}
+.image-container img {
+    width: 100%; /* 每张图片占据容器的 30% 宽度 */
+    /* max-height: 200px; 设置图片最大宽度 */
+    
+    height:150px
+    
+}
+.change{
+  width: 100px;
+  height:50px;
+  color: #fff;/*字体颜色*/
+  font-size: 15px;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 12px 0;
+  background: rgb(74, 121, 143);
+  border: 0;
+  border-radius: 8px;
+  outline: none;
+  margin-top: 3px;
+  cursor: pointer;
+  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2);
+  transition: transform 0.5s;
+  margin-top: 30px;
+}
+.change:hover{
+    transform: translateY(3px);
+}
+
+
+.image-container p{
+    width: 100%; /* 每段描述文字占据容器的 30% 宽度 */
+    text-align: left;
+    margin-top: 10px;
+}
+
+
+.scroll-btn {
+  cursor: pointer;
+}
+.row {
+  display: flex;
+  height: 88%;
+  align-items: center;
+}
+.col {
+  flex-basis: 100%;
+}
+.item_box{
+  margin:auto 0;/*居中*/
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-top: 3%;
+}
+.item_title_box{
+  color: black;
+  width:100%;
+}
+.item_title_box div{
+  display: inline-block;
+  font-family: 'Times New Roman', Times, serif;
+  
+}
+.item_big_title{
+  font-size: 90px;
+  width: 40%;
+  align-items: flex-end;
+}
+.item_info{
+  width: 50%;
+  align-items: flex-end;
+  line-height: 20px;
+  font-style: oblique;
+}
+.button_box{
+  margin:1%
+}
+.next{
+  width:30px;
+  height:30px;
+  border-radius: 3px;
+  color: #fff;
+  background-color:rgb(74, 121, 143); 
+}
+
+
+.item_contain{
+  margin: auto 0;
+  display: flex;
+  width:1200px;
+  align-items: center;
+  padding: 5px;
+}
+
+
+.item_little{
+  border: 1px solid #999;
+  flex:1;
+  height:230px;
+  margin: 2%;
+  transition: transform 0.5s;
+  padding: 1%;
+}
+
+.item_little:hover{
+  transform: translateY(3px);
+  box-shadow:0 8px 16px 0 rgba(36, 122, 164, 0.2);
+}
+
+.item_little img{
+  height:180px;
+  width:100%;
+}
+.item_little p{
+  margin-top: 1%;
+  font-family:华文行楷;
+  font-size: 35px;
+  font-weight: 100;
+}
+.item_little p span{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 24px;
+}
+.type_title{
+  /* border: 1px solid #999; */
+  align-items: center;
+}
+.type_title div{
+  display: inline-block;
+}
+.title{
+  color: black;
+  font-size: 120px;
+  width: 40%;
+  align-items: flex-end;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 100;
+}
+.type_info{
+  margin-left: 3%;
+  width: 50%;
+  align-items: flex-end;
+  line-height: 24px;
+  font-style: oblique;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.box1{
+  padding-left: 7%;
+  padding-right: 7%;
+  margin-top: 2%;
+  border: 1px solid #999;
+}
+.box_contain{
+  margin: auto 0;
+  display: flex;
+  /* border: 1px solid #999; */
+}
+
+.pic_box{
+  flex: 1;
+  height:230px;
+  margin: 1%;
+  border: 1px solid #999;
+  padding: 1%;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+.pic_box:hover{
+  transform: translateY(3px);
+  box-shadow:0 8px 16px 0 rgba(36, 122, 164, 0.2);
+}
+.pic_box img{
+  height:75%;
+  width:100%;
+}
+.pic_box .name_img p{
+  font-family:华文行楷;
+  font-size: 170%;
+  font-weight: 100;
+  display: inline;
+}
+.pic_box .name_img img{
+  width:10%;
+  display: inline;
+  float: right;
+}
+.pic_box p{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 100%;
+  font-weight: 100;
+  margin-top: 1%;
+}
+.pic_box p span{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 90%;
+  font-weight: 100;
+} 

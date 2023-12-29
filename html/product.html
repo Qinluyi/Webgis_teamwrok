@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>绣品详情页</title>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <link rel="stylesheet" href="../css/product.css" />
+  <script src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=jNm72YWh13h7xrg1Lh4CdHyzXxd5FPTy">
+  </script>
+</head>
+<body>
+<div class="box">
+    <div class="title">
+        <h2>松桃苗绣</h2>
+        <img src="../imgs/播音.png"><span>播报</span>
+        <img src="../imgs/论坛.png"><span>论坛</span>
+        <p>松桃苗绣起源于贵州省黔东南苗族侗族自治州松桃苗族自治县，是苗族传统的手工刺绣工艺之一。松桃苗绣注重对苗族传统文化的传承，图案多以当地的山水风光、传统花鸟、苗族服饰等元素为题材，具有浓厚的地方特色和文化内涵。</p>
+    </div>
+    <div class="item_box">
+        <div class="row_left">
+            <img src="../imgs/点赞.png" alt="点赞数"></img><p id="DianZan">210</p>
+            <img src="../imgs/销量.png" alt="销量"></img><p id="XiaoLiang">100</p>
+            <img src="../imgs/转发.png" alt="转发数"></img><p>100</p> 
+            <img src="../imgs/购物车蓝.png" alt="转发数"></img>  
+            <div id="description">
+            <div><img src="../imgs/点赞.png" alt="点赞数"></img><p>价格：20</p></div>
+            <div><img src="../imgs/点赞.png" alt="点赞数"></img><p>上课时间：2023.2.2</p></div>
+            <div><img src="../imgs/点赞.png" alt="点赞数"></img><p>查看上课地点</p></div>
+            <div><img src="../imgs/点赞.png" alt="点赞数"></img><p>商品详情：</p></div>
+            <div>123123123</div>
+            </div>
+        </div>
+        <div class="row_right">
+            <div class="col_up">  
+              <img src="../imgs/blackLoading.gif" alt="商品图片" class="col_up_loading" id="item_picture">
+            </div>
+            <p id="item_name">商品名称</p>
+            <div class="col_down" id="map" onclick="To_Map()"></div>
+            <p id="map_text" onclick="To_Map()">查看绣品产地</p>
+        </div>
+    </div>
+    <div class="same">
+        <h2>同类推荐</h2>
+        <hr/>
+        <div id="same_items">
+            <div class="box_contain">
+                  <div class="pic_box">
+                    <img class="loading" src="../imgs/blackLoading.gif" alt="Image A">
+                    <p>吉祥富贵 · <span>手提包</span></p>
+                  </div>
+                  <div class="pic_box">
+                    <img class="loading" src="../imgs/blackLoading.gif" alt="Image A">
+                      <p>吉祥富贵 · <span>手提包</span></p>
+                  </div>
+                  <div class="pic_box">
+                    <img class="loading" src="../imgs/blackLoading.gif" alt="Image A">
+                      <p>吉祥富贵 · <span>手提包</span></p>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<script type="text/javascript" src="../js/ShowItem.js"></script>     
+</body>
+

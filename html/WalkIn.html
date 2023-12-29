@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/WalkIn.css" />
+    <link rel="stylesheet" href="../css/Mainpage.css" />
+    <title>首页布局</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+  </head>
+    <body>
+      <div class="container">
+        <div class="navbar">
+          
+          <nav>
+            <ul>
+            <li class="dropdown">
+                <a href="#" class="nav_text_big">苗绣社区</a>
+            </li>
+            <li class="dropdown">
+                <a href="./html/WalkIn.html" class="nav_text_big">苗绣商城</a>
+            </li>
+            <li>
+              <a href="#" class="nav_text_big">苗绣周边</a>
+            </li>
+            <li>
+              <a href="#" class="nav_text_big">苗绣故事</a>
+            </li>
+            <li>
+              <a href="#" class="nav_text_big">产业概览</a>
+            </li>
+
+            </ul>
+          </nav>
+          <a href="购物车网页">
+            <img src="../imgs/登录.png" class="menu-icon shopcar"/>
+          </a> 
+          <a href="购物车网页">
+              <img src="../imgs/_购物车.png" class="menu-icon shopcar"/>
+          </a> 
+
+        </div>
+        <div class="row">
+          <div class="col">
+           
+            <div class="small_title">
+              2006年5月，苗绣进入第一批国家级非物质文化遗产名录。其图案中记录的族群历史、纹饰中流露的朴素哲学，已经让人们惊叹不已，
+              而艺术呈现和工艺造诣上的精妙绝伦，更令外界叹为观止。从2006年至今，已有六种各具特色的贵州苗绣被纳入中国非物质文化遗产，
+              分别是花溪苗绣、松桃苗绣、湘西苗绣、台江苗绣、雷山苗绣以及剑河苗绣。
+            </div>
+          </div>
+          <div class="col">
+            <div class="card1 card" id="scrollBtn" class="scroll-btn" onclick="myscroll('content')">
+              <h5>苗绣非遗</h5>
+              <p class="my_p">no other member state of the United Nations had ever officially recognized</p>
+            </div>
+            <div class="card2 card" onclick="myscroll('content1')">
+              <h5>潮牌绣品</h5>
+              <p class="my_p">no other member state of the United Nations had ever officially recognized</p>
+            </div>
+            <div class="card3 card" onclick="myscroll('content2')">
+              <h5>伴手佳礼</h5>
+              <p class="my_p">no other member state of the United Nations had ever officially recognized</p>
+            </div>
+            <div class="card4 card" onclick="myscroll('content3')">
+              <h5>绣娘的一天</h5>
+              <p class="my_p">no other member state of the United Nations had ever officially recognized</p>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+      
+
+        <div class="box1" id="content">
+            <div class="type_title">
+              <div class="title">
+                  苗绣非遗
+              </div>
+              <div class="type_info">
+                2006年5月，苗绣进入第一批国家级非物质文化遗产名录。其图案中记录的族群历史、纹饰中流露的朴素哲学，已经让人们惊叹不已，
+              而艺术呈现和工艺造诣上的精妙绝伦，更令外界叹为观止。从2006年至今，已有六种各具特色的贵州苗绣被纳入中国非物质文化遗产，
+              分别是花溪苗绣、松桃苗绣、湘西苗绣、台江苗绣、雷山苗绣以及剑河苗绣。
+              </div>
+            </div>
+            <hr/>
+            <div class="button_box"> 
+              <input type="button" class="next" value="<" onclick="NextItems(1,'s')">
+              <input type="button" class="next" value=">" onclick="NextItems(1,'next')">
+            </div> 
+
+              <div id ="type1"> 
+                
+              </div>  
+              
+        </div>    
+
+        <div class="box1" id="content1">
+            <div class="type_title">
+                <div class="title">
+                    潮牌绣品
+                </div>
+                <div class="type_info">
+                  如今的苗绣服饰融入新时代的流行元素，与传统元素相结合，用全新的方式演绎古老的图案，让古色古香的花纹焕发生机，栩栩如生。传统样纹得到传承的同时，年轻人们又多了一种国风类型服饰可选择。
+                  苗绣特色的服饰品牌如雨后春笋般涌现，古阿新、琇、锦绣乾坤、洛书河图······无一不在彰显着苗绣特色的魅力。
+                </div>
+            </div>
+            <hr/>
+            <div class="button_box"> 
+                <input type="button" class="next" value="<" onclick="NextItems(2,'s')"> 
+                <input type="button" class="next" value=">" onclick="NextItems(2,'next')">
+            </div> 
+
+            <div id ="type2"> 
+                  
+            </div> 
+          
+        </div>
+
+      <div class="box1" id="content2">
+        <div class="type_title">
+          <div class="title">
+              伴手佳礼
+          </div>
+          <div class="type_info">
+            苗绣纹样中的吉祥瑞兽数不胜数，龙、凤、麒麟、仙鹤、醒狮等等，都有自己美好的寓意和故事。
+          </div>
+        </div>
+        <hr/>
+        <div class="button_box"> 
+          <input type="button" class="next" value="<" onclick="NextItems(3,'s')">
+          <input type="button" class="next" value=">" onclick="NextItems(3,'next')">
+        </div> 
+        <div id ="type3"> 
+                
+        </div> 
+      </div>
+
+      <div class="box1" id="content3">
+        <div class="type_title">
+          <div class="title">
+              体验苗绣
+          </div>
+          <div class="type_info">
+            2006年5月，苗绣进入第一批国家级非物质文化遗产名录。其图案中记录的族群历史、纹饰中流露的朴素哲学，已经让人们惊叹不已，
+                    而艺术呈现和工艺造诣上的精妙绝伦。
+          </div>
+        </div>
+        <hr/>
+        <div class="button_box"> 
+          <input type="button" class="next" value="<" onclick="NextItems(4,'s')">
+          <input type="button" class="next" value=">" onclick="NextItems(4,'next')">
+        </div> 
+        <div id ="type4"> 
+                
+        </div> 
+      </div>
+        
+      
+
+    
+        <!--添加scripts的地方-->
+        <!-- <script type="text/javascript"  src='../js/switch.js'></script> -->
+        <script type="text/javascript" src="../js/ShowProducts.js"></script>
+        <!--添加图片的地方-->
+        <script type="text/javascript" src="../js/LoadPicture.js"></script> 
+        
+    </body>

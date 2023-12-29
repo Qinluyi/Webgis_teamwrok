@@ -103,7 +103,7 @@ img a{
   font-family: "楷体","楷体_GB2312";
   margin-top: 15px;
 }
-p {
+.my_p {
   color: #fff;
   font-size: 11px;
   line-height: 15px;
