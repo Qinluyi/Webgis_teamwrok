@@ -1,0 +1,32 @@
+{
+  "name": "nodejs-postgresql",
+  "version": "1.0.0",
+  "description": "How to use PostgreSQL with nodejs & it's connection pooling.",
+  "keywords": [
+    "database",
+    "libpq",
+    "pg-crud",
+    "postgre-crud",
+    "postgres-crud",
+    "postgresql-crud",
+    "rdbms",
+    "crud"
+  ],
+  "homepage": "http://github.com/dannibla/nodejs-postgresql",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dannibla/nodejs-postgresql.git"
+  },
+  "author": "Daniel Abraham <dannibla@outlook.com>",
+  "main": "app.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "package.json": "^0.0.0",
+    "pg": "^8.11.3"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 4.5.0"
+  }
+}
