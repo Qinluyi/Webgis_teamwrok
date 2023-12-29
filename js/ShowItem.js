@@ -3,6 +3,8 @@ var id;
 var is_class;
 var lng;
 var lat;
+var executeLinkworks;
+var worksname;
 
 
 window.onload = function(){
@@ -41,6 +43,7 @@ function show_product(item_id,is_class){
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
                                     lng = item.经度;
                                     lat = item.纬度;
+                                    worksname = item.名字;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
                                     map.centerAndZoom(point, 14);                      // 设置地图级别
@@ -75,6 +78,7 @@ function show_product(item_id,is_class){
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
                                     lng = item.经度;
                                     lat = item.纬度;
+                                    worksname = item.名字;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
                                     map.centerAndZoom(point, 10);                      // 设置地图级别
@@ -107,6 +111,7 @@ function show_product(item_id,is_class){
                 var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
                 lng = item.经度;
                 lat = item.纬度;
+                worksname = item.名字;
                 var marker = new BMapGL.Marker(point);        // 创建标注   
                 map.addOverlay(marker);   
                 map.centerAndZoom(point, 10);                      // 设置地图级别
@@ -139,6 +144,7 @@ function show_product(item_id,is_class){
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
                                     lng = item.经度;
                                     lat = item.纬度;
+                                    worksname = item.名字;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
                                     map.centerAndZoom(point, 10);                      // 设置地图级别
@@ -358,9 +364,11 @@ function add_product(id){
     console.log(id);  
 }
 
-
+//传递经纬度给周边推荐并跳转页面
 function To_Map(){
     localStorage.setItem('lng', lng);
     localStorage.setItem('lat', lat);
-    window.location.href = 'fangting.html';//芳婷的网页
+    localStorage.setItem('worksname', worksname);
+    localStorage.setItem('executeLinkworks', 'true');
+    window.location.href = '周边推荐2.html';
 }
