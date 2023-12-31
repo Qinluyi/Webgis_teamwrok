@@ -1,40 +1,125 @@
+// const express = require('express');
+// const { Client } = require('pg');
+// const connectionString = 'postgres://postgres:Xxsht123@localhost:5858/ajaxphp';
+// const bodyParser = require('body-parser');
+// const fs = require('fs');
+// const client = new Client({
+//     connectionString: connectionString
+// });
+
+// client.connect();
+
+// const app = express(); // 只需声明一次 Express 应用程序
+
+// app.set('port', process.env.PORT || 5000);
+
+// const cors = require('cors');
+
+// // Enable CORS for all routes
+// app.use(cors());
+
+// app.options('*', cors()); // Enable preflight for all routes
+
 const express = require('express');
 const { Client } = require('pg');
-const connectionString = 'postgres://postgres:Xxsht123@localhost:5858/ajaxphp';
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const client = new Client({
-    connectionString: connectionString
-});
 
-client.connect();
-
-const app = express(); // 只需声明一次 Express 应用程序
+const app = express();
 
 app.set('port', process.env.PORT || 5000);
 
 const cors = require('cors');
-
-// Enable CORS for all routes
 app.use(cors());
+app.options('*', cors());
 
-app.options('*', cors()); // Enable preflight for all routes
+const connectionString = 'postgres://postgres:Xxsht123@localhost:5858/ajaxphp';
+let client = null;
+let mySwitch = false; // 默认值为false
 
-
-
-// 在路由中添加一个检查连接的端点
-app.get('/checkConnection', async (req, res) => {
-    try {
-      // 执行一个简单的查询，例如 SELECT 1
-      const result = await client.query('SELECT 1');
-      
-      // 如果查询成功，返回 true
-      res.json({ my_switch: true });
-    } catch (error) {
-      // 如果发生错误，返回 false
-      res.json({ my_switch: false });
-    }
+// 检查数据库和表是否存在的函数
+async function doesDatabaseAndTableExist() {
+  const checkClient = new Client({
+      connectionString: 'postgres://postgres:Xxsht123@localhost:5858/ajaxphp', // 连接到默认的 'postgres' 数据库
   });
+
+  try {
+      await checkClient.connect();
+
+      // 检查数据库是否存在
+      const databaseResult = await checkClient.query('SELECT 1 FROM pg_database WHERE datname = $1', ['ajaxphp']);
+      if (databaseResult.rows.length === 0) {
+          console.log('数据库 "ajaxphp" 不存在。跳过数据库连接。');
+          return false;
+      }
+
+      // 检查表是否存在
+      const tableResult = await checkClient.query('SELECT 1 FROM information_schema.tables WHERE table_name = $1', ['xiupin1']);
+      if (tableResult.rows.length === 0) {
+          console.log('表 "xiupin1" 不存在。跳过数据库连接。');
+          return false;
+      }
+
+      // 数据库和表都存在
+      return true;
+  } catch (error) {
+      console.error('连接数据库时出错:', error.message);
+      return false; // 返回 false 表示数据库或表不存在
+  } finally {
+      await checkClient.end();
+  }
+}
+
+// 在检查数据库存在性后启动应用程序
+doesDatabaseAndTableExist().then((databaseExists) => {
+    if (databaseExists) {
+        mySwitch = true; // 设置 mySwitch 为 true
+        client = new Client({
+            connectionString: connectionString
+        });
+        client.connect();
+        console.log('已连接到数据库');
+    } else {
+        console.log('跳过数据库连接，数据直接加入到json文件中');
+    }
+
+    // 在这里定义你的路由和其他配置
+    // ...
+
+    // 启动 Express 服务器
+    app.listen(app.get('port'), () => {
+        console.log(`服务器正在运行在端口 ${app.get('port')}`);
+        console.log(`mySwitch 的值为: ${mySwitch}`);
+    });
+}).catch((error) => {
+    console.error('检查数据库存在性时出错:', error);
+});
+
+
+
+// 在这里定义你的路由和其他配置
+app.get('/checkConnection', (req, res) => {
+  // 在这个示例中，将 mySwitch 的值作为 JSON 对象发送回前端
+  res.json({ mySwitch: mySwitch });
+});
+
+// app.get('/checkConnection', async (req, res) => {
+//   try {
+//     // 执行一个简单的查询，例如 SELECT * FROM xiupin WHERE id = 1
+//     const result = await client.query('SELECT * FROM xiupin WHERE id = 1');
+    
+//     // 使用client.end来检查连接状态
+//     await client.end();
+
+//     // 如果查询成功且连接正常，返回 true
+//     res.json({ my_switch: true });
+//   } catch (error) {
+//     // 如果发生错误，返回 false
+//     res.json({ my_switch: false });
+//   }    
+// });
+
+
   
   
 
@@ -59,7 +144,7 @@ app.get('/list3', function(req, res) {
     const price=req.query.price;
     const ups=req.query.ups;
     const soldnum=req.query.soldnum;
-          const query = 'INSERT INTO xiupin (objectid,id,发布者i, 寓意, 非遗种, 类别, 品牌,名字,描述, 图片,adcode,name,经度,纬度,价格,点赞数,销量) VALUES (nextval(\'pk\'),$1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)';
+          const query = 'INSERT INTO xiupin1 (objectid,id,发布者i, 寓意, 非遗种, 类别, 品牌,名字,描述, 图片,adcode,name,经度,纬度,价格,点赞数,销量) VALUES (nextval(\'pk\'),$1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)';
           const values = [id,author, meaning, category, categorynum, brand,name,description, picture,adcode,ename,longtitude,latitude,price,ups,soldnum];
       
           client.query(query, values, function(error, results)  {
@@ -173,9 +258,9 @@ app.post('/saveData', (req, res) => {
 
 
 
-app.listen(5000, function () {
-    console.log('Server is running.. on Port 5000');
-});
+// app.listen(5000, function () {
+//     console.log('Server is running.. on Port 5000');
+// });
 
 
 
