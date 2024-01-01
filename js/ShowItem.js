@@ -36,7 +36,7 @@ function show_product(item_id,is_class){
                                     var srcpath="../MiaoXiu_Image/"+item.图片;
                                     $("#item_picture").attr("src", srcpath);
                                     $("#item_picture").attr("class","col_up_img");
-                                    $("#description").text(item.描述);
+                                    $("#product_introduction").text(item.描述);
                                     
                                     type=item.类别;
                                     var map = new BMapGL.Map("map");                // 创建地图实例
@@ -72,7 +72,7 @@ function show_product(item_id,is_class){
                                     var srcpath="../MiaoXiu_Image/"+item.课程id+".jpg";
                                     $("#item_picture").attr("src", srcpath);
                                     $("#item_picture").attr("class","col_up_img");
-                                    $("#description").text(item.介绍);
+                                    $("#product_introduction").text(item.介绍);
                                     $("#map_text").text('查看上课地点');
                                     var map = new BMapGL.Map("map");                // 创建地图实例
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
@@ -101,11 +101,14 @@ function show_product(item_id,is_class){
                 const item = data.find(item => item.OBJECTID === num_item_id);
                 console.log(item);
                 $("#item_name").text(item.名字);
-                type=item.类别;                
+                type=item.类别;              
                 var srcpath="../MiaoXiu_Image/"+item.图片;
+                $("#DianZan").text(item.点赞数);
+                $("#XiaoLiang").text(item.销量);
+                $("#price").text(item.价格);
                 $("#item_picture").attr("src", srcpath);
                 $("#item_picture").attr("class","col_up_img");
-                $("#description").text(item.描述);
+                $("#product_introduction").text(item.描述);
                 $("#map_text").text('查看绣品产地');
                 var map = new BMapGL.Map("map");                // 创建地图实例
                 var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
@@ -131,14 +134,18 @@ function show_product(item_id,is_class){
             // 在data中查找id为8的记录
                 var num_item_id = parseInt(item_id);
                 const item = data.find(item => item.课程ID === num_item_id);
-                
-                
+                var date_body ='<img src="../imgs/日期.png" alt="点赞数"></img><p>上课时间：'+item.时间+'</p>';
+                $("#product_introduction_title").text("课程详情");
+                $("#date").html(date_body); 
+                $("#price").text(item.价格);
+                $("#check_location").text('查看上课地点');
+                $("#person_introduction_title").text('授课老师简介')
+                $("#person_location").text('查看授课老师所在地');
                 $("#item_name").text(item.课程名);
-                                    
                                     var srcpath="../MiaoXiu_Image/"+item.课程ID+".jpg";
                                     $("#item_picture").attr("src", srcpath);
                                     $("#item_picture").attr("class","col_up_img");
-                                    $("#description").text(item.介绍);
+                                    $("#product_introduction").text(item.介绍);
                                     $("#map_text").text('查看上课地点');
                                     var map = new BMapGL.Map("map");                // 创建地图实例
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
@@ -176,39 +183,6 @@ function Find_the_same(type){
                     console.log('找到相同');
                     tbodydata=DivData(data,type);//给tbodydata赋值
                     $("#same_items").html(tbodydata);  //给相同的商品赋值
-                    // tbodydata = "<div class='box_contain'>";
-                    // $.each(data, function (index, item) {
-                    //     if(type==1){
-                    //                 tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
-                    //                 "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
-                    //                 "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
-                    //                 "<hr/><p>"+item.名字+"</p>"+"</div>";
-                    //                 if(index == 2){
-                    //                     tbodydata+="</div>";
-                    //                 }
-                    //     }
-                    // if(type == 2){
-                        
-                    //                 tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
-                    //                 "<div class = 'name_img'><p>"+item.品牌+"</p>"+
-                    //                 "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
-                    //                 "<hr/><p>"+item.名字+"</p>"+"</div>";
-                    //                 if(index == 2){
-                    //                     tbodydata+="</div>";
-                    //                 }      
-                    // }
-                    // if(type == 3){
-                        
-                    //                 tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
-                    //                 "<div class = 'name_img'><p>"+item.寓意+"</p>"+
-                    //                 "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
-                    //                 "<hr/><p>"+item.名字+"</p>"+"</div>";
-                    //                 if(index == 2){
-                    //                     tbodydata+="</div>";
-                    //                 }
-                    // }        
-                    // });  
-                    // $("#same_items").html(tbodydata);    
                 }
             });
         }else{
@@ -243,10 +217,6 @@ function Find_the_same(type){
                 const type1Records = jsonData.filter(item => item.类别 === type);
                 // 随机选取 3 条记录
                 const randomType1Records = getRandomRecords(type1Records, 3);
-
-                $.each(randomType1Records, function (index, item) {
-                    console.log(item.价格);
-                });
 
                 tbodydata=DivData(randomType1Records,type);//给tbodydata赋值
                 $("#same_items").html(tbodydata);  //给相同的商品赋值

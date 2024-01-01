@@ -76,7 +76,11 @@
     border: 1px solid #999;
 }
 .same{
-    margin-top: 4%;
+    margin-top: 5%;
+}
+.same h2{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 180%;
 }
 .box_contain{
     margin: auto 0;
@@ -125,4 +129,27 @@
     width:7%;
     display: inline;
     float: right;
-  }
+}
+
+.product_title{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    font-size: 135%;
+    margin-top: 2%;
+}
+.product_content{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+    font-size: 110%;
+    
+}
+.check{
+    
+}
+.check:hover{
+    color: rgb(6, 117, 172);
+    cursor: pointer;
+}
+.description{
+    margin-top: 2%;
+}
