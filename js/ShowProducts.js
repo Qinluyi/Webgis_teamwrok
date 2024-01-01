@@ -11,24 +11,11 @@ var name1=1;
 var name2=2;
 var name3=3;
 var name4 = 4;
+
 var my_switch = false;//默认是连不上数据库的
 //my_switch = localStorage.getItem("switch"); 
-
-
-
 var element = '';
 
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     // 获取滚动按钮和内容容器
-//       var scrollBtn = document.getElementById('scrollBtn');
-//       var content = document.getElementById('content');
-      
-//       // 点击图片时触发滑动事件
-//       scrollBtn.addEventListener('click', function () {
-//           scrollToContent(content);
-//       });
-//   });
 
     // 滑动到指定容器的函数
     function scrollToContent(element) {
@@ -84,7 +71,7 @@ var element = '';
                 for (var i=0;i<8;i++) {	
                     tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+data[i]["课程ID"]+".jpg' alt='"+data[i]["课程ID"]+".jpg' onclick='show_product("+data[i]["课程ID"]+",1)'>"+
                       "<div class = 'name_img'><p>"+data[i]["课程名"]+"</p>"+
-                       	"<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+data[i]["objectid"]+"' onclick='add_product("+data[i]["课程ID"]+")'></div></div>";
+                       	"<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+data[i]["objectid"]+"' onclick='add_product("+data[i]["课程ID"]+",1)'></div></div>";
                       if(i == 3){
                         tbodydata+="</div>";
                         tbodydata+="<div class='box_contain'>";
@@ -276,27 +263,6 @@ var element = '';
                 bodydata=DivData(data,4);
             })
             .catch(error => console.error('Error fetching data:', error));
-            // $.get('../json/课程.json',{},function(data){
-            //     creatTable(data);
-            //     console.log(data[0]["课程名"]);
-            //     function creatTable(data){
-                    
-            //      //这个函数的参数data是字符串数组，可以是从后台传过来的也可以是从其他任何地方传过来的
-            //         bodydata = "<div class='box_contain'>";
-            //         for (var i=start4;i<start4+8;i++) {	
-            //             bodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+data[i]["课程ID"]+".jpg' alt='"+data[i]["课程ID"]+".jpg' onclick='show_product("+data[i]["课程ID"]+",1)'>"+
-            //             "<div class = 'name_img'><p>"+data[i]["课程名"]+"</p>"+
-            //              	"<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+data[i]["课程ID"]+"' onclick='add_product("+data[i]["课程ID"]+")'></div></div>";
-            //             if(i == start4+3){
-            //                 bodydata+="</div>";
-            //                 bodydata+="<div class='box_contain'>";
-            //             }
-            //             if(i == start4+7){
-            //                 bodydata+="</div>";
-            //             }
-            //         }
-            //     }		
-            // });
         }
     }
 
@@ -309,7 +275,7 @@ var element = '';
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
                         "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                         "<hr/><p>"+item.名字+"</p>"+"</div>";
                         if(index == 3){
                             tbodydata+="</div>";
@@ -325,7 +291,7 @@ var element = '';
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
                         "<div class = 'name_img'><p>"+item.品牌+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                         "<hr/><p>"+item.名字+"</p>"+"</div>";
                         if(index == 3){
                             tbodydata+="</div>";
@@ -341,7 +307,7 @@ var element = '';
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
                         "<div class = 'name_img'><p>"+item.寓意+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                         "<hr/><p>"+item.名字+"</p>"+"</div>";
                         if(index == 3){
                             tbodydata+="</div>";
@@ -357,7 +323,7 @@ var element = '';
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.课程id+".jpg' alt='"+item.课程id+".jpg' onclick='show_product("+item.课程id+",1)'>"+
                         "<div class = 'name_img'><p>"+item.课程名+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.课程id+")'></div></div>";
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.课程id+",1)'></div></div>";
                         if(index == 3){
                             tbodydata+="</div>";
                             tbodydata+="<div class='box_contain'>";
@@ -373,7 +339,7 @@ var element = '';
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                         "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+")'></div>"+
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                         "<hr/><p>"+item.名字+"</p>"+"</div>";
                         if(index == 3){
                             tbodydata+="</div>";
@@ -389,7 +355,7 @@ var element = '';
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                         "<div class = 'name_img'><p>"+item.品牌+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+")'></div>"+
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                         "<hr/><p>"+item.名字+"</p>"+"</div>";
                         if(index == 3){
                             tbodydata+="</div>";
@@ -405,7 +371,7 @@ var element = '';
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                         "<div class = 'name_img'><p>"+item.寓意+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+")'></div>"+
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                         "<hr/><p>"+item.名字+"</p>"+"</div>";
                         if(index == 3){
                             tbodydata+="</div>";
@@ -421,7 +387,7 @@ var element = '';
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.课程ID+".jpg' alt='"+item.课程ID+".jpg' onclick='show_product("+item.课程ID+",1)'>"+
                         "<div class = 'name_img'><p>"+item.课程名+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.课程ID+")'></div></div>";
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.课程ID+",1)'></div></div>";
                         if(index == 3){
                             tbodydata+="</div>";
                             tbodydata+="<div class='box_contain'>";
@@ -450,6 +416,18 @@ var element = '';
     var cartCount = 0;
     var is_add = false;
     
-    function add_product(id){
-        console.log(id);  
+    function add_product(id, is_class){
+        
+        var item = {
+            id: id,
+            class: is_class
+          };
+
+          cartItems.push(item)
+
+        // 将对象存储为 JSON 字符串
+        localStorage.setItem('productData', JSON.stringify(cartItems));
+    
+        console.log(cartItems); 
     }
+
