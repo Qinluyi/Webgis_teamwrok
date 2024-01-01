@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>进行价格计算</title>
+		
+		<link rel="stylesheet" type="text/css" href="../css/jd.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		
+		<script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=ECIlSGv9vY76ntOPviKlx84j1MbswI4h"></script>
+
+		<script language="javascript" src="../js/jquery-3.5.1.min.js"></script>
+	</head>
+		
+	</head>
+	<body>
+		<!--导航开始-->
+		<div class="nav">
+			
+			<div class="warp">
+				<ul class="nav_ul1">
+					<li><a href="../index.html"><i class="iconfont">&#xe6d3;</i></a></li>
+					<li><a href="../index.html">首页</a></li>
+					<li><a href="">配送到：宿州</a></li>
+				</ul>
+				
+				 <ul class="nav_ul2">
+		  	 	  	<li><a href="">洋洋宝贝</a><span>|</span></li>
+		  	 	  	
+
+		  	 	  	<li><a href="">网站导航</a></li>
+		  	 	  </ul>
+			</div>
+			
+		</div>
+		<!--导航结束-->
+		
+		<!--搜索框开始-->
+		<div class="search">
+			<div class="warp">
+				<img src="../imgs/苗绣.png" width="180px" height = "100px" />
+				
+				<div class="search_div">
+					<input type="text" class="search_text">
+					 <input type="button" value="搜索"  class="search_but"/>
+					
+				</div>
+			</div>
+		</div>
+		<!--搜索框结束-->
+		
+		<!--标题开始	-->
+		<div class="title warp">
+			<h3>全部商品</h3>
+			
+			<div >
+				<span id="">配送至</span>
+				<input type="text" id="addressInput" placeholder="请输入地址">
+				<button id="getAddressBtn">获取地址</button>
+			</div>
+		</div>
+		
+		<!--标题结束-->
+		
+		<!--显示菜单的开始 -->
+		<!--warp令内容居中显示-->
+		<div class="tips warp">
+			<ui>
+				<li>
+					<input type="checkbox" name="fav" id="all" onclick="checkTest1(this),checkTest2()"/>全选</li>
+				<li>商品</li>
+				<li>单价</li>
+				<li>数量</li>
+				<li>小计</li>
+				<li>操作</li>
+			</ui>
+		</div>
+		<!--显示菜单的结束-->
+		
+		<!--商品详情展示开始-->
+		<div id="commodity"></div>
+
+
+		<!--商品详情展示结束-->
+		
+		<!--结算窗口开始-->
+			<div class="balance warp">
+				<ul class="balance_ul1">
+				<li><input type="checkbox" name="fav" onclick="checkTest1(this),checkTest2()" />全选</li>
+				<li>删除选中商品</li>
+				<li>移到我的关注</li>
+				<li>清除下柜商品</li>
+			</ul>
+			
+			<ul class="balance_ul2">
+				<li>已经选择<span id="snum">0</span>件商品</li>
+				<li>总价<span id="zongz">￥0</span></li>
+				<li class="butt">去结算</li>
+			</ul>
+			</div>
+			
+			<button class="niceButton" onclick="refreshProduct()">看看其他绣品吧</button>
+
+			<div class="container">
+			<div class="product" id="product">
+				
+
+			</div>
+			</div>
+		<!--结算窗口结束-->
+		<!--使用JS别忘记将其引入-->
+		<script src="../js/jd.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
