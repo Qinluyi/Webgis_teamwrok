@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Ask online Form">
+    <meta name="description" content="The Ask is a bootstrap design help desk, support forum website template coded and designed with bootstrap Design, Bootstrap, HTML5 and CSS. Ask ideal for wiki sites, knowledge base sites, support forum sites">
+    <meta name="keywords" content="HTML, CSS, JavaScript,Bootstrap,js,Forum,webstagram ,webdesign ,website ,web ,webdesigner ,webdevelopment">
+    <meta name="robots" content="index, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!-- <link href="css/animate.css" rel="stylesheet" type="text/css"> -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+     </head>
+
+<body>
+<script>
+    window.onload = function() {
+				var aData = [{
+    "imgUrl": "image/1.jpeg",
+    "authorID": 1,
+    "objectID": 12,
+    "time": "2023-10-26 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+  {
+    "imgUrl": "image/2.jpeg",
+    "authorID": 2,
+    "objectID": 411,
+    "time": "2023-10-27 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+  {
+    "imgUrl": "image/3.jpeg",
+    "authorID": 3,
+    "objectID": 282,
+    "time": "2023-10-28 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+  {
+    "imgUrl": "image/4.jpeg",
+    "authorID": 4,
+    "objectID": 360,
+    "time": "2023-10-29 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+  {
+    "imgUrl": "image/5.jpeg",
+    "authorID": 5,
+    "objectID": 302,
+    "time": "2023-10-30 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+  {
+    "imgUrl": "image/6.jpg",
+    "authorID": 6,
+    "objectID": 278,
+    "time": "2023-10-31 00:00:00",
+    "context": "\"被苗绣的神奇之美深深吸引，每一针每一线都透露着匠心独运，真是令人陶醉！\""
+  },
+  {
+    "imgUrl": "image/7.jpeg",
+    "authorID": 7,
+    "objectID": 314,
+    "time": "2023-11-01 00:00:00",
+    "context": "\"被苗绣的神奇之美深深吸引，每一针每一线都透露着匠心独运，真是令人陶醉！\""
+  },
+  {
+    "imgUrl": "image/8.jpeg",
+    "authorID": 8,
+    "objectID": 202,
+    "time": "2023-11-02 00:00:00",
+    "context": "\"被苗绣的神奇之美深深吸引，每一针每一线都透露着匠心独运，真是令人陶醉！\""
+  },
+  {
+    "imgUrl": "image/9.jpeg",
+    "authorID": 9,
+    "objectID": 303,
+    "time": "2023-11-03 00:00:00",
+    "context": "\"被苗绣的神奇之美深深吸引，每一针每一线都透露着匠心独运，真是令人陶醉！\""
+  }
+];
+
+
+
+  var aData1 = [{
+    "imgUrl": "image/12.jpeg",
+    "authorID": 1,
+    "objectID": 12,
+    "time": "2023-10-26 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+  {
+    "imgUrl": "image/14.jpeg",
+    "authorID": 2,
+    "objectID": 411,
+    "time": "2023-10-27 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+  {
+    "imgUrl": "image/15.jpeg",
+    "authorID": 3,
+    "objectID": 282,
+    "time": "2023-10-28 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+  {
+    "imgUrl": "image/16.jpeg",
+    "authorID": 4,
+    "objectID": 360,
+    "time": "2023-10-29 00:00:00",
+    "context": "\"苗绣作品真是太美了，色彩斑斓、纹路精致，简直就是艺术的杰作！\""
+  },
+ ];
+
+  var oUl = document.getElementById("comments-list");
+  for (var i = 0; i < aData.length; i++) {
+					var oLi = document.createElement("li");
+					var data = aData[i];
+
+					// 创建评论结构
+    var commentHTML = '<div class="comment-main-level">' +
+                          '<div class="comment-avatar"><img src="' + data["imgUrl"] + '" alt=""></div>' +
+                          '<div class="comment-box">' +
+                              '<div class="comment-head">' +
+                                  '<h6 class="comment-name"><a href="#">' + data["objectID"] + '</a></h6>' +
+                                  '<span><i class="fa fa-clock-o" aria-hidden="true"> ' + data["time"] + '</i></span>' +
+                              '</div>' +
+                              '<div class="comment-content">' + data["context"] + '</div>' +
+                              '<div class="comment-content">' + data["time"] + '</div>' +
+                          '</div>' +
+                      '</div>';
+
+    // 将评论结构添加到 <li> 元素中
+    oLi.innerHTML = commentHTML;
+
+    // 将 <li> 元素添加到评论列表容器
+    oUl.appendChild(oLi);
+	}
+
+
+    var oU2 = document.getElementById("reply-list");
+
+for (var i = 0; i < aData1.length; i++) {
+    var oLi = document.createElement("li");
+    var data = aData1[i];
+
+    // 创建评论结构
+    var commentHTML =
+        '<div class="comment-avatar"><img src="' + data["imgUrl"] + '" alt=""></div>' +
+        '<div class="comment-box">' +
+            '<div class="comment-head">' +
+                '<h6 class="comment-name"><a href="#">' + data["objectID"] + '</a></h6>' +
+                '<span><i class="fa fa-clock-o" aria-hidden="true"> ' + data["time"] + '</i></span>' +
+                '<i class="fa fa-reply"></i>' +
+                '<i class="fa fa-heart"></i>' +
+            '</div>' +
+            '<div class="comment-content">' + data["context"] + '</div>' +
+            '<div class="comment-content">' + data["time"] + '</div>' +
+        '</div>';
+
+    // 包装评论结构在 <li> 元素中
+    oLi.innerHTML = '<li>' + commentHTML + '</li>';
+
+    // 将 <li> 元素添加到评论列表容器
+    oU2.appendChild(oLi.firstChild); // Using .firstChild to append only the <li> content
+}
+
+
+
+}
+</script>
+<div class="container-top">
+    <div class="navbar-top">
+      
+      <nav>
+        <ul>
+        <li class="dropdown-top">
+            <a href="category.html" class="nav_text_big">苗绣社区</a>
+        </li>
+        <li class="dropdown-top">
+            <a href="../html/WalkIn.html" class="nav_text_big">苗绣商城</a>
+        </li>
+        <li>
+          <a href="../html/WalkIn.html" class="nav_text_big">苗绣周边</a>
+        </li>
+        <li>
+          <a href="../html/WalkIn.html" class="nav_text_big">苗绣故事</a>
+        </li>
+        <li>
+          <a href="../html/WalkIn.html" class="nav_text_big">产业概览</a>
+        </li>
+
+        </ul>
+      </nav>
+      <a href="购物车网页">
+        <img src="../imgs/登录.png" class="menu-icon-top shopcar"/>
+      </a> 
+      <a href="购物车网页">
+          <img src="../imgs/_购物车.png" class="menu-icon-top shopcar"/>
+      </a> 
+
+    </div>
+  </div>
+
+    <section class="header-descriptin329">
+        <div class="container">
+            <h3>苗绣非遗</h3>
+            <ol class="breadcrumb breadcrumb839">
+                <li><a href="#">首页</a></li>
+                <li><a href="category.html">苗绣论坛</a></li>
+                <li class="active">苗绣非遗</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content920">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="post-details">
+                        <div class="details-header923">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="post-title-left129">
+                                        <h3>你知道贵州省有几种申报了非遗的苗绣种类吗？</h3> </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="post-que-rep-rihght320"> <a href="category.html"><i class="fa fa-question-circle" aria-hidden="true"></i> 提问</a> <a href="#" class="r-clor10">回答</a> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-details-info1982">
+                            <p>苗族刺绣技艺荣幸地被列入首批国家级非物质文化遗产保护名录，这并非偶然，而是因为它作为传承悠久的传统技艺具有深刻的创造性价值。苗族刺绣不仅仅是一门技艺，更是承载着丰富的传统文化内涵和精神价值的艺术表达。在现代化发展进程中，面临后继无人的临濒危困境，我们决定将其保护在国家非遗名录中。</p>
+                            <p>这一决定不仅源于对非遗项目历史认知、艺术审美、科学知识、社会价值的深刻理解，更是为了应对苗族传统刺绣技艺在现代社会的保护需求。在此过程中，我们关注非遗传承人的主体作用，遵循非遗传承发展规律，科学而有效地进行保护工作。通过对其价值的多方面认知，苗族传统刺绣技艺成功摆脱了后继无人、濒危的境况，实现了良性生产性保护和传承。如今，它正步入新时代非遗的系统性保护与高质量发展的崭新传承之路。 </p>
+                            <hr>
+                            <div class="post-footer29032">
+                                <div class="l-side2023"> <i class="fa fa-check check2" aria-hidden="true"> 已回答</i> <a href="#"><i class="fa fa-star star2" aria-hidden="true">  5</i></a> <i class="fa fa-folder folder2" aria-hidden="true"> 词条</i> <i class="fa fa-clock-o clock2" aria-hidden="true"> 3年前</i> <a href="#"><i class="fa fa-commenting commenting2" aria-hidden="true">15 回答</i></a> <i class="fa fa-user user2" aria-hidden="true"> 70 浏览</i> </div>
+                                <div class="l-rightside39">
+                                    <button type="button" class="tolltip-button thumbs-up2" data-toggle="tooltip" data-placement="bottom" title="Like"><i class="fa fa-thumbs-o-up " aria-hidden="true"></i></button>
+                                    <button type="button" class="tolltip-button  thumbs-down2" data-toggle="tooltip" data-placement="bottom" title="Dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button> <span class="single-question-vote-result">+50</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="share-tags-page-content12092">
+                        <div class="l-share2093"> <i class="fa fa-share" aria-hidden="true"> 分享</i> </div>
+                        <div class="R-tags309"> <i class="fa fa-tags" aria-hidden="true"> 词条, 提问, 发布者</i> </div>
+                    </div>
+                    <div class="author-details8392">
+                        <div class="author-img202l"> <img src="image/haoyifu.jpg" alt="image">
+                            <div class="au-image-overlay text-center"> <a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a> </div>
+                        </div> <span class="author-deatila04re">
+                   <h5>发布者介绍</h5>
+                    <p>女性，66岁，湖南省苗绣艺术研究中心主任，苗绣的忠实爱好者和传承者，专注于苗绣研究与传承近40年。她是一位深具艺术情怀的苗绣研究者，在传统工艺和现代创新之间找到了独特的平衡点。</p>
+                    
+                </span> </div>
+                    <div class="related3948-question-part">
+                        <h3>相关问题</h3>
+                        <hr>
+                        <p><a href="post-deatils.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>你对苗绣的第一印象是什么？</a></p>
+                        <p><a href="miaoxiuchaopai.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>#苗绣潮牌 你见过哪些让人眼前一亮的苗绣品牌？</a></p>
+                        <p><a href="miaoxiutiyan.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>#苗绣体验 你最想以什么样的形式走进苗绣呢？</a></p>
+                        <p><a href="miaoxiubanshouli.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>#苗绣伴手礼 你有将苗绣作为礼物送给重要的人吗？说说你的故事吧。</a></p>
+                    </div>
+                    <div class="comment-list12993">
+                        <div class="container">
+                            <div class="row">
+                           
+                                <div class="comments-container">
+                                    <ul id="comments-list" class="comments-list">
+                                        <li>
+                                             <div class="comment-main-level">
+                                                <!-- Avatar -->
+                                                <div class="comment-avatar"><img src="image/1.jpeg" alt=""></div>
+                                                <!-- Contenedor del Comentario -->
+                                                <div class="comment-box">
+                                                    <div class="comment-head">
+                                                        <h6 class="comment-name"><a href="#">43</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i> </div>
+                                                    <div class="comment-content"> "苗绣被评为非遗真的实至名归，我印象中有松桃苗绣！" </div>
+                                                    <div class="comment-content"> 2023-11-05 00:00:00 </div>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="comment-main-level">
+                                                <!-- Avatar -->
+                                                <div class="comment-avatar"><img src="image/13.jpeg" alt=""></div>
+                                                <!-- Contenedor del Comentario -->
+                                                <div class="comment-box">
+                                                    <div class="comment-head">
+                                                        <h6 class="comment-name"><a href="#">43</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i> </div>
+                                                    <div class="comment-content"> "我们家乡的雷山苗绣2006年5月20日申遗成功，走向了全国和世界。" </div>
+                                                    <div class="comment-content"> 2023-11-07 00:00:00 </div>
+                                                </div>
+                                            </div>
+                                            <ul class="comments-list reply-list"id="reply-list"></ul>
+                                               
+                                            </ul>
+                                        </li>
+                                    </ul>
+                        
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment289-box">
+                        <h3>留下您的回答</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="replay-input-name42389">
+                                    <p>用户id*</p>
+                                    <input type="text" class="name-box24894 input238-design" placeholder="您的id"> </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="replay-email-input89298">
+                                    <p>邮箱*</p>
+                                    <input type="text" class="name-box24894 input238-design" placeholder="您的邮箱（方便我们联系您）"> </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="replay-input-websit128923">
+                                    <p>备注</p>
+                                    <input type="text" class="name-box24894 input238-design" placeholder="您的备注"> </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="post9320-box">
+                                    <input type="text" class="comment-input219882" placeholder="输入您的回答"> </div>
+                                <button type="button" class="pos393-submit">提交回答</button>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <!--                end of col-md-9 -->
+                <!--           strart col-md-3 (side bar)-->
+                <aside class="col-md-3 sidebar97239">
+                    <div class="status-part3821">
+                   <h4>苗绣社区</h4>
+                       
+                        <a href="./shangchuanzuopin.html"><i class="fa fa-question-circle" aria-hidden="true"> 上传作品</i></a>
+                        <a href="./category.html"><i class="fa fa-question-circle" aria-hidden="true"> 苗绣论坛</i></a>
+                    </div>  
+                    <div class="categori-part329">
+                        <h4>浏览作品</h4>
+                        <ul>
+                            <li><a href="#">湘西苗绣作品集</a></li>
+                            <li><a href="#">雷山苗绣作品集</a></li>
+                            <li><a href="#">松桃苗绣作品集</a></li>
+                            <li><a href="#">剑河苗绣作品集</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+            <!--             social part -->
+            <div class="social-part2189">
+                <h4>人气作品</h4>
+               <li class="rss-one">
+                  <a href="#" target="_blank">
+                   <strong>
+                      <span>绉绣双肩包</span>
+                       <!-- <i class="fa fa-rss" aria-hidden="true"></i> -->
+                       <!-- <i class="fa fa-house"></i> -->
+                       <br>
+                       <small>品牌："花溪"，发布者ID: 75</small>
+                       
+                   </strong>
+                   </a>
+               </li>
+                         <li class="facebook-two">
+                  <a href="#" target="_blank">
+                   <strong>
+                      <span>破线绣毛衣</span>
+                           <!-- <i class="fa fa-facebook" aria-hidden="true"></i> -->
+         
+                       <br>
+                       <small>品牌："花溪"，发布者ID：73</small>
+                       
+                   </strong>
+                   </a>
+               </li>
+                                  <li class="twitter-three">
+                  <a href="#" target="_blank">
+                   <strong>
+                      <span>辫绣手提包</span>
+                  <!-- <i class="fa fa-twitter" aria-hidden="true"></i> -->
+         
+                       <br>
+                       <small>品牌："锦绣黔坤"，发布者ID：99</small>
+                       
+                   </strong>
+                   </a>
+               </li>
+                                  <li class="youtube-four">
+                  <a href="#" target="_blank">
+                   <strong>
+                      <span>破线绣围巾</span>
+                 <!-- <i class="fa fa-youtube" aria-hidden="true"></i> -->
+         
+                       <br>
+                       <small>品牌："古阿新"，发布者ID：77</small>
+                       
+                   </strong>
+                   </a>
+               </li>
+                    
+                </div>
+                     
+       <!--              login part-->
+       <div class="login-part2389">
+        <h4>登录</h4>
+        <div class="input-group300">
+        <span><i class="fa fa-user" aria-hidden="true"></i></span>
+        <input type="text" class="namein309" placeholder="输入用户名">
+        </div>
+            <div class="input-group300">
+        <span><i class="fa fa-lock" aria-hidden="true"></i></span>
+        <input type="password" class="passin309" placeholder="输入密码">
+        </div>
+        <a href="#"><button type="button" class="userlogin320">登录</button></a>
+        <div class="rememberme">
+                      <label><input type="checkbox" checked="checked"> 记住我</label>
+                      <a href="#" class="resbutton3892">注册</a>
+                  </div>
+    </div>
+
+
+                 
+                  </aside>
+            </div>
+        </div>
+    </section>
+    <!--    footer -->
+    <div class="footer-search">
+        <div class="container">
+            <div class="row">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <input type="text" class="  search-query form-control user-control30" placeholder="在这里搜索...." /> <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span> </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="footer-part">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-3">
+                  <div class="info-part-one320">
+                   <h4>基本信息</h4>
+                    <p>武汉大学遥感信息工程学院《网络GIS实习》第一组</p>
+                    <h4>地址 :</h4>
+                    <p>湖北省武汉市珞喻路129号武汉大学信息学部 教学实验大楼3楼、6楼—9楼,五号教学楼,宇航科学与技术研究院</p>
+                    <h4>联系方式</h4>
+                    <p>电话号码: 18986197481</p>
+                    <p>邮箱账号 : </p>
+                    <p>2021302191847@whu.edu.cn</p>
+                    </div>
+                </div>
+                   <div class="col-md-3">
+                  <div class="info-part-two320">
+              <h4>快速链接</h4>
+                   <a href="../html/WalkIn.html"><p>-主页</p></a>
+                     <a href="#"><p>-苗绣社区</p></a>
+                     <a href="#"><p>-苗绣商城</p></a>
+                     <a href="../html/周边推荐2.html"><p>-周边推荐</p></a>
+                     <a href="#"><p>-产业概览</p></a>
+                     <a href="shangchuanzuopin.html"><p>-作品上传</p></a>
+                     <a href="category.html"><p>-苗绣论坛</p></a>
+                    </div>
+                </div>
+                   <div class="col-md-3">
+                  <div class="info-part-three320">
+                   <h4>人气作品</h4>
+                  <div class="news-info209">
+                  
+                   <h5>绉绣双肩包（“花溪”）</h5>
+                    <p>这幅苗绣作品，凝聚了艺术家卓越的绣艺技巧与独到的创意思维...</p> 
+                    <small>2017-7-16</small>
+                      </div>
+                       <div class="news-info209">
+                <h5>破线绣毛衣（“花溪”）</h5>
+                    <p>艺术家精湛地运用苗绣传统工艺，将古老的手工技艺与现代审美巧妙融合 ...</p>
+                    <small>2019-7-9</small>
+                      </div>
+                        <div class="news-info209">
+                <h5>辫绣手提包（“锦绣黔坤”）</h5>
+                    <p>苗绣作品展现了艺术家对大自然的独到感悟，细致入微的绣工勾勒出山水...</p>
+                    <small>2023-12-29</small>
+                      </div>
+                    
+                    </div>
+                </div>
+                   <div class="col-md-3">
+                  <div class="info-part-four320">
+                   <h4>苗绣论坛</h4>
+                   <div class="tweet-details29">
+                    <h5>苗绣初体验</h5>
+                    <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="post-deatils.html"> 苗绣，宛如大地的绚烂花开，细腻而瑰丽，它是苗族文化的精髓 ...</a></p>
+                   
+                      </div>
+                            <div class="tweet-details29">
+                    <h5>苗绣非遗</h5>
+                    <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="miaoxiufeiyi.html">苗族刺绣技艺进入首批国家级保护的非遗保护名录 ...</a></p>
+                  
+                      </div>
+                            <div class="tweet-details29">
+                    <h5>苗绣潮牌</h5>
+                    <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="miaoxiuchaopai.html">走进苗族聚居的贵州，世世代代的苗族人，用绣在服饰上的符号和图案...</a></p>
+                     
+                      </div>
+                      <div class="tweet-details29">
+                        <h5>苗绣体验</h5>
+                        <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="miaoxiutiyan.html">近年来，贵州多地因地制宜，利用自身独特的地理景观...</a></p>
+                       
+                          </div>
+                      <div class="tweet-details29">
+                      <h5>苗绣伴手礼</h5>
+                      <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="miaoxiubanshouli.html">在每个美好的时刻，我想将一份独特的礼物送给你...</a></p>
+                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="footer-social">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright 2023 苗绣 | <strong>《网络GIS实习》第一组</strong></p>
+            </div>
+             <div class="col-md-6">
+              <div class="social-right2389">
+               <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+               <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+               <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+               <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+               <a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a>
+               <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+               <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/npm.js"></script>
+</body>
+
+</html>
