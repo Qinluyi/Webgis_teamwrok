@@ -125,7 +125,7 @@ randomData.forEach(function (item, index) {
   // 创建产品元素
   var productElement = document.createElement('div');
   productElement.className = 'pic_box';
-  productElement.innerHTML = "<img src='../MiaoXiu_Image/" + item.图片 + "' alt='" + item.图片 + "' onclick='show_product(" + item.OBJECTID + ", 0)'>" +
+  productElement.innerHTML = "<img src='../MiaoXiu_Image/" + item.OBJECTID+".jpg" + "' alt='" + item.图片 + "' onclick='show_product(" + item.OBJECTID + ", 0)'>" +
     "<div class='name_img'>" +
     "<p>" + item.品牌 + "</p>" +
     "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='" + item.OBJECTID + "' onclick='add_product(" + item.OBJECTID + ", 0)'>" +
