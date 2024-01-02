@@ -27,7 +27,7 @@ function char1() {
                 color : '#ffffff',
 
             },
-            data:['雷山苗绣','松桃苗绣','湘西苗绣','剑河苗绣']
+            data:['雷山苗绣','松桃苗绣','花溪苗绣','剑河苗绣']
         },
 
         calculable : false,
@@ -59,7 +59,7 @@ function char1() {
                 data:[
                     {value:335, name:'雷山苗绣'},
                     {value:310, name:'松桃苗绣'},
-                    {value:234, name:'湘西苗绣'},
+                    {value:234, name:'花溪苗绣'},
                     {value:135, name:'剑河苗绣'}
 
                 ]
