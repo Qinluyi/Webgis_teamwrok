@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>首页界面</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <style>
+        body, html {
+          margin: 0;
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+      
+        #container {
+          position: absolute;
+          top: 23px;
+          right: 18px;
+          width: 95%;
+          height: 93%;
+        }
+        .input-item {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999;
+        }
+        .btn {
+        border-radius: 5px; /* 设置按钮的圆角 */
+        background-color: #110a3b; /* 设置按钮的背景颜色为红色 */
+        color: #FFFFFF; /* 设置按钮的文字颜色为白色 */
+        width: 120px;
+        height: 30px;
+        }
+        .input-item2 {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        z-index: 9999;
+        }
+      </style>
+</head>
+<body>
+<!--顶部-->
+<header class="header left">
+    <div class="left nav">
+        <ul>
+            <li class="nav_active"><i class="nav_1"></i><a href="index.html">数据概览</a> </li>
+            <li><i class="nav_2"></i><a href="carContrl.html">待链接</a> </li>
+            <li><i class="nav_3"></i><a href="map.html">待链接</a> </li>
+
+
+
+            </ul>
+    </div>
+    <div class="header_center left">
+        <h2><strong>苗绣产值大数据可视化平台</strong></h2>
+        <!-- <p class="color_font"><small>Comprehensive service platform for smart tourism</small></p> -->
+    </div>
+    <div class="right nav text_right">
+        <ul> <li><i class="nav_7"></i><a href="static.html">待链接</a> </li>
+            <li><i class="nav_8"></i><a href="message.html">待链接</a> </li>
+            <li><i class="nav_4"></i><a href="table1.html">待链接</a> </li>
+        </ul>
+    </div>
+   
+</header>
+<!--内容部分-->
+<div class="con left">
+    <!--选择时间-->
+    <!-- <div class="select_time">
+        <div class="static_top left">
+            <i></i><span>总体概况</span>
+        </div>
+    </div> -->
+    <!--数据总概-->
+    <div class="con_div">
+        <div class="con_div_text left">
+            <div class="con_div_text01 left">
+                <img src="../imgs/1.png" class="left text01_img">
+                <div class="left text01_div">
+                    <p>月总产值（万元）</p>
+                    <p>12356</p>
+                </div>
+            </div>
+            <div class="con_div_text01 right">
+                <img src="../imgs/1.png" class="left text01_img">
+                <div class="left text01_div">
+                    <p>月总成交数（笔）</p>
+                    <p>12356</p>
+                </div>
+            </div>
+        </div>
+        <div class="con_div_text left">
+            <div class="con_div_text01 left">
+                <img src="../imgs/info_4.png" class="left text01_img">
+                <div class="left text01_div">
+                    <p>平台成交额（万元）</p>
+                    <p class="sky">12356</p>
+                </div>
+            </div>
+            <div class="con_div_text01 right">
+                <img src="../imgs/info_5.png" class="left text01_img">
+                <div class="left text01_div">
+                    <p>平台成交数（笔）</p>
+                    <p class="sky">12356</p>
+                </div>
+            </div>
+        </div>
+        <div class="con_div_text left">
+
+            <div class="con_div_text01 left">
+                <img src="../imgs/info_6.png" class="left text01_img">
+                <div class="left text01_div">
+                    <p>苗绣作坊总数</p>
+                    <p class="org">12356</p>
+                </div>
+            </div>
+            <div class="con_div_text01 right">
+                <img src="../imgs/info_7.png" class="left text01_img">
+                <div class="left text01_div">
+                    <p>绣娘人数</p>
+                    <p class="org">12356</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--统计分析图-->
+    <div class="div_any">
+        <div class="left div_any01">
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../imgs/title_2.png">绣品类型统计 </div>
+                <p id="char1" class="p_chart"></p>
+            </div>
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../imgs/title_2.png">作坊成交额统计 </div>
+                <p id="char2" class="p_chart"></p>
+            </div>
+        </div>
+        <div class="div_any02 left ">
+            <div class="div_any_child div_height">
+                <div class="div_any_title any_title_width"><img src="../imgs/title_3.png">苗绣作坊分布 </div>
+                <div class="div_containerx">
+                    <div class="input-item">
+                        <input type="button" class="btn" value="分布点位" onclick='P()'/>
+                        <input type="button" class="btn" value="统计数据" onclick='L()'/>
+                    </div>
+                    <div class="input-item2">
+                        <input type="button" class="btn" value="作坊" onclick='zuo()'/>
+                        <input type="button" class="btn" value="绣品" onclick='xiu()'/>
+                    </div>
+                    <div id="container"></div>
+                </div>
+            </div>
+        </div>
+        <div class="right div_any01">
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../imgs/title_4.png">单日成交量 </div>
+                <p id="char3" class="p_chart"></p>
+            </div>
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../imgs/title_5.png">地区成交量 </div>
+                <p id="char4" class="p_chart"></p>
+            </div>
+        </div>
+    </div>
+    <!--分析表格-->
+    <div class="div_table">
+        <div class="left div_table_box">
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../imgs/title_4.png">作坊月产值排名前5位 </div>
+                <div class="table_p">
+                    <table>
+               <thead><tr>
+                   <th>排名</th>
+                   <th>作坊</th>
+                   <th>成交额（万元）</th>
+               </tr>
+               </thead>
+                <tbody>
+                <tr><td>1</td><td>创和服饰</td><td>4.2</td></tr>
+                <tr><td>2</td><td>苗疆故事</td><td>4.1</td></tr>
+                <tr><td>3</td><td>阿新</td><td>3.5</td></tr>
+                <tr><td>4</td><td>古苗疆</td><td>2.8</td></tr>
+                <tr><td>5</td><td>舞水云台</td><td>2.5</td></tr>
+                </tbody>
+            </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="left div_table_box">
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../imgs/title_4.png">绣娘月成交额前5位 </div>
+                <div class="table_p">
+                    <table>
+                        <thead><tr>
+                            <th>排名</th>
+                            <th>绣娘</th>
+                            <th>成交额（万元）</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>1</td><td>赵燕</td><td>1.3</td></tr>
+                        <tr><td>2</td><td>李敏</td><td>0.9</td></tr>
+                        <tr><td>3</td><td>王洪伟</td><td>0.8</td></tr>
+                        <tr><td>4</td><td>孙怡</td><td>0.79</td></tr>
+                        <tr><td>5</td><td>杨秀芳</td><td>0.68</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="left div_table_box">
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../imgs/title_4.png">地区成交额前5位 </div>
+                <div class="table_p">
+                    <table>
+                        <thead><tr>
+                            <th>排名</th>
+                            <th>地区</th>
+                            <th>成交额（万元）</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>1</td><td>贵阳</td><td>34.2</td></tr>
+                        <tr><td>2</td><td>毕节</td><td>32.5</td></tr>
+                        <tr><td>3</td><td>黔东南苗族侗族自治州</td><td>30.2</td></tr>
+                        <tr><td>4</td><td>黔南布依族苗族自治州</td><td>27.9</td></tr>
+                        <tr><td>5</td><td>六盘水</td><td>26.8</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="left div_table_box">
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../imgs/title_4.png">绣品类型排名前5位 </div>
+                <div class="table_p">
+                    <table>
+                        <thead><tr>
+                            <th>排名</th>
+                            <th>绣品</th>
+                            <th>成交额（万元）</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>1</td><td>xxx</td><td>134.2</td></tr>
+                        <tr><td>2</td><td>xxx</td><td>134.2</td></tr>
+                        <tr><td>3</td><td>xxx</td><td>134.2</td></tr>
+                        <tr><td>4</td><td>xxx</td><td>134.2</td></tr>
+                        <tr><td>5</td><td>xxx</td><td>134.2</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery/jQuery-2.2.0.min.js"></script>
+<script src="../js/echarts-all.js"></script>
+<script src="js/base.js"></script>
+<script src="../js/index.js"></script>
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5ieMMexWmzB9jivTq6oCRX9j&callback"></script> -->
+<script src="../js/map.js"></script>
+</body>
+
+<script type="text/javascript" src='../js/xiu.js'></script>
+<script type="text/javascript" src='../js/data.js'></script>
+<script>
+    window._AMapSecurityConfig = {
+      securityJsCode: "xxxx",
+    };
+  </script>
+  <script
+    language="javascript"
+    src="https://webapi.amap.com/maps?v=1.4.15&key=d802347354dcb85c363b5a5785274cb7&plugin=AMap.DistrictLayer"
+  ></script>
+
+  <script type="text/javascript"
+  src="https://webapi.amap.com/maps?v=2.0&key=d802347354dcb85c363b5a5785274cb7&plugin=AMap.Adaptor"></script>
+
+  <script type="text/javascript"
+    src="https://webapi.amap.com/loca?v=2.0.0&key=d802347354dcb85c363b5a5785274cb7"></script>
+
+  <script language="javascript">
+    var r = 1;
+    var s = 1;
+    function zuo(){
+        r=1;
+        go();
+    }
+    function xiu(){
+        r=2;
+        go();
+    }
+    function P(){
+        s=1;
+        go();
+    }
+    function L(){
+        s=2;
+        go();
+    }
+    const map = (window.map = new AMap.Map("container", {
+      center: [106.713478, 26.578343],
+      viewMode: "3D",
+      zoom: 7,
+      pitch: 50,
+      mapStyle: "amap://styles/blue"
+    }));
+    const disProvince = new AMap.DistrictLayer.Province({
+      adcode: [520000],
+      opacity :0.8,
+      depth: 1,
+      styles: {
+        fill: function (properties) {
+          // properties为可用于做样式映射的字段，包含
+          // NAME_CHN:中文名称
+          // adcode_pro
+          // adcode_cit
+          // adcode
+          var adcode = properties.adcode;
+          return getColorByAdcode(adcode);
+        },
+        "province-stroke": "cornflowerblue",
+        "city-stroke": "white", // 中国地级市边界
+        "county-stroke": "rgba(255,255,255,0.5)", // 中国区县边界
+      },
+    });
+	// 设置图层对应的map对象
+    disProvince.setMap(map);
+    // 颜色辅助方法 为了是改变各个版块的颜色 方便区分
+    var colors = {};
+    var getColorByAdcode = function (adcode) {
+      if (!colors[adcode]) {
+        var gb = Math.random() * 155 + 50;
+        colors[adcode] = "rgb(100,180,200)";
+      }
+
+      return colors[adcode];
+    };
+
+
+
+var style = {
+        url: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+        anchor: new AMap.Pixel(3, 3),
+        size: new AMap.Size(15, 15),//图标大小
+        zIndex: 1,
+    };
+    //创建点标记对象
+    var mass = new AMap.MassMarks(city, {
+        opacity: 0.8,
+        zIndex: 111,
+        cursor: 'pointer',
+        style: style
+    });
+    var marker = new AMap.Marker({content: ' ', map: map});
+   
+    mass.on('mouseover', function (e) {
+
+marker.setPosition(e.data.lnglat);
+marker.setLabel({content: e.data.name})
+});
+mass.setMap(map);
+
+
+function ShowPoints(){
+     const map = (window.map = new AMap.Map("container", {
+      center: [106.713478, 26.578343],
+      viewMode: "3D",
+      zoom: 7,
+      pitch: 50,
+      mapStyle: "amap://styles/blue"
+    }));
+    const disProvince = new AMap.DistrictLayer.Province({
+      adcode: [520000],
+      opacity :0.8,
+      depth: 1,
+      styles: {
+        fill: function (properties) {
+          // properties为可用于做样式映射的字段，包含
+          // NAME_CHN:中文名称
+          // adcode_pro
+          // adcode_cit
+          // adcode
+          var adcode = properties.adcode;
+          return getColorByAdcode(adcode);
+        },
+        "province-stroke": "cornflowerblue",
+        "city-stroke": "white", // 中国地级市边界
+        "county-stroke": "rgba(255,255,255,0.5)", // 中国区县边界
+      },
+    });
+	// 设置图层对应的map对象
+    disProvince.setMap(map);
+    // 颜色辅助方法 为了是改变各个版块的颜色 方便区分
+    var colors = {};
+    var getColorByAdcode = function (adcode) {
+      if (!colors[adcode]) {
+        var gb = Math.random() * 155 + 50;
+        colors[adcode] = "rgb(100,180,200)";
+      }
+
+      return colors[adcode];
+    };
+
+var style = {
+        url: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+        anchor: new AMap.Pixel(3, 3),
+        size: new AMap.Size(15, 15),//图标大小
+        zIndex: 1,
+    };
+    //创建点标记对象
+    var mass = new AMap.MassMarks(city, {
+        opacity: 0.8,
+        zIndex: 111,
+        cursor: 'pointer',
+        style: style
+    });
+    var marker = new AMap.Marker({content: ' ', map: map});
+   
+    mass.on('mouseover', function (e) {
+
+marker.setPosition(e.data.lnglat);
+marker.setLabel({content: e.data.name})
+});
+    mass.setMap(map);
+}
+
+function ShowPoints2(){
+     const map = (window.map = new AMap.Map("container", {
+      center: [106.713478, 26.578343],
+      viewMode: "3D",
+      zoom: 7,
+      pitch: 50,
+      mapStyle: "amap://styles/blue"
+    }));
+    const disProvince = new AMap.DistrictLayer.Province({
+      adcode: [520000],
+      opacity :0.8,
+      depth: 1,
+      styles: {
+        fill: function (properties) {
+          // properties为可用于做样式映射的字段，包含
+          // NAME_CHN:中文名称
+          // adcode_pro
+          // adcode_cit
+          // adcode
+          var adcode = properties.adcode;
+          return getColorByAdcode(adcode);
+        },
+        "province-stroke": "cornflowerblue",
+        "city-stroke": "white", // 中国地级市边界
+        "county-stroke": "rgba(255,255,255,0.5)", // 中国区县边界
+      },
+    });
+	// 设置图层对应的map对象
+    disProvince.setMap(map);
+    // 颜色辅助方法 为了是改变各个版块的颜色 方便区分
+    var colors = {};
+    var getColorByAdcode = function (adcode) {
+      if (!colors[adcode]) {
+        var gb = Math.random() * 155 + 50;
+        colors[adcode] = "rgb(100,180,200)";
+      }
+
+      return colors[adcode];
+    };
+
+var style = {
+        url: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+        anchor: new AMap.Pixel(3, 3),
+        size: new AMap.Size(15, 15),//图标大小
+        zIndex: 1,
+    };
+    //创建点标记对象
+    var mass = new AMap.MassMarks(city2, {
+        opacity: 0.8,
+        zIndex: 111,
+        cursor: 'pointer',
+        style: style
+    });
+    var marker = new AMap.Marker({content: ' ', map: map});
+   
+    mass.on('mouseover', function (e) {
+
+marker.setPosition(e.data.lnglat);
+marker.setLabel({content: e.data.name})
+});
+    mass.setMap(map);
+}
+
+function ShowL(){
+    mass.clear();
+    const map = (window.map = new AMap.Map("container", {
+      center: [106.713478, 26.578343],
+      viewMode: "3D",
+      zoom: 7,
+      pitch: 50,
+      mapStyle: "amap://styles/blue"
+    }));
+    const disProvince = new AMap.DistrictLayer.Province({
+      adcode: [520000],
+      opacity :0.8,
+      depth: 1,
+      styles: {
+        fill: function (properties) {
+          // properties为可用于做样式映射的字段，包含
+          // NAME_CHN:中文名称
+          // adcode_pro
+          // adcode_cit
+          // adcode
+          var adcode = properties.adcode;
+          return getColorByAdcode(adcode);
+        },
+        "province-stroke": "cornflowerblue",
+        "city-stroke": "white", // 中国地级市边界
+        "county-stroke": "rgba(255,255,255,0.5)", // 中国区县边界
+      },
+    });
+	// 设置图层对应的map对象
+    disProvince.setMap(map);
+    // 颜色辅助方法 为了是改变各个版块的颜色 方便区分
+    var colors = {};
+    var getColorByAdcode = function (adcode) {
+      if (!colors[adcode]) {
+        var gb = Math.random() * 155 + 50;
+        colors[adcode] = "rgb(100,180,200)";
+      }
+
+      return colors[adcode];
+    };
+    //设置loca环境对象 设置了环境光、平行光和点光的属性。
+var loca = new Loca.Container({
+      map,
+    });
+
+    loca.ambLight = {
+      intensity: 0.7,
+      color: '#7b7bff',
+    };
+    loca.dirLight = {
+      intensity: 0.8,
+      color: '#fff',
+      target: [0, 0, 0],
+      position: [0, -1, 1],
+    };
+    loca.pointLight = {
+      color: 'rgb(240,88,25)',
+      position: [112.028276, 31.58538, 2000000],
+      intensity: 3,
+      // 距离表示从光源到光照强度为 0 的位置，0 就是光不会消失。
+      distance: 5000000,
+    };
+
+    var pl = new Loca.PrismLayer({
+      zIndex: 1111,
+      opacity: 1,
+      visible: false,
+      hasSide: true,
+    });
+
+    //读取数据
+    var geo = new Loca.GeoJSONSource({
+      data:{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                106.713478, 
+                26.578343
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "名称": "贵阳市",
+                "地址": "贵阳市",
+                "GDP": 10894.24,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                104.846743, 
+                26.584643
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "名称": "六盘水市",
+                "地址": "六盘水市",
+                "GDP": 9872.42,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                105.932188,
+                26.245544
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "名称": "安顺市",
+                "地址": "安顺市",
+                "GDP": 10094.24,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                109.189598, 
+                27.731514
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "名称": "铜仁市",
+                "地址": "铜仁市",
+                "GDP": 11872.42,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                104.910858,
+                25.095974
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "名称": "黔西南布依族苗族自治州",
+                "地址": "黔西南布依族苗族自治州",
+                "GDP": 12894.24,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                105.28501,
+                27.301693
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "名称": "毕节市",
+                "地址": "毕节市",
+                "GDP": 9872.42,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                107.990602,
+                26.589858
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "名称": "黔东南苗族侗族自治州市",
+                "地址": "黔东南苗族侗族自治州市",
+                "GDP": 10894.24,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                107.523205, 
+                26.254049
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "名称": "黔南布依族苗族自治州",
+                "地址": "黔南布依族苗族自治州",
+                "GDP": 10872.42,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                106.937265, 
+                27.706626
+                ]
+            },
+            "properties": {
+                "id": 3,
+                "名称": "遵义市",
+                "地址": "遵义市",
+                "GDP": 13777.9,
+            }
+        }
+    ]
+}
+    });
+   
+    pl.setSource(geo);
+   
+    //设置棱柱效果和高度
+    pl.setStyle({
+      unit: 'meter',
+      sideNumber: 4,
+      topColor: (index, f) => {
+        var n = f.properties['GDP'];
+        return n > 7000 ? '#E97091' : '#2852F1';
+      },
+      sideTopColor: (index, f) => {
+        var n = f.properties['GDP'];
+        return n > 7000 ? '#E97091' : '#2852F1';
+      },
+      sideBottomColor: '#002bb9',
+      radius: 10000,
+      height: (index, f) => {
+        var props = f.properties;
+        var height = Math.max(100, Math.sqrt(props['GDP']) * 9000 - 790000);
+        return height;
+      },
+      rotation: 360,
+      altitude: 0,
+    });
+
+    loca.add(pl);
+
+    //动画设置
+    map.on('complete', function () {
+      setTimeout(function () {
+        pl.show(500);
+        pl.addAnimate({
+          key: 'height',
+          value: [0, 1],
+          duration: 500,
+          easing: 'Linear',
+          transform: 2000,
+          random: true,
+          delay: 800,
+        });
+        pl.addAnimate({
+          key: 'rotation',
+          value: [0, 1],
+          duration: 500,
+          easing: 'Linear',
+          transform: 1000,
+          random: true,
+          delay: 800,
+        });
+      }, 80);
+    });
+
+    loca.animate.start();
+}
+
+function ShowL2(){
+    mass.clear();
+    const map = (window.map = new AMap.Map("container", {
+      center: [106.713478, 26.578343],
+      viewMode: "3D",
+      zoom: 7,
+      pitch: 50,
+      mapStyle: "amap://styles/blue"
+    }));
+    const disProvince = new AMap.DistrictLayer.Province({
+      adcode: [520000],
+      opacity :0.8,
+      depth: 1,
+      styles: {
+        fill: function (properties) {
+          // properties为可用于做样式映射的字段，包含
+          // NAME_CHN:中文名称
+          // adcode_pro
+          // adcode_cit
+          // adcode
+          var adcode = properties.adcode;
+          return getColorByAdcode(adcode);
+        },
+        "province-stroke": "cornflowerblue",
+        "city-stroke": "white", // 中国地级市边界
+        "county-stroke": "rgba(255,255,255,0.5)", // 中国区县边界
+      },
+    });
+	// 设置图层对应的map对象
+    disProvince.setMap(map);
+    // 颜色辅助方法 为了是改变各个版块的颜色 方便区分
+    var colors = {};
+    var getColorByAdcode = function (adcode) {
+      if (!colors[adcode]) {
+        var gb = Math.random() * 155 + 50;
+        colors[adcode] = "rgb(100,180,200)";
+      }
+
+      return colors[adcode];
+    };
+    //设置loca环境对象 设置了环境光、平行光和点光的属性。
+var loca = new Loca.Container({
+      map,
+    });
+
+    loca.ambLight = {
+      intensity: 0.7,
+      color: '#7b7bff',
+    };
+    loca.dirLight = {
+      intensity: 0.8,
+      color: '#fff',
+      target: [0, 0, 0],
+      position: [0, -1, 1],
+    };
+    loca.pointLight = {
+      color: 'rgb(240,88,25)',
+      position: [112.028276, 31.58538, 2000000],
+      intensity: 3,
+      // 距离表示从光源到光照强度为 0 的位置，0 就是光不会消失。
+      distance: 5000000,
+    };
+
+    var pl = new Loca.PrismLayer({
+      zIndex: 1111,
+      opacity: 1,
+      visible: false,
+      hasSide: true,
+    });
+
+    //读取数据
+    var geo = new Loca.GeoJSONSource({
+      data:{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                106.713478, 
+                26.578343
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "名称": "贵阳市",
+                "地址": "贵阳市",
+                "GDP": 9894.24,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                104.846743, 
+                26.584643
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "名称": "六盘水市",
+                "地址": "六盘水市",
+                "GDP": 10872.42,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                105.932188,
+                26.245544
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "名称": "安顺市",
+                "地址": "安顺市",
+                "GDP": 11094.24,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                109.189598, 
+                27.731514
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "名称": "铜仁市",
+                "地址": "铜仁市",
+                "GDP": 8872.42,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                104.910858,
+                25.095974
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "名称": "黔西南布依族苗族自治州",
+                "地址": "黔西南布依族苗族自治州",
+                "GDP": 11894.24,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                105.28501,
+                27.301693
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "名称": "毕节市",
+                "地址": "毕节市",
+                "GDP": 8972.42,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                107.990602,
+                26.589858
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "名称": "黔东南苗族侗族自治州市",
+                "地址": "黔东南苗族侗族自治州市",
+                "GDP": 11894.24,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                107.523205, 
+                26.254049
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "名称": "黔南布依族苗族自治州",
+                "地址": "黔南布依族苗族自治州",
+                "GDP": 10072.42,
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                106.937265, 
+                27.706626
+                ]
+            },
+            "properties": {
+                "id": 3,
+                "名称": "遵义市",
+                "地址": "遵义市",
+                "GDP": 9777.9,
+            }
+        }
+    ]
+}
+    });
+   
+    pl.setSource(geo);
+   
+    //设置棱柱效果和高度
+    pl.setStyle({
+      unit: 'meter',
+      sideNumber: 4,
+      topColor: (index, f) => {
+        var n = f.properties['GDP'];
+        return n > 7000 ? '#FFA500' : '#2852F1';
+      },
+      sideTopColor: (index, f) => {
+        var n = f.properties['GDP'];
+        return n > 7000 ? '#FFA500' : '#2852F1';
+      },
+      sideBottomColor: '#002bb9',
+      radius: 10000,
+      height: (index, f) => {
+        var props = f.properties;
+        var height = Math.max(100, Math.sqrt(props['GDP']) * 9000 - 790000);
+        return height;
+      },
+      rotation: 360,
+      altitude: 0,
+    });
+
+    loca.add(pl);
+
+    //动画设置
+    map.on('complete', function () {
+      setTimeout(function () {
+        pl.show(500);
+        pl.addAnimate({
+          key: 'height',
+          value: [0, 1],
+          duration: 500,
+          easing: 'Linear',
+          transform: 2000,
+          random: true,
+          delay: 800,
+        });
+        pl.addAnimate({
+          key: 'rotation',
+          value: [0, 1],
+          duration: 500,
+          easing: 'Linear',
+          transform: 1000,
+          random: true,
+          delay: 800,
+        });
+      }, 80);
+    });
+
+    loca.animate.start();
+}
+
+
+function go(){
+if(r==1&&s==1){
+    ShowPoints();
+}
+else if(r==1&&s==2){
+    ShowL();
+}
+else if(r==2&&s==1){
+    ShowPoints2();
+}
+else {
+    ShowL2();
+}
+}
+
+
+  </script>
+
+</html>
