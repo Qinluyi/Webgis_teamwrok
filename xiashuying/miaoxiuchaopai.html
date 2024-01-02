@@ -358,10 +358,10 @@ for (var i = 0; i < aData1.length; i++) {
                     <div class="categori-part329">
                         <h4>浏览作品</h4>
                         <ul>
-                            <li><a href="#">湘西苗绣作品集</a></li>
-                            <li><a href="#">雷山苗绣作品集</a></li>
-                            <li><a href="#">松桃苗绣作品集</a></li>
-                            <li><a href="#">剑河苗绣作品集</a></li>
+                            <li><a href="../html/WalkIn.html">花溪苗绣作品集</a></li>
+                            <li><a href="../html/WalkIn.html">雷山苗绣作品集</a></li>
+                            <li><a href="../html/WalkIn.html">松桃苗绣作品集</a></li>
+                            <li><a href="../html/WalkIn.html">剑河苗绣作品集</a></li>
                             
                         </ul>
                     </div>
@@ -369,54 +369,54 @@ for (var i = 0; i < aData1.length; i++) {
            <!--             social part -->
            <div class="social-part2189">
             <h4>人气作品</h4>
-           <li class="rss-one">
-              <a href="#" target="_blank">
-               <strong>
-                  <span>绉绣双肩包</span>
-                   <!-- <i class="fa fa-rss" aria-hidden="true"></i> -->
-                   <!-- <i class="fa fa-house"></i> -->
-                   <br>
-                   <small>品牌："花溪"，发布者ID: 75</small>
-                   
-               </strong>
-               </a>
-           </li>
-                     <li class="facebook-two">
-              <a href="#" target="_blank">
-               <strong>
-                  <span>破线绣毛衣</span>
-                       <!-- <i class="fa fa-facebook" aria-hidden="true"></i> -->
-     
-                   <br>
-                   <small>品牌："花溪"，发布者ID：73</small>
-                   
-               </strong>
-               </a>
-           </li>
-                              <li class="twitter-three">
-              <a href="#" target="_blank">
-               <strong>
-                  <span>辫绣手提包</span>
-              <!-- <i class="fa fa-twitter" aria-hidden="true"></i> -->
-     
-                   <br>
-                   <small>品牌："锦绣黔坤"，发布者ID：99</small>
-                   
-               </strong>
-               </a>
-           </li>
-                              <li class="youtube-four">
-              <a href="#" target="_blank">
-               <strong>
-                  <span>破线绣围巾</span>
-             <!-- <i class="fa fa-youtube" aria-hidden="true"></i> -->
-     
-                   <br>
-                   <small>品牌："古阿新"，发布者ID：77</small>
-                   
-               </strong>
-               </a>
-           </li>
+            <li class="rss-one" onclick="go_to_item(5,0)">
+                <!-- <a href="#" target="_blank"> -->
+                 <strong>
+                    <span>缠绣手提包</span>
+                     <!-- <i class="fa fa-rss" aria-hidden="true"></i> -->
+                     <!-- <i class="fa fa-house"></i> -->
+                     <br>
+                     <small>品牌："花溪"，发布者ID: 9</small>
+                     
+                 </strong>
+                 </a>
+             </li>
+             <li class="facebook-two" onclick="go_to_item(346,0)">
+                <!-- <a href="#" target="_blank"> -->
+                 <strong>
+                    <span>破线绣毛衣</span>
+                         <!-- <i class="fa fa-facebook" aria-hidden="true"></i> -->
+       
+                     <br>
+                     <small>品牌："洛书河图"，发布者ID：8</small>
+                     
+                 </strong>
+                 </a>
+             </li>
+             <li class="twitter-three" onclick="go_to_item(356,0)">
+                <!-- <a href="#" target="_blank"> -->
+                 <strong>
+                    <span>锡绣袜</span>
+                <!-- <i class="fa fa-twitter" aria-hidden="true"></i> -->
+       
+                     <br>
+                     <small>品牌："锦绣黔坤"，发布者ID：99</small>
+                     
+                 </strong>
+                 </a>
+             </li>
+             <li class="youtube-four" onclick="go_to_item(37,0)">
+                <!-- <a href="#" target="_blank"> -->
+                 <strong>
+                    <span>锡绣毛衣</span>
+               <!-- <i class="fa fa-youtube" aria-hidden="true"></i> -->
+       
+                     <br>
+                     <small>品牌："古阿新"，发布者ID：2</small>
+                     
+                 </strong>
+                 </a>
+             </li>
                 
             </div>
                      
@@ -566,6 +566,13 @@ for (var i = 0; i < aData1.length; i++) {
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/npm.js"></script>
+    <script>
+        function go_to_item(item_id,is_class){
+    localStorage.setItem('item_id', item_id);
+    localStorage.setItem('item_type', is_class);
+    window.location.href = '../html/product.html';
+    }
+    </script>
 </body>
 
 </html>

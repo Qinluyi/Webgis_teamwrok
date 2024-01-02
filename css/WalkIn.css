@@ -128,16 +128,16 @@ button {
   transition: transform 0.5s;
 }
  .card1{
-  background-image: url(../imgs/index_ShouYe1.png);
+  background-image: url(../imgs/FeiYi.jpg);
  }
  .card2{
-  background-image: url(../imgs/index_ShouYe2.png);
+  background-image: url(../imgs/Chaopai.jpg);
  }
  .card3{
-  background-image: url(../imgs/index_ShouYe3.png);
+  background-image: url(../imgs/present.jpg);
  }
  .card4{
-  background-image: url(../imgs/index_ShouYe4.png);
+  background-image: url(../imgs/Tiyan.jpg);
  }
  .card:hover{
    transform: translateY(-10px);

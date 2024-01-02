@@ -8,12 +8,38 @@
   </script>
 </head>
 <body>
+  <div class="container-top">
+    <div class="navbar-top">
+      <nav>
+        <ul>
+        <li class="dropdown-top">
+            <a href="../xiashuying/category.html" class="nav_text_big">苗绣社区</a>
+        </li>
+        <li class="dropdown-top">
+            <a href="WalkIn.html" class="nav_text_big">苗绣商城</a>
+        </li>
+        <li>
+          <a href="periphery.html" class="nav_text_big">苗绣周边</a>
+        </li>
+        <li>
+          <a href="WalkIn.html" class="nav_text_big">产业概览</a>
+        </li>
+        </ul>
+      </nav>
+      <a href="./logIn.html">
+        <img src="../imgs/登录.png" class="menu-icon-top shopcar"/>
+      </a> 
+      <a href="./购物车.html">
+          <img src="../imgs/_购物车.png" class="menu-icon-top shopcar"/>
+      </a> 
+    </div>
+  </div>
 <div class="box">
     <div class="title">
         <h2 id="type">松桃苗绣</h2>
         <hr/>
         <img src="../imgs/播音.png"><span>播报</span>
-        <img src="../imgs/论坛.png"><span>论坛</span>
+        <img src="../imgs/论坛.png"><a href="../xiashuying/category.html"><span>论坛</span></a>
         <p id="type_introduction">松桃苗绣起源于贵州省黔东南苗族侗族自治州松桃苗族自治县，是苗族传统的手工刺绣工艺之一。松桃苗绣注重对苗族传统文化的传承，图案多以当地的山水风光、传统花鸟、苗族服饰等元素为题材，具有浓厚的地方特色和文化内涵。
           苗绣以五色彩线织成，图形主要是规则的若干基本几何图形组成，花草图案极少。几何图案的基本图形多为方形、棱形、螺形、十字形、之字形等。
         </p>
@@ -24,7 +50,7 @@
             <img src="../imgs/销量.png" alt="销量"></img><p id="XiaoLiang">100</p>
             <img src="../imgs/转发.png" alt="转发数"></img><p>100</p>
             <img src="../imgs/价格.png" alt="点赞数"></img><p id="price">20</p> 
-            <img src="../imgs/购物车蓝.png" alt="转发数"></img>  
+            <img src="../imgs/购物车蓝.png" alt="转发数" onclick="add_the_product()"></img>  
             <div class="description">
               
                 <div id="date">

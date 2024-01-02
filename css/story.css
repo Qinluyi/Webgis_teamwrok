@@ -1,0 +1,119 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #eee;
+}
+
+.focus {
+    margin: 10px auto;
+    position: relative;
+    width: 1000px;
+    height: 2000px;
+    background-color: purple;
+    overflow: hidden;
+}
+
+/* 左右侧切换的小按钮 */
+.focus .arrow {
+    display: none;
+    width: 24px;
+    height: 40px;
+    /* border: 1px solid #eee; */
+    line-height: 40px;
+    text-align: center;
+    background: rgba(178, 117, 235, 0.3);
+    font-size: 20px;
+    /* 用了定位注意层级问题 */
+    z-index: 11;
+}
+
+.focus .arrow-l {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -15px;
+    border-radius: 0 20px 20px 0;
+
+}
+
+
+.focus .arrow-r {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -15px;
+    border-radius: 20px 0 0 20px;
+
+}
+
+/* 轮播图的区域 */
+.focus ul {
+    /* ul 里面放着所有轮播图的图片，所以 ul 的宽度必须足够大能够容纳所有图片
+       这里有4张图片，ul宽度设置为 600% */
+    width: 600%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.focus ul li {
+    float: left;
+}
+
+.focus ul li a img {
+    width: 1000px;
+    height: 2000px;
+}
+
+/* 小圆点显示区域 */
+.focus ol {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    margin-left: -40px;
+}
+
+.focus ol li {
+    float: left;
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50% 50%;
+    border: 1px solid rgb(178, 121, 248);
+    cursor: pointer;
+
+}
+
+.current {
+    background-color: #b58dff;
+}
+
+#story {
+    border-top: 50px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#story img:first-child,
+#story img:last-child {
+    width: 100px;
+    height: 50px;
+}
+
+#story img:nth-child(2) {
+    width: 450px;
+    height: 105px;
+}

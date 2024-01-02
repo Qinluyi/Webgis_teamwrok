@@ -345,7 +345,6 @@ function add_product(id){
                     var band = match['品牌'];
                     var yuyi = match['寓意'];
                     var combinedString = band + ' ' + yuyi;
-    
                     var price = match['价格']
                     productElement = createProductItem(id,name2,price,combinedString);
     

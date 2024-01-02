@@ -35,7 +35,7 @@ function show_product(item_id,is_class){
                                     $("#item_name").text(item.名字);
                                     $("#DianZan").text(item.点赞数);
                                     $("#XiaoLiang").text(item.销量);
-                                    var srcpath="../MiaoXiu_Image/"+item.图片;
+                                    var srcpath="../MiaoXiu_Image/"+item.OBJECTID+".jpg";
                                     $("#item_picture").attr("src", srcpath);
                                     $("#item_picture").attr("class","col_up_img");
                                     $("#product_introduction").text(item.描述);
@@ -105,7 +105,7 @@ function show_product(item_id,is_class){
                 show_person(item.发布者I);
                 $("#item_name").text(item.名字);
                 type=item.类别;              
-                var srcpath="../MiaoXiu_Image/"+item.图片;
+                var srcpath="../MiaoXiu_Image/"+item.OBJECTID+".jpg";
                 $("#DianZan").text(item.点赞数);
                 $("#XiaoLiang").text(item.销量);
                 $("#price").text(item.价格);
@@ -258,7 +258,7 @@ function DivData(data,type){
     if(my_switch==true){
                     $.each(data, function (index, item) {
                         if(type==1){
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
                                     "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -268,7 +268,7 @@ function DivData(data,type){
                         }
                     if(type == 2){
                         
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.品牌+"</p>"+
                                     "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -278,7 +278,7 @@ function DivData(data,type){
                     }
                     if(type == 3){
                         
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.寓意+"</p>"+
                                     "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -291,7 +291,7 @@ function DivData(data,type){
     }else{
         $.each(data, function (index, item) {
             if(type==1){
-                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
+                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                             "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
                             "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                             "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -301,7 +301,7 @@ function DivData(data,type){
                 }
             if(type == 2){
                 
-                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
+                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                             "<div class = 'name_img'><p>"+item.品牌+"</p>"+
                             "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                             "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -311,7 +311,7 @@ function DivData(data,type){
             }
             if(type == 3){
                 
-                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
+                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                             "<div class = 'name_img'><p>"+item.寓意+"</p>"+
                             "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                             "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -331,23 +331,24 @@ function getRandomRecords(data, count) {
 }
 
 function show_type(item,is_class){
+    var type_item;
     fetch('../json/介绍.json')
             .then(response => response.json()) // 解析JSON数据
             .then(data => {
                 if(is_class ==0){
                     if(item.类别==1){
-                        var type_item = data.find(type_item => type_item.种类 === item.非遗种);
+                        type_item = data.find(type_item => type_item.种类 === item.非遗种);
                         console.log(type_item.介绍);
                     }
                     if(item.类别==2){
-                        var type_item = data.find(type_item => type_item.种类 === item.品牌);
+                        type_item = data.find(type_item => type_item.种类 === item.品牌);
                     }
                     if(item.类别==3){
-                        var type_item = data.find(type_item => type_item.种类 === item.寓意);
+                        type_item = data.find(type_item => type_item.种类 === item.寓意);
                     }
                 
                 }else{
-                    var type_item = data.find(type_item => type_item.种类 === "体验苗绣");
+                    type_item = data.find(type_item => type_item.种类 === "体验苗绣");
                 }
                 $("#type").text(type_item.种类);
                 $("#type_introduction").text(type_item.介绍); 
@@ -372,19 +373,22 @@ var cartItems = [];
 var cartCount = 0;
 var is_add = false;
 
-function add_product(id, is_class){
+function add_the_product(){
+    var num_item_id = parseInt(id);
+    var the_is_class = parseInt(is_class);
+    add_product(num_item_id, the_is_class);
+}
+
+function add_product(the_id, the_is_class){
         
     var item = {
-        id: id,
-        class: is_class
+        id: the_id,
+        class: the_is_class
       };
-
-      cartItems.push(item)
+      cartItems.push(item);
 
     // 将对象存储为 JSON 字符串
     localStorage.setItem('productData', JSON.stringify(cartItems));
-
-    console.log(cartItems); 
 }
 
 //传递经纬度给周边推荐并跳转页面
@@ -399,5 +403,5 @@ function To_Map(is_product){
     }
     localStorage.setItem('worksname', worksname);
     localStorage.setItem('executeLinkworks', 'true');
-    window.location.href = '周边推荐2.html';
+    window.location.href = 'periphery.html';
 }
