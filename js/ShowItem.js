@@ -1,8 +1,10 @@
 var my_switch = false;
 var id;
 var is_class;
-var lng;
-var lat;
+var lng_product;
+var lat_product;
+var lng_person;
+var lat_person;
 var executeLinkworks;
 var worksname;
 
@@ -33,16 +35,16 @@ function show_product(item_id,is_class){
                                     $("#item_name").text(item.名字);
                                     $("#DianZan").text(item.点赞数);
                                     $("#XiaoLiang").text(item.销量);
-                                    var srcpath="../MiaoXiu_Image/"+item.图片;
+                                    var srcpath="../MiaoXiu_Image/"+item.OBJECTID+".jpg";
                                     $("#item_picture").attr("src", srcpath);
                                     $("#item_picture").attr("class","col_up_img");
-                                    $("#description").text(item.描述);
+                                    $("#product_introduction").text(item.描述);
                                     
                                     type=item.类别;
                                     var map = new BMapGL.Map("map");                // 创建地图实例
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
-                                    lng = item.经度;
-                                    lat = item.纬度;
+                                    lng_product = item.经度;
+                                    lat_product = item.纬度;
                                     worksname = item.名字;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
@@ -72,12 +74,12 @@ function show_product(item_id,is_class){
                                     var srcpath="../MiaoXiu_Image/"+item.课程id+".jpg";
                                     $("#item_picture").attr("src", srcpath);
                                     $("#item_picture").attr("class","col_up_img");
-                                    $("#description").text(item.介绍);
+                                    $("#product_introduction").text(item.介绍);
                                     $("#map_text").text('查看上课地点');
                                     var map = new BMapGL.Map("map");                // 创建地图实例
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
-                                    lng = item.经度;
-                                    lat = item.纬度;
+                                    lng_product = item.经度;
+                                    lat_product = item.纬度;
                                     worksname = item.名字;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
@@ -99,18 +101,22 @@ function show_product(item_id,is_class){
             // 在data中查找id为8的记录
                 var num_item_id = parseInt(item_id);//转换id的数据类型
                 const item = data.find(item => item.OBJECTID === num_item_id);
-                console.log(item);
+                show_type(item,is_class);
+                show_person(item.发布者I);
                 $("#item_name").text(item.名字);
-                type=item.类别;                
-                var srcpath="../MiaoXiu_Image/"+item.图片;
+                type=item.类别;              
+                var srcpath="../MiaoXiu_Image/"+item.OBJECTID+".jpg";
+                $("#DianZan").text(item.点赞数);
+                $("#XiaoLiang").text(item.销量);
+                $("#price").text(item.价格);
                 $("#item_picture").attr("src", srcpath);
                 $("#item_picture").attr("class","col_up_img");
-                $("#description").text(item.描述);
+                $("#product_introduction").text(item.描述);
                 $("#map_text").text('查看绣品产地');
                 var map = new BMapGL.Map("map");                // 创建地图实例
                 var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
-                lng = item.经度;
-                lat = item.纬度;
+                lng_product = item.经度;
+                lat_product = item.纬度;
                 worksname = item.名字;
                 var marker = new BMapGL.Marker(point);        // 创建标注   
                 map.addOverlay(marker);   
@@ -131,19 +137,25 @@ function show_product(item_id,is_class){
             // 在data中查找id为8的记录
                 var num_item_id = parseInt(item_id);
                 const item = data.find(item => item.课程ID === num_item_id);
-                
-                
+                var date_body ='<img src="../imgs/日期.png" alt="点赞数"></img><p>上课时间：'+item.时间+'</p>';
+                show_person(item.授课老师ID);
+                $("#date").html(date_body); 
+                show_type(item,is_class);
+                $("#product_introduction_title").text("课程详情");
+                $("#price").text(item.价格);
+                $("#check_location").text('查看上课地点');
+                $("#person_introduction_title").text('授课老师简介')
+                $("#person_location").text('查看授课老师所在地');
                 $("#item_name").text(item.课程名);
-                                    
                                     var srcpath="../MiaoXiu_Image/"+item.课程ID+".jpg";
                                     $("#item_picture").attr("src", srcpath);
                                     $("#item_picture").attr("class","col_up_img");
-                                    $("#description").text(item.介绍);
+                                    $("#product_introduction").text(item.介绍);
                                     $("#map_text").text('查看上课地点');
                                     var map = new BMapGL.Map("map");                // 创建地图实例
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
-                                    lng = item.经度;
-                                    lat = item.纬度;
+                                    lng_product = item.经度;
+                                    lat_product = item.纬度;
                                     worksname = item.名字;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
@@ -176,39 +188,6 @@ function Find_the_same(type){
                     console.log('找到相同');
                     tbodydata=DivData(data,type);//给tbodydata赋值
                     $("#same_items").html(tbodydata);  //给相同的商品赋值
-                    // tbodydata = "<div class='box_contain'>";
-                    // $.each(data, function (index, item) {
-                    //     if(type==1){
-                    //                 tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
-                    //                 "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
-                    //                 "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
-                    //                 "<hr/><p>"+item.名字+"</p>"+"</div>";
-                    //                 if(index == 2){
-                    //                     tbodydata+="</div>";
-                    //                 }
-                    //     }
-                    // if(type == 2){
-                        
-                    //                 tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
-                    //                 "<div class = 'name_img'><p>"+item.品牌+"</p>"+
-                    //                 "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
-                    //                 "<hr/><p>"+item.名字+"</p>"+"</div>";
-                    //                 if(index == 2){
-                    //                     tbodydata+="</div>";
-                    //                 }      
-                    // }
-                    // if(type == 3){
-                        
-                    //                 tbodydata +="<div class='pic_box'>"+"<img src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
-                    //                 "<div class = 'name_img'><p>"+item.寓意+"</p>"+
-                    //                 "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
-                    //                 "<hr/><p>"+item.名字+"</p>"+"</div>";
-                    //                 if(index == 2){
-                    //                     tbodydata+="</div>";
-                    //                 }
-                    // }        
-                    // });  
-                    // $("#same_items").html(tbodydata);    
                 }
             });
         }else{
@@ -225,7 +204,7 @@ function Find_the_same(type){
                     $.each(data, function (index, item) {
                         tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.课程id+".jpg' alt='"+item.课程id+".jpg' onclick='show_product("+item.课程id+",1)'>"+
                         "<div class = 'name_img'><p>"+item.课程名+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.课程id+"' onclick='add_product("+item.课程id+")'></div></div>";
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.课程id+"' onclick='add_product("+item.课程id+",1)'></div></div>";
                         if(index == 2){
                             tbodydata+="</div>";
                         }           
@@ -244,10 +223,6 @@ function Find_the_same(type){
                 // 随机选取 3 条记录
                 const randomType1Records = getRandomRecords(type1Records, 3);
 
-                $.each(randomType1Records, function (index, item) {
-                    console.log(item.价格);
-                });
-
                 tbodydata=DivData(randomType1Records,type);//给tbodydata赋值
                 $("#same_items").html(tbodydata);  //给相同的商品赋值
                 //console.log(randomType1Records);
@@ -264,7 +239,7 @@ function Find_the_same(type){
                     for(var i=0;i<3;i++){
                         tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+items[i]["课程ID"]+".jpg' alt='"+items[i]["课程ID"]+".jpg' onclick='show_product("+items[i]["课程ID"]+",1)'>"+
                         "<div class = 'name_img'><p>"+items[i]["课程名"]+"</p>"+
-                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+items[i]["课程ID"]+"' onclick='add_product("+items[i]["课程ID"]+")'></div></div>";
+                        "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+items[i]["课程ID"]+"' onclick='add_product("+items[i]["课程ID"]+",1)'></div></div>";
                         if(i == 2){
                             tbodydata+="</div>";
                         }           
@@ -283,9 +258,9 @@ function DivData(data,type){
     if(my_switch==true){
                     $.each(data, function (index, item) {
                         if(type==1){
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
-                                    "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
+                                    "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
                                     if(index == 2){
                                         tbodydata+="</div>";
@@ -293,7 +268,7 @@ function DivData(data,type){
                         }
                     if(type == 2){
                         
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.品牌+"</p>"+
                                     "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -303,9 +278,9 @@ function DivData(data,type){
                     }
                     if(type == 3){
                         
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.寓意+"</p>"+
-                                    "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
+                                    "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
                                     if(index == 2){
                                         tbodydata+="</div>";
@@ -316,9 +291,9 @@ function DivData(data,type){
     }else{
         $.each(data, function (index, item) {
             if(type==1){
-                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
+                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                             "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
-                            "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+")'></div>"+
+                            "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                             "<hr/><p>"+item.名字+"</p>"+"</div>";
                             if(index == 2){
                                 tbodydata+="</div>";
@@ -326,9 +301,9 @@ function DivData(data,type){
                 }
             if(type == 2){
                 
-                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
+                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                             "<div class = 'name_img'><p>"+item.品牌+"</p>"+
-                            "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+")'></div>"+
+                            "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                             "<hr/><p>"+item.名字+"</p>"+"</div>";
                             if(index == 2){
                                 tbodydata+="</div>";
@@ -336,9 +311,9 @@ function DivData(data,type){
             }
             if(type == 3){
                 
-                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.图片+"' alt='"+item.图片+"' onclick='show_product("+item.OBJECTID+",0)'>"+
+                            tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.OBJECTID+",0)'>"+
                             "<div class = 'name_img'><p>"+item.寓意+"</p>"+
-                            "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+")'></div>"+
+                            "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.OBJECTID+"' onclick='add_product("+item.OBJECTID+",0)'></div>"+
                             "<hr/><p>"+item.名字+"</p>"+"</div>";
                             if(index == 2){
                                 tbodydata+="</div>";
@@ -355,20 +330,78 @@ function getRandomRecords(data, count) {
     return shuffled.slice(0, count); // 截取前 count 条记录
 }
 
+function show_type(item,is_class){
+    var type_item;
+    fetch('../json/介绍.json')
+            .then(response => response.json()) // 解析JSON数据
+            .then(data => {
+                if(is_class ==0){
+                    if(item.类别==1){
+                        type_item = data.find(type_item => type_item.种类 === item.非遗种);
+                        console.log(type_item.介绍);
+                    }
+                    if(item.类别==2){
+                        type_item = data.find(type_item => type_item.种类 === item.品牌);
+                    }
+                    if(item.类别==3){
+                        type_item = data.find(type_item => type_item.种类 === item.寓意);
+                    }
+                
+                }else{
+                    type_item = data.find(type_item => type_item.种类 === "体验苗绣");
+                }
+                $("#type").text(type_item.种类);
+                $("#type_introduction").text(type_item.介绍); 
+            })
+            .catch(error => console.error('加载JSON文件时出错：', error));
+}
+
+function show_person(person_id){
+    fetch('../json/绣娘.json')
+            .then(response => response.json()) // 解析JSON数据
+            .then(data => {
+                var item = data.find(item => item.ID === person_id);
+                $("#person_introduction").text(item.介绍);
+                lng_person = item.经度;
+                lat_person = item.纬度;
+            })
+            .catch(error => console.error('加载JSON文件时出错：', error));
+             
+}
 //和购物车有关功能
 var cartItems = [];
 var cartCount = 0;
 var is_add = false;
 
-function add_product(id){
-    console.log(id);  
+function add_the_product(){
+    var num_item_id = parseInt(id);
+    var the_is_class = parseInt(is_class);
+    add_product(num_item_id, the_is_class);
+}
+
+function add_product(the_id, the_is_class){
+        
+    var item = {
+        id: the_id,
+        class: the_is_class
+      };
+      cartItems.push(item);
+
+    // 将对象存储为 JSON 字符串
+    localStorage.setItem('productData', JSON.stringify(cartItems));
 }
 
 //传递经纬度给周边推荐并跳转页面
-function To_Map(){
-    localStorage.setItem('lng', lng);
-    localStorage.setItem('lat', lat);
+function To_Map(is_product){
+    if(is_product==1){
+    localStorage.setItem('lng', lng_product);
+    localStorage.setItem('lat', lat_product);
+    }else{
+    localStorage.setItem('lng', lng_person);
+    localStorage.setItem('lat', lat_person);
+    console.log("person");
+    }
     localStorage.setItem('worksname', worksname);
     localStorage.setItem('executeLinkworks', 'true');
-    window.location.href = '周边推荐2.html';
+    window.location.href = 'periphery.html';
 }

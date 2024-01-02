@@ -1,3 +1,44 @@
+.container-top {
+    background-color: #333333;
+    width: 100%;
+    height: 8vh;
+    background-position: center;
+    background-size: cover;
+    padding-left: 8%;
+    padding-right: 8%;
+    box-sizing: border-box;
+  }
+  .navbar-top {
+    height: 80%;
+    display: flex;
+    align-items: center;
+  }
+  .logo-top {
+    width: 50px;
+    cursor: pointer;
+    margin-right: 15px;
+  }
+  .menu-icon-top {
+    width: 30px;
+    cursor: pointer;
+    margin-left: 40px;
+  }
+  nav {
+    flex: 1;
+    text-align: left;
+  }
+  nav ul li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 60px;
+  }
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-family: "楷体","楷体_GB2312";
+    font-size: 140%;
+  }
+
 .box{
     padding-left: 7%;
     padding-right: 7%;
@@ -16,23 +57,38 @@
     margin-right: 1%;
     font-family: 'Times New Roman', Times, serif;
 }
-.title h3{
-    font-size: 140%;
+.title a{
+    text-decoration: none;
+    color: black;
+}
+.title a:hover{
+    color: rgb(0, 95, 158);
+}
+.title h2{
+    font-size: 200%;
+    font-family: 华文行楷;
+}
+.title p{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 120%;
+    font-style: oblique;
+    line-height: 125%;
 }
 .item_box{
     height:450px;
     width:100%;
     display: flex;
-    border: 1px solid #999;
+    /* border: 1px solid #999; */
 }
 .row_left{
     width:70%;
-    border: 1px solid #999;
+    /* border: 1px solid #999; */
     align-items:flex-start;
 }
 .row_left img{
     width:3%;
     display: inline;
+    cursor: pointer;
     
 }
 .row_left p{
@@ -43,7 +99,7 @@
 .row_right{
     margin-left: 2%;
     width:25%;
-    border: 1px solid #999;
+    /* border: 1px solid #999; */
     align-items:flex-start;
      
 }
@@ -76,12 +132,16 @@
     border: 1px solid #999;
 }
 .same{
-    margin-top: 4%;
+    margin-top: 8%;
+}
+.same h2{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 180%;
 }
 .box_contain{
     margin: auto 0;
     display: flex;
-    border: 1px solid #999;
+    /* border: 1px solid #999; */
   }
   .pic_box{
     flex: 1;
@@ -125,4 +185,31 @@
     width:7%;
     display: inline;
     float: right;
-  }
+}
+
+.product_title{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    font-size: 135%;
+    margin-top: 2%;
+}
+.product_content{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+    font-size: 110%;
+    
+}
+.check{
+    
+}
+.check:hover{
+    color: rgb(6, 117, 172);
+    cursor: pointer;
+    margin-bottom: 3%;
+}
+.description{
+    margin-top: 2%;
+}
+.icon{
+    margin-bottom: 2%;
+}

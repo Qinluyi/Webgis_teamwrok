@@ -5,27 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/Mainpage.css" />
+    <link rel="stylesheet" href="./css/story.css" />
+    <link href="./xiashuying/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="./xiashuying/css/style.css" rel="stylesheet" type="text/css">
+    <!-- <link href="css/animate.css" rel="stylesheet" type="text/css"> -->
+    <link href="./xiashuying/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./xiashuying/css/responsive.css" rel="stylesheet" type="text/css">
+
     <title>首页布局</title>
   </head>
   <body>
     <!--放首页的地方-->
-    <body>
-        <div class="container">
+        <div class="my_container">
           <div class="navbar">
             
             <nav>
               <ul>
               <li class="dropdown">
-                  <a href="#" class="nav_text_big">苗绣社区</a>
+                  <a href="./xiashuying/category.html" class="nav_text_big">苗绣社区</a>
               </li>
               <li class="dropdown">
                   <a href="./html/WalkIn.html" class="nav_text_big">苗绣商城</a>
               </li>
               <li>
-                <a href="#" class="nav_text_big">苗绣周边</a>
-              </li>
-              <li>
-                <a href="#" class="nav_text_big">苗绣故事</a>
+                <a href="./html/periphery.html" class="nav_text_big">苗绣周边</a>
               </li>
               <li>
                 <a href="#" class="nav_text_big">产业概览</a>
@@ -33,10 +36,10 @@
 
               </ul>
             </nav>
-            <a href="购物车网页">
+            <a href="./html/logIn.html">
               <img src="./imgs/登录.png" class="menu-icon shopcar"/>
             </a> 
-            <a href="购物车网页">
+            <a href="./html/购物车.html">
                 <img src="./imgs/_购物车.png" class="menu-icon shopcar"/>
             </a> 
 
@@ -51,22 +54,226 @@
             </div>
             <div class="col">
               <div class="card1 card">
-                <h5>马尾绣</h5>
-                <p>no other member state of the United Nations had ever officially recognized</p>
+                <h5 class="my_h5">马尾绣</h5>
+                <p class="my_p">马尾绣是一种传统的刺绣技艺，以其独特的绣法和精湛的工艺展现了丰富的文化内涵</p>
               </div>
               <div class="card2 card">
-                <h5>绣娘的一天</h5>
-                <p>no other member state of the United Nations had ever officially recognized</p>
+                <h5 class="my_h5">平绣</h5>
+                <p class="my_p">平绣是一种绣法，以平稳匀称的绣线表现图案，常用于刺绣工艺中，展现出细致而和谐的效果</p>
               </div>
               <div class="card3 card">
-                <h5>Pyramid of Giza</h5>
-                <p>no other member state of the United Nations had ever officially recognized</p>
+                <h5 class="my_h5">破线绣</h5>
+                <p class="my_p">堆绣通过在织物表面垒叠多层刺绣线，形成丰富的立体效果，常用于刺绣工艺中，赋予图案更加立体生动的特色</p>
               </div>
               <div class="card4 card">
-                <h5>Kalahari Desert</h5>
-                <p>no other member state of the United Nations had ever officially recognized</p>
+                <h5 class="my_h5">堆绣</h5>
+                <p class="my_p">破线绣是一种刺绣工艺，通过故意拉断绣线，形成独特的线条效果，以独特的破碎感展现绣品的艺术美感</p>
               </div>
     
             </div>
           </div>
         </div>
+
+        <!--苗绣故事-->
+        <div id = "story" class="img1">
+          <img src="imgs/边纹.png">
+          <img src="imgs/苗绣故事.png">
+          <img src="imgs/边纹.png">
+        </div>
+        <div class="focus">
+            <!-- 左右侧切换的小按钮 -->
+            <a href="javascript:;" class="arrow-l arrow">
+                &lt;
+            </a>
+            <a href="javascript:; " class="arrow-r arrow">
+                >
+            </a>
+            <!-- 轮播的图片 -->
+            <ul>
+                <li><a href="#"><img src="imgs/一针一线中的修行.png" alt=""></a></li>
+                <li><a href="#"><img src="imgs/一针一线中的修行.png" alt=""></a></li>
+                <li><a href="#"><img src="imgs/一针一线中的修行.png" alt=""></a></li>
+                <li><a href="#"><img src="imgs/一针一线中的修行.png" alt=""></a></li>
+            </ul>
+            <!-- 小圆点显示播放第几张图 -->
+            <ol class="circle">
+            </ol>
+        </div>
+        <!--新闻资讯-->
+         
+        <div class="box_contain">
+          <div class="pic_box">
+            <img class="box_img" src="./imgs/news4.png" alt="Image A">
+            <a href="https://www.thepaper.cn/newsDetail_forward_22605791">彩线绣成的史诗,穿在身上的图腾</a>
+            <div class="icon_box"> 
+              <img class="icon" src="./imgs/微信.png" alt="Image A">
+              <img class="icon" src="./imgs/微博.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ空间.png" alt="Image A">
+            </div>
+          </div>
+
+          <div class="pic_box">
+            <img class="box_img" src="./imgs/news5.png" alt="Image A">
+            <a href="https://www.neac.gov.cn/seac/c103391/202309/1167326.shtml">苗绣：留住老手艺编织新梦想</a>
+            <div class="icon_box"> 
+              <img class="icon" src="./imgs/微信.png" alt="Image A">
+              <img class="icon" src="./imgs/微博.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ空间.png" alt="Image A">
+            </div>
+          </div>
+
+          <div class="pic_box">
+            <img class="box_img" src="./imgs/news6.png" alt="Image A">
+            <a href="http://ip.people.com.cn/n1/2021/0220/c136655-32032820.html">传统苗绣，一针一线“绣”出时尚文化</a>
+            <div class="icon_box"> 
+              <img class="icon" src="./imgs/微信.png" alt="Image A">
+              <img class="icon" src="./imgs/微博.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ空间.png" alt="Image A">
+            </div>
+          </div>
+        </div>
+        <div class="box_contain">
+          <div class="pic_box">
+            <img class="box_img" src="./imgs/news1.png" alt="Image A">
+            <a href="https://cn.chinadaily.com.cn/a/202309/21/WS650c2fe2a310936092f22fdd.html">“绣”向世界，让贵州苗绣焕发新颜</a>
+            <div class="icon_box"> 
+              <img class="icon" src="./imgs/微信.png" alt="Image A">
+              <img class="icon" src="./imgs/微博.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ空间.png" alt="Image A">
+            </div>
+          </div>
+
+          <div class="pic_box">
+            <img class="box_img" src="./imgs/news3.png" alt="Image A">
+            <a href="https://www.thepaper.cn/newsDetail_forward_11824069">指尖技艺“绣”前程,黔东南苗绣勇闯市场</a>
+            <div class="icon_box"> 
+              <img class="icon" src="./imgs/微信.png" alt="Image A">
+              <img class="icon" src="./imgs/微博.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ空间.png" alt="Image A">
+            </div>
+          </div>
+
+          <div class="pic_box">
+            <img class="box_img" src="./imgs/news2.png" alt="Image A">
+            <a href="https://city.sina.com.cn/guizhou/business/2023-12-20/detail-imzyrtrx8658547.shtml">“贵州·苗绣”交流活动走进贵州理工学院</a>
+            <div class="icon_box"> 
+              <img class="icon" src="./imgs/微信.png" alt="Image A">
+              <img class="icon" src="./imgs/微博.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ.png" alt="Image A">
+              <img class="icon" src="./imgs/QQ空间.png" alt="Image A">
+            </div>
+          </div>
+        </div>
+        <div class="check_news">查看更多资讯>>></div>
+
+        <section class="footer-part">
+          <div class="container1">
+              <div class="row">
+                  
+                  <div class="col-md-3">
+                    <div class="info-part-one320">
+                     <h4>基本信息</h4>
+                      <p>武汉大学遥感信息工程学院《网络GIS实习》第一组</p>
+                      <h4>地址 :</h4>
+                      <p>湖北省武汉市珞喻路129号武汉大学信息学部 教学实验大楼3楼、6楼—9楼,五号教学楼,宇航科学与技术研究院</p>
+                      <h4>联系方式</h4>
+                      <p>电话号码: 18986197481</p>
+                      <p>邮箱账号 : </p>
+                      <p>2021302191847@whu.edu.cn</p>
+                      </div>
+                  </div>
+                     <div class="col-md-3">
+                    <div class="info-part-two320">
+                <h4>快速链接</h4>
+                     <a href="index.html"><p>-主页</p></a>
+                       <a href="./xiashuying/category.html"><p>-苗绣社区</p></a>
+                       <a href="#"><p>-苗绣商城</p></a>
+                       <a href="./html/periphery.html"><p>-周边推荐</p></a>
+                       <a href="#"><p>-产业概览</p></a>
+                       <a href="./xiashuying/category.html"><p>-作品上传</p></a>
+                       <a href="./xiashuying/category.html"><p>-苗绣论坛</p></a>
+                      </div>
+                  </div>
+                     <div class="col-md-3">
+                    <div class="info-part-three320">
+                     <h4>人气作品</h4>
+                    <div class="news-info209">
+                    
+                     <h5>绉绣双肩包（“花溪”）</h5>
+                      <p>这幅苗绣作品，凝聚了艺术家卓越的绣艺技巧与独到的创意思维...</p> 
+                      <small>2017-7-16</small>
+                        </div>
+                         <div class="news-info209">
+                  <h5>破线绣毛衣（“花溪”）</h5>
+                      <p>艺术家精湛地运用苗绣传统工艺，将古老的手工技艺与现代审美巧妙融合 ...</p>
+                      <small>2019-7-9</small>
+                        </div>
+                          <div class="news-info209">
+                  <h5>辫绣手提包（“锦绣黔坤”）</h5>
+                      <p>苗绣作品展现了艺术家对大自然的独到感悟，细致入微的绣工勾勒出山水...</p>
+                      <small>2023-12-29</small>
+                        </div>
+                      
+                      </div>
+                  </div>
+                     <div class="col-md-3">
+                    <div class="info-part-four320">
+                     <h4>苗绣论坛</h4>
+                     <div class="tweet-details29">
+                      <h5>苗绣初体验</h5>
+                      <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="post-deatils.html"> 苗绣，宛如大地的绚烂花开，细腻而瑰丽，它是苗族文化的精髓 ...</a></p>
+                     
+                        </div>
+                              <div class="tweet-details29">
+                      <h5>苗绣非遗</h5>
+                      <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="miaoxiufeiyi.html">苗族刺绣技艺进入首批国家级保护的非遗保护名录 ...</a></p>
+                    
+                        </div>
+                              <div class="tweet-details29">
+                      <h5>苗绣潮牌</h5>
+                      <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="miaoxiuchaopai.html">走进苗族聚居的贵州，世世代代的苗族人，用绣在服饰上的符号和图案...</a></p>
+                       
+                        </div>
+                        <div class="tweet-details29">
+                          <h5>苗绣体验</h5>
+                          <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="miaoxiutiyan.html">近年来，贵州多地因地制宜，利用自身独特的地理景观...</a></p>
+                         
+                            </div>
+                        <div class="tweet-details29">
+                        <h5>苗绣伴手礼</h5>
+                        <p><i class="fa fa-twitter-square" aria-hidden="true"></i><a href="miaoxiubanshouli.html">在每个美好的时刻，我想将一份独特的礼物送给你...</a></p>
+                       
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  <section class="footer-social">
+      <div class="container1">
+          <div class="row">
+              <div class="col-md-6">
+                  <p>Copyright 2023 苗绣 | <strong>《网络GIS实习》第一组</strong></p>
+              </div>
+               <div class="col-md-6">
+                <div class="social-right2389">
+                 <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                 <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                 <a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a>
+                 <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                 <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                   </div>
+              </div>
+          </div>
+      </div>
+  </section>
+        <script src="./js/story.js"></script>
+
+    </body>
