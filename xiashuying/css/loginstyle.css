@@ -1,5 +1,8 @@
 html {
-  background: #FF7361;
+  /* background: #FF7361; */
+  background-image: url("../../imgs/background1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 /*
   background: radial-gradient(#fff176, #f57f17);
   min-height: 100%;
@@ -11,7 +14,7 @@ html {
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 30px;
-  color: #FF7361;
+  color: #784bcc;
   font-weight: 300;
   font-size: 24px;
   letter-spacing: 1px;
@@ -40,7 +43,7 @@ input[type="con-password"]
 }
 input[type="text"]:focus,
 input[type="email"]:focus {
-  border-color: #FF7361;
+  border-color: #b58dff;
 }
 
 input[type="radio"] {
@@ -66,7 +69,7 @@ label:first-child {
 .rerun-button {
   padding: 10px 20px;
   border-radius: 3px;
-  background: #FF7361;
+  background: #b58dff;
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -76,7 +79,7 @@ label:first-child {
 }
 .button:hover,
 .rerun-button:hover {
-  background: #e66400;
+  background: #5b34a3;
 }
 .button.rerun-button,
 .rerun-button.rerun-button {
@@ -123,7 +126,7 @@ label:first-child {
 }
 .modal-header span.is-active {
   background: rgba(0, 0, 0, 0.4);
-  background: #FF8F00;
+  background: #b58dff;
 }
 
 .modal-bodies {
