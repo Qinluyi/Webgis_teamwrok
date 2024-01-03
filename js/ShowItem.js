@@ -399,7 +399,6 @@ function To_Map(is_product){
     }else{
     localStorage.setItem('lng', lng_person);
     localStorage.setItem('lat', lat_person);
-    console.log("person");
     }
     localStorage.setItem('worksname', worksname);
     localStorage.setItem('executeLinkworks', 'true');

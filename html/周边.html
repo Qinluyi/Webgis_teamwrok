@@ -280,10 +280,6 @@
     <script src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
     <!-- <script src="../js/periphery.js"></script> -->
     <script>
-        //全局变量
-        var iflngandlat = false;
-        var point;
-
         document.getElementById("toggleSidebar").addEventListener("click", function () {
             var sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("sidebar-hidden");
@@ -395,15 +391,8 @@
             });
             startSearch.search(startPointName);
         }
+        document.getElementById("routeButton").addEventListener("click", searchRoute);
 
-        // document.getElementById("routeButton").addEventListener("click", searchRoute);
-        document.getElementById("routeButton").addEventListener("click", function () {
-            if (iflngandlat === false) {
-                searchRoute();
-            } else {
-                searchRoute1();
-            }
-        });
 
         // 初始化搜索框
         var startAutocomplete1 = new BMap.Autocomplete({
@@ -549,34 +538,11 @@
                 searchRoute(); // 触发路径规划
             });
 
-            // 创建一个从这出发的按钮
-            var fromButton = document.createElement("button");
-            fromButton.appendChild(document.createTextNode("从这出发"));
-            fromButton.className = "info-window-button"; // 添加样式类
-
-            // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
-            fromButton.addEventListener("click", function () {
-                document.getElementById("startPoint").value = poi.title;
-                searchRoute(); // 触发路径规划
-            });
-
-            // 创建一个周边推荐的按钮
-            var roundrecommButton = document.createElement("button");
-            roundrecommButton.appendChild(document.createTextNode("周边推荐"));
-            roundrecommButton.className = "info-window-button"; // 添加样式类
-
-            // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
-            roundrecommButton.addEventListener("click", function () {
-                document.getElementById("centerPoint").value = poi.title;
-                // searchRoute(); // 触发路径规划
-            });
             // 创建一个 div 包含两个按钮
             var contentDiv = document.createElement('div');
             contentDiv.innerHTML = content + "<br>";
             contentDiv.appendChild(openLinkButton);
             contentDiv.appendChild(goToButton);
-            contentDiv.appendChild(fromButton);
-            contentDiv.appendChild(roundrecommButton);
 
             // 将按钮添加到信息窗口内容中
             infoWindow.setContent(contentDiv);
@@ -586,6 +552,7 @@
                 map.openInfoWindow(infoWindow, point);
             });
         }
+
 
         function linkworks() {
             var lng = localStorage.getItem("lng");
