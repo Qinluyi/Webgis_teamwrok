@@ -584,7 +584,7 @@
             });
         }
 
-        function addInfoWindow1(marker, content, point) {
+        function addInfoWindow1(marker, content, point, isback) {
             var address;
             var geocoder = new BMap.Geocoder();
             geocoder.getLocation(point, function (result) {
@@ -598,17 +598,24 @@
             });
             // 创建信息窗口
             var infoWindow = new BMap.InfoWindow(content);
+            var contentDiv = document.createElement('div');
+    contentDiv.innerHTML = content + "<br>";
+            if (isback == 1) {
+                // 创建一个查看详情的按钮
+                var openLinkButton = document.createElement("button");
+                openLinkButton.appendChild(document.createTextNode("查看详情"));
+                openLinkButton.className = "info-window-button"; // 添加样式类
 
-            // 创建一个查看详情的按钮
-            var openLinkButton = document.createElement("button");
-            openLinkButton.appendChild(document.createTextNode("查看详情"));
-            openLinkButton.className = "info-window-button"; // 添加样式类
-
-            // 绑定点击事件，打开链接
-            openLinkButton.addEventListener("click", function () {
-                window.open(poi.url, "_blank"); // 在新窗口中打开链接
-            });
-
+                // 绑定点击事件，打开链接
+                // openLinkButton.addEventListener("click", function () {
+                //     window.open(poi.url, "_blank"); // 在新窗口中打开链接
+                // });
+                openLinkButton.addEventListener("click", function () {
+                    map.openInfoWindow(infoWindow, point);
+                    window.history.back();
+                });
+                contentDiv.appendChild(openLinkButton);
+            }
             // 创建一个到这去的按钮
             var goToButton = document.createElement("button");
             goToButton.appendChild(document.createTextNode("到这去"));
@@ -642,9 +649,9 @@
                 searchRoute(); // 触发路径规划
             });
             // 创建一个 div 包含两个按钮
-            var contentDiv = document.createElement('div');
-            contentDiv.innerHTML = content + "<br>";
-            contentDiv.appendChild(openLinkButton);
+            // contentDiv = document.createElement('div');
+            // contentDiv.innerHTML = content + "<br>";
+            // contentDiv.appendChild(openLinkButton);
             contentDiv.appendChild(goToButton);
             contentDiv.appendChild(fromButton);
             contentDiv.appendChild(roundrecommButton);
@@ -681,7 +688,7 @@
             //         // document.getElementById("endPoint").value = address;  // 设置中心点搜索框
             //     }
             // });
-            addInfoWindow1(newMarker, worksname, point);
+            addInfoWindow1(newMarker, worksname, point,1);
         }
         // 在页面加载完成时执行 linkworks 函数的标志
         var executeLinkworks = localStorage.getItem("executeLinkworks");
@@ -727,7 +734,7 @@
 
                 // 添加信息窗口
                 // var content = location.name;
-                addInfoWindow1(marker, location.name, point);
+                addInfoWindow1(marker, location.name, point,0);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
@@ -766,7 +773,7 @@
 
                 // 添加信息窗口
                 // var content = location.名字;
-                addInfoWindow1(marker, location.名字, point);
+                addInfoWindow1(marker, location.名字, point,0);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
@@ -807,7 +814,7 @@
 
                 // 添加信息窗口
                 // var content = location.name;
-                addInfoWindow1(marker, location.name, point);
+                addInfoWindow1(marker, location.name, point,0);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
