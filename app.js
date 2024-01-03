@@ -12,40 +12,6 @@ var app = express();
 
 app.set('port', process.env.PORT || 5500);
 
-//查询语句
-// app.get('/list', function (req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin','*');
-//     var name1=req.query.name1;
-//     client.query('SELECT * FROM edu_school_edu_school where localtion = $1', [name1], function (err, result) {      
-//         if (err) {
-//             console.log(err);
-//             return res.status(400).send(err);
-//         }
-//         // res.status(200).send(result.rows); 
-//         // 将查询结果存储在变量中
-//         const schoolsData = result.rows;
-
-//         // 以 JSON 格式返回数据给前端
-//         res.status(200).json(schoolsData);
-//     });
-// });
-
-// app.get('/list', function (req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin','*');
-//     var name1=req.query.name1;
-//     client.query('SELECT * FROM xiupin where 类别 = $1', [name1], function (err, result) {      
-//         if (err) {
-//             console.log(err);
-//             return res.status(400).send(err);
-//         }
-//         // res.status(200).send(result.rows); 
-//         // 将查询结果存储在变量中
-//         const schoolsData = result.rows;
-
-//         // 以 JSON 格式返回数据给前端
-//         res.status(200).json(schoolsData);
-//     });
-// });
 
 
 //查询语句  翻页查询
