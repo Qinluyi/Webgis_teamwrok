@@ -399,5 +399,5 @@ function To_Map(is_product){
     }
     localStorage.setItem('worksname', worksname);
     localStorage.setItem('executeLinkworks', 'true');
-    window.location.href = '周边推荐2.html';
+    window.location.href = 'periphery.html';
 }

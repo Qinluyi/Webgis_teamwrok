@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周边推荐</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="../json/合作社.json"></script>
+
     <style>
         /* 样式用于设置地图容器和侧边栏的布局 */
         body {
@@ -19,6 +21,7 @@
             display: flex;
             height: 100vh;
             position: relative;
+            margin-top: 60px;
         }
 
         .sidebar {
@@ -147,10 +150,68 @@
         .info-window-button:hover {
             background-color: #a6bfa7;
         }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #f5f5f5;
+            color: black;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            transition: top 0.3s;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #81b183;
+        }
+
+        #showAllLocationsBtnContainer {
+            position: absolute;
+            bottom: 80px;
+            left: 65%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .footbutton {
+            background: #917ea8;
+            border: 1px solid #ccc;
+            color: white;
+            cursor: pointer;
+            position: relative;
+            /* left: 20px; */
+            z-index: 2;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .footbutton:hover {
+            background-color: #89b08a;
+        }
     </style>
 </head>
 
 <body>
+    <div class="navbar">
+        <a href="#">苗绣社区</a>
+        <a href="../html/WalkIn.html">苗绣商城</a>
+        <a href="">苗绣周边</a>
+        <a href="#">产业概览</a>
+    </div>
     <div class="container">
         <button id="toggleSidebar" class="sidebar-toggle-btn"><i class="fa fa-bars"></i><br>路<br>径<br>规<br>划</button>
         <div class="sidebar" id="sidebar">
@@ -206,14 +267,440 @@
             </ul>
         </div>
         <div class="map" id="map"></div>
+        <div id="showAllLocationsBtnContainer">
+            <button class="footbutton" , id="showAllLocationsBtn">显示合作社</button>
+            <button class="footbutton" , id="showEmbroideryBtn">显示绣品</button>
+            <button class="footbutton" , id="showCulturalPlacesBtn">显示文化场所</button>
+        </div>
     </div>
 
     <script src="http://api.map.baidu.com/api?v=3.0&ak=EcsnNhOfA5uKn6iwi1pAkkDGCQuGLHkC"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <script src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
-    <script src="../js/periphery.js"></script>
+    <!-- <script src="../js/periphery.js"></script> -->
+    <script>
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            var sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("sidebar-hidden");
+        });
+        document.getElementById("toggleSidebar1").addEventListener("click", function () {
+            var sidebar = document.getElementById("sidebar1");
+            sidebar.classList.toggle("sidebar-hidden");
+        });
 
+
+        // 初始化地图
+        var map = new BMap.Map("map");
+        // 设置地图中心点和缩放级别
+        var point = new BMap.Point(107.98228, 26.58356);
+        map.centerAndZoom(point, 15);
+
+        // 添加默认缩放平移控件
+
+        var opt = {
+            anchor: BMAP_ANCHOR_TOP_RIGHT,
+        };
+        map.addControl(new BMap.NavigationControl(opt));
+        // 启用滚轮缩放
+        map.enableScrollWheelZoom(true);
+
+        // var geolocation = new BMap.Geolocation();
+        // geolocation.getCurrentPosition(function (r) {
+        //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+        //         var mk = new BMap.Marker(r.point);
+        //         map.addOverlay(mk);
+        //         map.panTo(r.point);
+        //     } else {
+        //         alert('定位失败：' + this.getStatus());
+        //     }
+        // }, { enableHighAccuracy: true });
+
+        // 添加定位控件
+        var geolocationControl = new BMap.GeolocationControl({
+            anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+            showAddressBar: true,
+            enableAutoLocation: true
+        });
+        map.addControl(geolocationControl);
+
+        // 获取当前位置并设置为起点输入框的值
+        var startInput = document.getElementById("startPoint");
+        geolocationControl.addEventListener("locationSuccess", function (e) {
+            var address = e.addressComponent;
+            startInput.value = address.province + address.city + address.district + address.street + address.streetNumber;
+        });
+
+        // 初始化搜索框
+        var startAutocomplete = new BMap.Autocomplete({
+            "input": "startPoint",
+            "location": map
+        });
+        var endAutocomplete = new BMap.Autocomplete({
+            "input": "endPoint",
+            "location": map
+        });
+
+        // 路径规划地点列表点击事件
+        var locationList = document.getElementById("locationList");
+        locationList.addEventListener("click", function (e) {
+            if (e.target.classList.contains("locationItem")) {
+                var locationName = e.target.dataset.location;
+                console.log(locationName);
+                document.getElementById("endPoint").value = locationName;
+            }
+        });
+
+        // 路径规划
+        function searchRoute() {
+            var startPointName = document.getElementById("startPoint").value;
+            var endPointName = document.getElementById("endPoint").value;
+
+            if (!startPointName || !endPointName) {
+                alert("请输入起点和终点");
+                return;
+            }
+
+            // 使用百度地图的getPoint方法获取经纬度坐标
+            var startSearch = new BMap.LocalSearch(map, {
+                onSearchComplete: function (results) {
+                    var startPoint = results.getPoi(0).point;
+                    var endSearch = new BMap.LocalSearch(map, {
+                        onSearchComplete: function (results) {
+                            var endPoint = results.getPoi(0).point;
+                            // 清除之前的覆盖物（折线）
+                            map.clearOverlays();
+
+                            var driving = new BMap.DrivingRoute(map, {
+                                renderOptions: { map: map, autoViewport: true },
+                                onSearchComplete: function (results) {
+                                    if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
+                                        var plan = results.getPlan(0);
+                                        var route = plan.getRoute(0);
+                                        var path = route.getPath();
+                                        var polyline = new BMap.Polyline(path);
+                                        map.addOverlay(polyline);
+                                    }
+                                }
+                            });
+                            driving.search(startPoint, endPoint);
+                        }
+                    });
+                    endSearch.search(endPointName);
+                }
+            });
+            startSearch.search(startPointName);
+        }
+        document.getElementById("routeButton").addEventListener("click", searchRoute);
+
+
+        // 初始化搜索框
+        var startAutocomplete1 = new BMap.Autocomplete({
+            "input": "centerPoint",
+            "location": map
+        });
+        // 周边推荐地点列表点击事件
+        var locationList1 = document.getElementById("locationList1");
+        locationList1.addEventListener("click", function (e) {
+            if (e.target.classList.contains("locationItem1")) {
+                var locationName1 = e.target.dataset.location;
+                document.getElementById("centerPoint").value = locationName1;
+            }
+        });
+
+        // 酒店推荐按钮点击事件
+        function searchHotel() {
+            var centerPointName = document.getElementById("centerPoint").value;
+            // 将地图缩小
+            var nationalCenter = new BMap.Point(104.1954, 35.8617);
+            map.centerAndZoom(nationalCenter, 5);
+
+            if (!centerPointName) {
+                alert("请输入中心点");
+                return;
+            }
+
+            // 使用百度地图的Place Search API进行周边检索
+            var local = new BMap.LocalSearch(map, {
+
+                onSearchComplete: function (results) {
+                    if (local.getStatus() == BMAP_STATUS_SUCCESS) {
+                        // 清除之前的覆盖物（标记）
+                        map.clearOverlays();
+                        // 获取检索结果
+                        var points = [];
+                        for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                            var poi = results.getPoi(i);
+                            console.log(poi);
+                            var point = poi.point;
+                            points.push(point);
+                            // 在地图上添加一个标记
+                            var marker = new BMap.Marker(point);
+                            map.addOverlay(marker);
+                            // 添加信息窗口
+                            var content = poi.title;
+                            addInfoWindow(marker, content, point, poi);
+                        }
+                        // 将地图中心设置为检索结果的位置
+                        map.setViewport(points);
+                    }
+                }
+            });
+
+            // 将中心点的地址转换为坐标
+            var geo = new BMap.Geocoder();
+            geo.getPoint(centerPointName, function (point) {
+                if (point) {
+                    // 开始进行周边检索，以1000米为半径
+                    local.searchNearby("酒店", point, 5000);
+                    // local.searchNearby("酒店", centerPointName, 1000);
+                } else {
+                    alert("无法获取中心点坐标，请检查输入地址是否正确");
+                }
+            }, "中国");
+        }
+        document.getElementById("hotelButton").addEventListener("click", searchHotel);
+
+        //饭店推荐
+        // 饭店推荐按钮点击事件
+        function searchRestaurant() {
+            var centerPointName = document.getElementById("centerPoint").value;
+            var nationalCenter = new BMap.Point(104.1954, 35.8617);
+            map.centerAndZoom(nationalCenter, 5);
+
+            if (!centerPointName) {
+                alert("请输入中心点");
+                return;
+            }
+
+            // 使用百度地图的Place Search API进行周边检索
+            var local = new BMap.LocalSearch(map, {
+
+                onSearchComplete: function (results) {
+                    if (local.getStatus() == BMAP_STATUS_SUCCESS) {
+                        // 清除之前的覆盖物（标记）
+                        map.clearOverlays();
+                        // 获取检索结果
+                        var points = [];
+                        for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                            var poi = results.getPoi(i);
+                            var point = poi.point;
+                            points.push(point);
+                            // 在地图上添加一个标记
+                            var marker = new BMap.Marker(point);
+                            map.addOverlay(marker);
+                            // 添加信息窗口
+                            var content = poi.title;
+                            addInfoWindow(marker, content, point, poi);
+                        }
+                        // 将地图中心设置为检索结果的位置
+                        map.setViewport(points);
+                    }
+                }
+            });
+
+            // 将中心点的地址转换为坐标
+            var geo = new BMap.Geocoder();
+            geo.getPoint(centerPointName, function (point) {
+                if (point) {
+                    // 开始进行周边检索，以1000米为半径
+                    local.searchNearby("饭店", point, 3000);
+                    // local.searchNearby("酒店", centerPointName, 1000);
+                } else {
+                    alert("无法获取中心点坐标，请检查输入地址是否正确");
+                }
+            }, "中国");
+        }
+        document.getElementById("restaurantButton").addEventListener("click", searchRestaurant);
+
+        function addInfoWindow(marker, content, point, poi) {
+            // 创建信息窗口
+            var infoWindow = new BMap.InfoWindow(content);
+
+            // 创建一个查看详情的按钮
+            var openLinkButton = document.createElement("button");
+            openLinkButton.appendChild(document.createTextNode("查看详情"));
+            openLinkButton.className = "info-window-button"; // 添加样式类
+
+            // 绑定点击事件，打开链接
+            openLinkButton.addEventListener("click", function () {
+                window.open(poi.url, "_blank"); // 在新窗口中打开链接
+            });
+
+            // 创建一个到这去的按钮
+            var goToButton = document.createElement("button");
+            goToButton.appendChild(document.createTextNode("到这去"));
+            goToButton.className = "info-window-button"; // 添加样式类
+
+            // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
+            goToButton.addEventListener("click", function () {
+                document.getElementById("endPoint").value = poi.title;
+                searchRoute(); // 触发路径规划
+            });
+
+            // 创建一个 div 包含两个按钮
+            var contentDiv = document.createElement('div');
+            contentDiv.innerHTML = content + "<br>";
+            contentDiv.appendChild(openLinkButton);
+            contentDiv.appendChild(goToButton);
+
+            // 将按钮添加到信息窗口内容中
+            infoWindow.setContent(contentDiv);
+
+            // 绑定标记点击事件，打开信息窗口
+            marker.addEventListener("click", function () {
+                map.openInfoWindow(infoWindow, point);
+            });
+        }
+
+
+        function linkworks() {
+            var lng = localStorage.getItem("lng");
+            var lat = localStorage.getItem("lat");
+            var worksname = localStorage.getItem('worksname');
+            console.log(lng, lat, worksname);
+
+            var point = new BMap.Point(parseFloat(lng), parseFloat(lat));
+            // 在地图上添加一个标记
+            var myPurpleIcon = new BMap.Icon('../imgs/marker.png', new BMap.Size(18, 27), { "imageOffset": new BMap.Size(-72, -22) });
+            var newMarker = new BMap.Marker(point, { icon: myPurpleIcon });
+            // var marker = new BMap.Marker(point);
+            map.addOverlay(newMarker);
+            content = worksname;
+            // addInfoWindow(newMarker,content, point);
+            map.centerAndZoom(point, 15);
+            var geocoder = new BMap.Geocoder();
+            geocoder.getLocation(point, function (result) {
+                if (result) {
+                    var address = result.address;
+                    document.getElementById("centerPoint").value = address;  // 设置起点搜索框
+                    document.getElementById("endPoint").value = address;  // 设置中心点搜索框
+                }
+            });
+        }
+        // 在页面加载完成时执行 linkworks 函数的标志
+        var executeLinkworks = localStorage.getItem("executeLinkworks");
+
+        // 如果标志存在并且为 "true"，则执行 linkworks 函数
+        if (executeLinkworks === "true") {
+            linkworks();
+        }
+
+        // 清除标志，确保不会在单独打开时执行 linkworks
+        localStorage.removeItem("executeLinkworks");
+
+
+
+        //显示点位
+        document.getElementById("showAllLocationsBtn").addEventListener("click", function () {
+            // 异步加载 JSON 文件
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var locationsData = JSON.parse(xhr.responseText);
+                    displayAllLocations(locationsData);
+                }
+            };
+            xhr.open("GET", "../json/合作社.json", true);
+            xhr.send();
+        });
+
+        function displayAllLocations(locationsData) {
+            // 清除之前的所有覆盖物
+            map.clearOverlays();
+
+            // 循环添加所有合作社的标记
+            for (var i = 0; i < locationsData.length; i++) {
+                var location = locationsData[i];
+                var point = new BMap.Point(location.lng, location.lat);
+                var marker = new BMap.Marker(point);
+                map.addOverlay(marker);
+
+                // 添加信息窗口
+                var content = location.name;
+                addInfoWindow(marker, content, point, location);
+            }
+
+            // 将地图缩放到合适的级别，显示所有点位
+            map.setViewport(locationsData.map(function (location) {
+                return new BMap.Point(location.lng, location.lat);
+            }));
+        }
+
+        document.getElementById("showEmbroideryBtn").addEventListener("click", function () {
+            // 异步加载 JSON 文件
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var locationsData = JSON.parse(xhr.responseText);
+                    showEmbroidery(locationsData);
+                }
+            };
+            xhr.open("GET", "../json/绣品.json", true);
+            xhr.send();
+        });
+
+        function showEmbroidery(locationsData) {
+            // 清除之前的所有覆盖物
+            map.clearOverlays();
+
+            // 循环添加所有合作社的标记
+            for (var i = 0; i < locationsData.length; i++) {
+                var location = locationsData[i];
+                // console.log("绣品信息:", location);
+                var point = new BMap.Point(location.经度, location.纬度);
+                // console.log(point);
+                var marker = new BMap.Marker(point);
+                map.addOverlay(marker);
+
+                // 添加信息窗口
+                var content = location.名字;
+                addInfoWindow(marker, content, point, location);
+            }
+
+            // 将地图缩放到合适的级别，显示所有点位
+            map.setViewport(locationsData.map(function (location) {
+                return new BMap.Point(location.经度, location.纬度);
+            }));
+        }
+
+        document.getElementById("showCulturalPlacesBtn").addEventListener("click", function () {
+            // 异步加载 JSON 文件
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var locationsData = JSON.parse(xhr.responseText);
+                    showCulturalPlaces(locationsData);
+                }
+            };
+            xhr.open("GET", "../json/MiaoXiu_travel.json", true);
+            xhr.send();
+        });
+
+        function showCulturalPlaces(locationsData) {
+            // 清除之前的所有覆盖物
+            map.clearOverlays();
+
+            // 循环添加所有合作社的标记
+            for (var i = 0; i < locationsData.length; i++) {
+                var location = locationsData[i];
+                // console.log("绣品信息:", location);
+                var point = new BMap.Point(location.lng, location.lat);
+                // console.log(point);
+                var marker = new BMap.Marker(point);
+                map.addOverlay(marker);
+
+                // 添加信息窗口
+                var content = location.name;
+                addInfoWindow(marker, content, point, location);
+            }
+
+            // 将地图缩放到合适的级别，显示所有点位
+            map.setViewport(locationsData.map(function (location) {
+                return new BMap.Point(location.lng, location.lat);
+            }));
+        }
+    </script>
 
 </body>
 
