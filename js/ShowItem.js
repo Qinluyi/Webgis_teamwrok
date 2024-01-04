@@ -7,6 +7,7 @@ var lng_person;
 var lat_person;
 var executeLinkworks;
 var worksname;
+var personsname;
 
 
 window.onload = function(){
@@ -88,7 +89,7 @@ function show_product(item_id,is_class){
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
                                     lng_product = item.经度;
                                     lat_product = item.纬度;
-                                    worksname = item.名字;
+                                    worksname = item.课程名;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
                                     map.centerAndZoom(point, 10);                      // 设置地图级别
@@ -163,7 +164,7 @@ function show_product(item_id,is_class){
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
                                     lng_product = item.经度;
                                     lat_product = item.纬度;
-                                    worksname = item.名字;
+                                    worksname = item.课程名;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
                                     map.centerAndZoom(point, 10);                      // 设置地图级别
