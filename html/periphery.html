@@ -221,7 +221,7 @@
             <input type="text" id="startPoint" />
             <label for="endPoint">终点：</label>
             <input type="text" id="endPoint" />
-            <p style="font-size: 1px;">以当前位置作为起点请点击地图右下角的定位控件</p>
+            <p style="font-size: 1px;">以当前位置作为起点请点击地图左上角的定位控件</p>
             <button id="routeButton">规划驾车路径</button>
             <button id="routewalkButton">规划步行路径</button>
 
@@ -322,11 +322,24 @@
 
         // 添加定位控件
         var geolocationControl = new BMap.GeolocationControl({
-            anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+            // anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+            anchor:new BMap.Size(50, 50),
             showAddressBar: true,
             enableAutoLocation: true
         });
         map.addControl(geolocationControl);
+
+        // var geolocationControl = new BMap.GeolocationControl({
+        //     anchor: BMAP_ANCHOR_BOTTOM_RIGHT, // 设置为右下角
+        //     showAddressBar: true,
+        //     enableAutoLocation: true
+        // });
+        // map.addControl(geolocationControl);
+
+        // // 手动调整位置
+        // var geolocationDiv = document.querySelector('.anchorBL');
+        // geolocationDiv.style.bottom = '50px';
+        // geolocationDiv.style.right = '50px';
 
         // 获取当前位置并设置为起点输入框的值
         var startInput = document.getElementById("startPoint");
@@ -576,7 +589,7 @@
 
             // 绑定点击事件，打开链接
             openLinkButton.addEventListener("click", function () {
-                window.open(poi.url, "_blank"); 
+                window.open(poi.url, "_blank");
             });
 
             // 创建到这去的按钮
@@ -592,7 +605,7 @@
             // 创建从这出发的按钮
             var fromButton = document.createElement("button");
             fromButton.appendChild(document.createTextNode("从这出发"));
-            fromButton.className = "info-window-button"; 
+            fromButton.className = "info-window-button";
 
             // 绑定点击事件，路径规划
             fromButton.addEventListener("click", function () {
@@ -602,7 +615,7 @@
             // 创建周边推荐的按钮
             var roundrecommButton = document.createElement("button");
             roundrecommButton.appendChild(document.createTextNode("周边推荐"));
-            roundrecommButton.className = "info-window-button"; 
+            roundrecommButton.className = "info-window-button";
 
             // 绑定点击事件，周边推荐
             roundrecommButton.addEventListener("click", function () {
@@ -676,7 +689,6 @@
             // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
             fromButton.addEventListener("click", function () {
                 document.getElementById("startPoint").value = address;
-                searchRoute(); // 触发路径规划
             });
 
             // 创建一个周边推荐的按钮
@@ -687,7 +699,6 @@
             // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
             roundrecommButton.addEventListener("click", function () {
                 document.getElementById("centerPoint").value = address;
-                searchRoute(); // 触发路径规划
             });
             // 创建一个 div 包含两个按钮
             // contentDiv = document.createElement('div');
