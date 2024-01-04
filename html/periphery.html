@@ -372,7 +372,7 @@
                     var endSearch = new BMap.LocalSearch(map, {
                         onSearchComplete: function (results) {
                             var endPoint = results.getPoi(0).point;
-                            // 清除之前的覆盖物（折线）
+                            // 清除之前的覆盖物
                             map.clearOverlays();
 
                             var driving = new BMap.DrivingRoute(map, {
@@ -477,7 +477,7 @@
 
                 onSearchComplete: function (results) {
                     if (local.getStatus() == BMAP_STATUS_SUCCESS) {
-                        // 清除之前的覆盖物（标记）
+                        // 清除之前的覆盖物
                         map.clearOverlays();
                         // 获取检索结果
                         var points = [];
@@ -486,7 +486,7 @@
                             console.log(poi);
                             var point = poi.point;
                             points.push(point);
-                            // 在地图上添加一个标记
+                            // 在地图上添加标记
                             var marker = new BMap.Marker(point);
                             map.addOverlay(marker);
                             // 添加信息窗口
@@ -569,49 +569,46 @@
             // 创建信息窗口
             var infoWindow = new BMap.InfoWindow(content);
 
-            // 创建一个查看详情的按钮
+            // 创建查看详情按钮
             var openLinkButton = document.createElement("button");
             openLinkButton.appendChild(document.createTextNode("查看详情"));
             openLinkButton.className = "info-window-button"; // 添加样式类
 
             // 绑定点击事件，打开链接
             openLinkButton.addEventListener("click", function () {
-                window.open(poi.url, "_blank"); // 在新窗口中打开链接
+                window.open(poi.url, "_blank"); 
             });
 
-            // 创建一个到这去的按钮
+            // 创建到这去的按钮
             var goToButton = document.createElement("button");
             goToButton.appendChild(document.createTextNode("到这去"));
-            goToButton.className = "info-window-button"; // 添加样式类
+            goToButton.className = "info-window-button";
 
-            // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
+            // 绑定点击事件，路径规划
             goToButton.addEventListener("click", function () {
                 document.getElementById("endPoint").value = poi.title;
-                searchRoute(); // 触发路径规划
             });
 
-            // 创建一个从这出发的按钮
+            // 创建从这出发的按钮
             var fromButton = document.createElement("button");
             fromButton.appendChild(document.createTextNode("从这出发"));
-            fromButton.className = "info-window-button"; // 添加样式类
+            fromButton.className = "info-window-button"; 
 
-            // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
+            // 绑定点击事件，路径规划
             fromButton.addEventListener("click", function () {
                 document.getElementById("startPoint").value = poi.title;
-                searchRoute(); // 触发路径规划
             });
 
-            // 创建一个周边推荐的按钮
+            // 创建周边推荐的按钮
             var roundrecommButton = document.createElement("button");
             roundrecommButton.appendChild(document.createTextNode("周边推荐"));
-            roundrecommButton.className = "info-window-button"; // 添加样式类
+            roundrecommButton.className = "info-window-button"; 
 
-            // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
+            // 绑定点击事件，周边推荐
             roundrecommButton.addEventListener("click", function () {
                 document.getElementById("centerPoint").value = poi.title;
-                // searchRoute(); // 触发路径规划
             });
-            // 创建一个 div 包含两个按钮
+            // 创建 div 包含所有按钮
             var contentDiv = document.createElement('div');
             contentDiv.innerHTML = content + "<br>";
             contentDiv.appendChild(openLinkButton);
@@ -769,15 +766,11 @@
             for (var i = 0; i < locationsData.length; i++) {
                 var location = locationsData[i];
                 var point = new BMap.Point(location.lng, location.lat);
-                // var marker = new BMap.Marker(point);
-                // var myPurpleIcon = new BMap.Icon('../imgs/marker.png', new BMap.Size(36, 27), { "imageOffset": new BMap.Size(-90, -22) });
-                // var marker = new BMap.Marker(point, { icon: myPurpleIcon });
                 var myPurpleIcon = new BMap.Icon('../imgs/marker.png', new BMap.Size(18, 27), { "imageOffset": new BMap.Size(-18, -22) });
                 var marker = new BMap.Marker(point, { icon: myPurpleIcon });
                 map.addOverlay(marker);
 
                 // 添加信息窗口
-                // var content = location.name;
                 addInfoWindow1(marker, location.name, point, 0);
             }
 
