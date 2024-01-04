@@ -367,7 +367,8 @@ function show_person(person_id){
     fetch('../json/绣娘.json')
             .then(response => response.json()) // 解析JSON数据
             .then(data => {
-                var item = data.find(item => item.ID === person_id);
+                var num_person_id = parseInt(person_id);
+                var item = data.find(item => item.ID === num_person_id);
                 $("#person_introduction").text(item.介绍);
                 lng_person = item.经度;
                 lat_person = item.纬度;
