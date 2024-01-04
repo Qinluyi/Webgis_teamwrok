@@ -217,10 +217,14 @@
         <div class="sidebar" id="sidebar">
             <h2>路径规划</h2>
             <label for="startPoint">起点：</label>
+
             <input type="text" id="startPoint" />
             <label for="endPoint">终点：</label>
             <input type="text" id="endPoint" />
-            <button id="routeButton">规划路径</button>
+            <p style="font-size: 1px;">以当前位置作为起点请点击地图右下角的定位控件</p>
+            <button id="routeButton">规划驾车路径</button>
+            <button id="routewalkButton">规划步行路径</button>
+
 
             <!-- 地点列表 -->
             <ul class="locationList" id="locationList">
@@ -280,7 +284,6 @@
     <script src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
     <!-- <script src="../js/periphery.js"></script> -->
     <script>
-        //全局变量
         document.getElementById("toggleSidebar").addEventListener("click", function () {
             var sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("sidebar-hidden");
@@ -393,14 +396,55 @@
             startSearch.search(startPointName);
         }
 
-        // document.getElementById("routeButton").addEventListener("click", searchRoute);
-        document.getElementById("routeButton").addEventListener("click", function () {
-            if (iflngandlat === false) {
-                searchRoute();
-            } else {
-                searchRoute1();
+        document.getElementById("routeButton").addEventListener("click", searchRoute);
+
+        function searchWalkingRoute() {
+            var startPointName = document.getElementById("startPoint").value;
+            var endPointName = document.getElementById("endPoint").value;
+
+            if (!startPointName || !endPointName) {
+                alert("请输入起点和终点");
+                return;
             }
-        });
+
+            // 使用百度地图的getPoint方法获取经纬度坐标
+            var startSearch = new BMap.LocalSearch(map, {
+                onSearchComplete: function (results) {
+                    var startPoint = results.getPoi(0).point;
+                    var endSearch = new BMap.LocalSearch(map, {
+                        onSearchComplete: function (results) {
+                            var endPoint = results.getPoi(0).point;
+                            // 清除之前的覆盖物（折线）
+                            map.clearOverlays();
+
+                            var walking = new BMap.WalkingRoute(map, {
+                                renderOptions: { map: map, autoViewport: true },
+                                onSearchComplete: function (results) {
+                                    if (walking.getStatus() == BMAP_STATUS_SUCCESS) {
+                                        var plan = results.getPlan(0);
+                                        var route = plan.getRoute(0);
+                                        var path = route.getPath();
+                                        var polyline = new BMap.Polyline(path);
+                                        map.addOverlay(polyline);
+                                    }
+                                }
+                            });
+                            walking.search(startPoint, endPoint);
+                        }
+                    });
+                    endSearch.search(endPointName);
+                }
+            });
+            startSearch.search(startPointName);
+        }
+        document.getElementById("routewalkButton").addEventListener("click", searchWalkingRoute);
+        // document.getElementById("routeButton").addEventListener("click", function () {
+        //     if (iflngandlat === false) {
+        //         searchRoute();
+        //     } else {
+        //         searchRoute1();
+        //     }
+        // });
 
         // 初始化搜索框
         var startAutocomplete1 = new BMap.Autocomplete({
@@ -511,8 +555,8 @@
             var geo = new BMap.Geocoder();
             geo.getPoint(centerPointName, function (point) {
                 if (point) {
-                    // 开始进行周边检索，以1000米为半径
-                    local.searchNearby("饭店", point, 3000);
+                    // 开始进行周边检索，以5000米为半径
+                    local.searchNearby("饭店", point, 5000);
                     // local.searchNearby("酒店", centerPointName, 1000);
                 } else {
                     alert("无法获取中心点坐标，请检查输入地址是否正确");
@@ -599,7 +643,7 @@
             // 创建信息窗口
             var infoWindow = new BMap.InfoWindow(content);
             var contentDiv = document.createElement('div');
-    contentDiv.innerHTML = content + "<br>";
+            contentDiv.innerHTML = content + "<br>";
             if (isback == 1) {
                 // 创建一个查看详情的按钮
                 var openLinkButton = document.createElement("button");
@@ -688,7 +732,7 @@
             //         // document.getElementById("endPoint").value = address;  // 设置中心点搜索框
             //     }
             // });
-            addInfoWindow1(newMarker, worksname, point,1);
+            addInfoWindow1(newMarker, worksname, point, 1);
         }
         // 在页面加载完成时执行 linkworks 函数的标志
         var executeLinkworks = localStorage.getItem("executeLinkworks");
@@ -734,7 +778,7 @@
 
                 // 添加信息窗口
                 // var content = location.name;
-                addInfoWindow1(marker, location.name, point,0);
+                addInfoWindow1(marker, location.name, point, 0);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
@@ -773,7 +817,7 @@
 
                 // 添加信息窗口
                 // var content = location.名字;
-                addInfoWindow1(marker, location.名字, point,0);
+                addInfoWindow1(marker, location.名字, point, 0);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
@@ -814,7 +858,7 @@
 
                 // 添加信息窗口
                 // var content = location.name;
-                addInfoWindow1(marker, location.name, point,0);
+                addInfoWindow1(marker, location.name, point, 0);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
