@@ -7,6 +7,7 @@ var lng_person;
 var lat_person;
 var executeLinkworks;
 var worksname;
+var personsname;
 
 
 window.onload = function(){
@@ -31,30 +32,31 @@ function show_product(item_id,is_class){
                 }, // Pass the parameter here
                 success: function (data) {//返回结果在data里 数据返回成功之后要干什么
                     $.each(data, function (index, item) {
-                                    console.log(item.objectid)
-                                    $("#item_name").text(item.名字);
-                                    $("#DianZan").text(item.点赞数);
-                                    $("#XiaoLiang").text(item.销量);
-                                    var srcpath="../MiaoXiu_Image/"+item.OBJECTID+".jpg";
-                                    $("#item_picture").attr("src", srcpath);
-                                    $("#item_picture").attr("class","col_up_img");
-                                    $("#product_introduction").text(item.描述);
                                     
-                                    type=item.类别;
-                                    var map = new BMapGL.Map("map");                // 创建地图实例
-                                    var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
-                                    lng_product = item.经度;
-                                    lat_product = item.纬度;
-                                    worksname = item.名字;
-                                    var marker = new BMapGL.Marker(point);        // 创建标注   
-                                    map.addOverlay(marker);   
-                                    map.centerAndZoom(point, 14);                      // 设置地图级别
-                                    map.enableScrollWheelZoom(); 
-                                    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-                                    console.log('地图完成');
-                                    //找相同商品
-                                    Find_the_same(type);    
-                                });      
+                        show_type(item,is_class);
+                        show_person(item.发布者I);
+                        $("#item_name").text(item.名字);
+                        type=item.类别;              
+                        var srcpath="../MiaoXiu_Image/"+item.objectid+".jpg";
+                        $("#DianZan").text(item.点赞数);
+                        $("#XiaoLiang").text(item.销量);
+                        $("#price").text(item.价格);
+                        $("#item_picture").attr("src", srcpath);
+                        $("#item_picture").attr("class","col_up_img");
+                        $("#product_introduction").text(item.描述);
+                        $("#map_text").text('查看绣品产地');
+                        var map = new BMapGL.Map("map");                // 创建地图实例
+                        var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
+                        lng_product = item.经度;
+                        lat_product = item.纬度;
+                        worksname = item.名字;
+                        var marker = new BMapGL.Marker(point);        // 创建标注   
+                        map.addOverlay(marker);   
+                        map.centerAndZoom(point, 10);                      // 设置地图级别
+                        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+                        console.log('地图完成');
+                        Find_the_same(type); 
+                    });      
                 }
             });
         }else{
@@ -68,9 +70,16 @@ function show_product(item_id,is_class){
                 success: function (data) {//返回结果在data里 数据返回成功之后要干什么
                     $.each(data, function (index, item) {
                                     console.log(item.objectid)
-                                    $("#item_name").text(item.课程名);
-                                    $("#DianZan").text(item.点赞数);
-                                    $("#XiaoLiang").text(item.销量);
+                                    var date_body ='<img src="../imgs/日期.png" alt="点赞数"></img><p>上课时间：'+item.时间+'</p>';
+                show_person(item.授课老师id);
+                $("#date").html(date_body); 
+                show_type(item,is_class);
+                $("#product_introduction_title").text("课程详情");
+                $("#price").text(item.价格);
+                $("#check_location").text('查看上课地点');
+                $("#person_introduction_title").text('授课老师简介')
+                $("#person_location").text('查看授课老师所在地');
+                $("#item_name").text(item.课程名);
                                     var srcpath="../MiaoXiu_Image/"+item.课程id+".jpg";
                                     $("#item_picture").attr("src", srcpath);
                                     $("#item_picture").attr("class","col_up_img");
@@ -80,13 +89,12 @@ function show_product(item_id,is_class){
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
                                     lng_product = item.经度;
                                     lat_product = item.纬度;
-                                    worksname = item.名字;
+                                    worksname = item.课程名;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
                                     map.centerAndZoom(point, 10);                      // 设置地图级别
                                     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
                                     console.log('地图完成');
-                                    //找相同商品
                                     Find_the_same(0);    
                                 });      
                 }
@@ -156,7 +164,7 @@ function show_product(item_id,is_class){
                                     var point = new BMapGL.Point(item.经度, item.纬度);     // 设置中心点坐标
                                     lng_product = item.经度;
                                     lat_product = item.纬度;
-                                    worksname = item.名字;
+                                    worksname = item.课程名;
                                     var marker = new BMapGL.Marker(point);        // 创建标注   
                                     map.addOverlay(marker);   
                                     map.centerAndZoom(point, 10);                      // 设置地图级别
@@ -258,7 +266,7 @@ function DivData(data,type){
     if(my_switch==true){
                     $.each(data, function (index, item) {
                         if(type==1){
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.objectid+".jpg' alt='"+item.objectid+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.非遗种+"</p>"+
                                     "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -268,7 +276,7 @@ function DivData(data,type){
                         }
                     if(type == 2){
                         
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.objectid+".jpg' alt='"+item.objectid+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.品牌+"</p>"+
                                     "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+")'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -278,7 +286,7 @@ function DivData(data,type){
                     }
                     if(type == 3){
                         
-                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.OBJECTID+".jpg' alt='"+item.OBJECTID+"' onclick='show_product("+item.objectid+",0)'>"+
+                                    tbodydata +="<div class='pic_box'>"+"<img class='box_img' src='../MiaoXiu_Image/"+item.objectid+".jpg' alt='"+item.objectid+"' onclick='show_product("+item.objectid+",0)'>"+
                                     "<div class = 'name_img'><p>"+item.寓意+"</p>"+
                                     "<img src='../imgs/购物车.png' class='add-to-cart' alt='Image' item_id='"+item.objectid+"' onclick='add_product("+item.objectid+",0)'></div>"+
                                     "<hr/><p>"+item.名字+"</p>"+"</div>";
@@ -360,7 +368,8 @@ function show_person(person_id){
     fetch('../json/绣娘.json')
             .then(response => response.json()) // 解析JSON数据
             .then(data => {
-                var item = data.find(item => item.ID === person_id);
+                var num_person_id = parseInt(person_id);
+                var item = data.find(item => item.ID === num_person_id);
                 $("#person_introduction").text(item.介绍);
                 lng_person = item.经度;
                 lat_person = item.纬度;
@@ -399,6 +408,8 @@ function To_Map(is_product){
     }else{
     localStorage.setItem('lng', lng_person);
     localStorage.setItem('lat', lat_person);
+    console.log(lng_person);
+    console.log(lat_person);
     console.log("person");
     }
     localStorage.setItem('worksname', worksname);

@@ -33,14 +33,14 @@ const cors = require('cors');
 app.use(cors());
 app.options('*', cors());
 
-const connectionString = 'postgres://postgres:Xxsht123@localhost:5858/ajaxphp';
+const connectionString = 'postgres://postgres:123456@localhost:5432/ajaxphp';
 let client = null;
 let mySwitch = false; // 默认值为false
 
 // 检查数据库和表是否存在的函数
 async function doesDatabaseAndTableExist() {
   const checkClient = new Client({
-      connectionString: 'postgres://postgres:Xxsht123@localhost:5858/ajaxphp', // 连接到默认的 'postgres' 数据库
+      connectionString: 'postgres://postgres:123456@localhost:5432/ajaxphp', // 连接到默认的 'postgres' 数据库
   });
 
   try {
@@ -144,7 +144,7 @@ app.get('/list3', function(req, res) {
     const price=req.query.price;
     const ups=req.query.ups;
     const soldnum=req.query.soldnum;
-          const query = 'INSERT INTO xiupin1 (objectid,id,发布者i, 寓意, 非遗种, 类别, 品牌,名字,描述, 图片,adcode,name,经度,纬度,价格,点赞数,销量) VALUES (nextval(\'pk\'),$1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)';
+          const query = 'INSERT INTO xiupin1 (objectid,id,发布者i, 寓意, 非遗种, 类别, 品牌,名字,描述, 图片,adcode,name,经度,纬度,价格,点赞数,销量) VALUES (nextval(\'xiupin_sequence\'),$1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)';
           const values = [id,author, meaning, category, categorynum, brand,name,description, picture,adcode,ename,longtitude,latitude,price,ups,soldnum];
       
           client.query(query, values, function(error, results)  {

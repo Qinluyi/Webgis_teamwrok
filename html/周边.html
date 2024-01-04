@@ -207,24 +207,20 @@
 
 <body>
     <div class="navbar">
-        <a href="../xiashuying/category.html">苗绣社区</a>
+        <a href="#">苗绣社区</a>
         <a href="../html/WalkIn.html">苗绣商城</a>
-        <a href="periphery.html">苗绣周边</a>
-        <a href="产业概览.html">产业概览</a>
+        <a href="">苗绣周边</a>
+        <a href="#">产业概览</a>
     </div>
     <div class="container">
         <button id="toggleSidebar" class="sidebar-toggle-btn"><i class="fa fa-bars"></i><br>路<br>径<br>规<br>划</button>
         <div class="sidebar" id="sidebar">
             <h2>路径规划</h2>
             <label for="startPoint">起点：</label>
-
             <input type="text" id="startPoint" />
             <label for="endPoint">终点：</label>
             <input type="text" id="endPoint" />
-            <p style="font-size: 1px;">以当前位置作为起点请点击地图左上角的定位控件</p>
-            <button id="routeButton">规划驾车路径</button>
-            <button id="routewalkButton">规划步行路径</button>
-
+            <button id="routeButton">规划路径</button>
 
             <!-- 地点列表 -->
             <ul class="locationList" id="locationList">
@@ -322,24 +318,11 @@
 
         // 添加定位控件
         var geolocationControl = new BMap.GeolocationControl({
-            // anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
-            anchor:new BMap.Size(50, 50),
+            anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
             showAddressBar: true,
             enableAutoLocation: true
         });
         map.addControl(geolocationControl);
-
-        // var geolocationControl = new BMap.GeolocationControl({
-        //     anchor: BMAP_ANCHOR_BOTTOM_RIGHT, // 设置为右下角
-        //     showAddressBar: true,
-        //     enableAutoLocation: true
-        // });
-        // map.addControl(geolocationControl);
-
-        // // 手动调整位置
-        // var geolocationDiv = document.querySelector('.anchorBL');
-        // geolocationDiv.style.bottom = '50px';
-        // geolocationDiv.style.right = '50px';
 
         // 获取当前位置并设置为起点输入框的值
         var startInput = document.getElementById("startPoint");
@@ -385,7 +368,7 @@
                     var endSearch = new BMap.LocalSearch(map, {
                         onSearchComplete: function (results) {
                             var endPoint = results.getPoi(0).point;
-                            // 清除之前的覆盖物
+                            // 清除之前的覆盖物（折线）
                             map.clearOverlays();
 
                             var driving = new BMap.DrivingRoute(map, {
@@ -408,56 +391,8 @@
             });
             startSearch.search(startPointName);
         }
-
         document.getElementById("routeButton").addEventListener("click", searchRoute);
 
-        function searchWalkingRoute() {
-            var startPointName = document.getElementById("startPoint").value;
-            var endPointName = document.getElementById("endPoint").value;
-
-            if (!startPointName || !endPointName) {
-                alert("请输入起点和终点");
-                return;
-            }
-
-            // 使用百度地图的getPoint方法获取经纬度坐标
-            var startSearch = new BMap.LocalSearch(map, {
-                onSearchComplete: function (results) {
-                    var startPoint = results.getPoi(0).point;
-                    var endSearch = new BMap.LocalSearch(map, {
-                        onSearchComplete: function (results) {
-                            var endPoint = results.getPoi(0).point;
-                            // 清除之前的覆盖物（折线）
-                            map.clearOverlays();
-
-                            var walking = new BMap.WalkingRoute(map, {
-                                renderOptions: { map: map, autoViewport: true },
-                                onSearchComplete: function (results) {
-                                    if (walking.getStatus() == BMAP_STATUS_SUCCESS) {
-                                        var plan = results.getPlan(0);
-                                        var route = plan.getRoute(0);
-                                        var path = route.getPath();
-                                        var polyline = new BMap.Polyline(path);
-                                        map.addOverlay(polyline);
-                                    }
-                                }
-                            });
-                            walking.search(startPoint, endPoint);
-                        }
-                    });
-                    endSearch.search(endPointName);
-                }
-            });
-            startSearch.search(startPointName);
-        }
-        document.getElementById("routewalkButton").addEventListener("click", searchWalkingRoute);
-        // document.getElementById("routeButton").addEventListener("click", function () {
-        //     if (iflngandlat === false) {
-        //         searchRoute();
-        //     } else {
-        //         searchRoute1();
-        //     }
-        // });
 
         // 初始化搜索框
         var startAutocomplete1 = new BMap.Autocomplete({
@@ -490,7 +425,7 @@
 
                 onSearchComplete: function (results) {
                     if (local.getStatus() == BMAP_STATUS_SUCCESS) {
-                        // 清除之前的覆盖物
+                        // 清除之前的覆盖物（标记）
                         map.clearOverlays();
                         // 获取检索结果
                         var points = [];
@@ -499,7 +434,7 @@
                             console.log(poi);
                             var point = poi.point;
                             points.push(point);
-                            // 在地图上添加标记
+                            // 在地图上添加一个标记
                             var marker = new BMap.Marker(point);
                             map.addOverlay(marker);
                             // 添加信息窗口
@@ -568,8 +503,8 @@
             var geo = new BMap.Geocoder();
             geo.getPoint(centerPointName, function (point) {
                 if (point) {
-                    // 开始进行周边检索，以5000米为半径
-                    local.searchNearby("饭店", point, 5000);
+                    // 开始进行周边检索，以1000米为半径
+                    local.searchNearby("饭店", point, 3000);
                     // local.searchNearby("酒店", centerPointName, 1000);
                 } else {
                     alert("无法获取中心点坐标，请检查输入地址是否正确");
@@ -582,94 +517,16 @@
             // 创建信息窗口
             var infoWindow = new BMap.InfoWindow(content);
 
-            // 创建查看详情按钮
+            // 创建一个查看详情的按钮
             var openLinkButton = document.createElement("button");
             openLinkButton.appendChild(document.createTextNode("查看详情"));
             openLinkButton.className = "info-window-button"; // 添加样式类
 
             // 绑定点击事件，打开链接
             openLinkButton.addEventListener("click", function () {
-                window.open(poi.url, "_blank");
+                window.open(poi.url, "_blank"); // 在新窗口中打开链接
             });
 
-            // 创建到这去的按钮
-            var goToButton = document.createElement("button");
-            goToButton.appendChild(document.createTextNode("到这去"));
-            goToButton.className = "info-window-button";
-
-            // 绑定点击事件，路径规划
-            goToButton.addEventListener("click", function () {
-                document.getElementById("endPoint").value = poi.title;
-            });
-
-            // 创建从这出发的按钮
-            var fromButton = document.createElement("button");
-            fromButton.appendChild(document.createTextNode("从这出发"));
-            fromButton.className = "info-window-button";
-
-            // 绑定点击事件，路径规划
-            fromButton.addEventListener("click", function () {
-                document.getElementById("startPoint").value = poi.title;
-            });
-
-            // 创建周边推荐的按钮
-            var roundrecommButton = document.createElement("button");
-            roundrecommButton.appendChild(document.createTextNode("周边推荐"));
-            roundrecommButton.className = "info-window-button";
-
-            // 绑定点击事件，周边推荐
-            roundrecommButton.addEventListener("click", function () {
-                document.getElementById("centerPoint").value = poi.title;
-            });
-            // 创建 div 包含所有按钮
-            var contentDiv = document.createElement('div');
-            contentDiv.innerHTML = content + "<br>";
-            contentDiv.appendChild(openLinkButton);
-            contentDiv.appendChild(goToButton);
-            contentDiv.appendChild(fromButton);
-            contentDiv.appendChild(roundrecommButton);
-
-            // 将按钮添加到信息窗口内容中
-            infoWindow.setContent(contentDiv);
-
-            // 绑定标记点击事件，打开信息窗口
-            marker.addEventListener("click", function () {
-                map.openInfoWindow(infoWindow, point);
-            });
-        }
-
-        function addInfoWindow1(marker, content, point, isback) {
-            var address;
-            var geocoder = new BMap.Geocoder();
-            geocoder.getLocation(point, function (result) {
-                if (result) {
-                    var addressComponents = result.addressComponents;
-                    address = addressComponents.province + addressComponents.city + addressComponents.district +
-                        addressComponents.street + addressComponents.streetNumber;
-
-                    console.log(address);
-                }
-            });
-            // 创建信息窗口
-            var infoWindow = new BMap.InfoWindow(content);
-            var contentDiv = document.createElement('div');
-            contentDiv.innerHTML = content + "<br>";
-            if (isback == 1) {
-                // 创建一个查看详情的按钮
-                var openLinkButton = document.createElement("button");
-                openLinkButton.appendChild(document.createTextNode("查看详情"));
-                openLinkButton.className = "info-window-button"; // 添加样式类
-
-                // 绑定点击事件，打开链接
-                // openLinkButton.addEventListener("click", function () {
-                //     window.open(poi.url, "_blank"); // 在新窗口中打开链接
-                // });
-                openLinkButton.addEventListener("click", function () {
-                    map.openInfoWindow(infoWindow, point);
-                    window.history.back();
-                });
-                contentDiv.appendChild(openLinkButton);
-            }
             // 创建一个到这去的按钮
             var goToButton = document.createElement("button");
             goToButton.appendChild(document.createTextNode("到这去"));
@@ -677,36 +534,15 @@
 
             // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
             goToButton.addEventListener("click", function () {
-                document.getElementById("endPoint").value = address;
-                // searchRoute(); // 触发路径规划
+                document.getElementById("endPoint").value = poi.title;
+                searchRoute(); // 触发路径规划
             });
 
-            // 创建一个从这出发的按钮
-            var fromButton = document.createElement("button");
-            fromButton.appendChild(document.createTextNode("从这出发"));
-            fromButton.className = "info-window-button"; // 添加样式类
-
-            // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
-            fromButton.addEventListener("click", function () {
-                document.getElementById("startPoint").value = address;
-            });
-
-            // 创建一个周边推荐的按钮
-            var roundrecommButton = document.createElement("button");
-            roundrecommButton.appendChild(document.createTextNode("周边推荐"));
-            roundrecommButton.className = "info-window-button"; // 添加样式类
-
-            // 绑定点击事件，路径规划，并将 poi.title 设置为终点搜索框的值
-            roundrecommButton.addEventListener("click", function () {
-                document.getElementById("centerPoint").value = address;
-            });
             // 创建一个 div 包含两个按钮
-            // contentDiv = document.createElement('div');
-            // contentDiv.innerHTML = content + "<br>";
-            // contentDiv.appendChild(openLinkButton);
+            var contentDiv = document.createElement('div');
+            contentDiv.innerHTML = content + "<br>";
+            contentDiv.appendChild(openLinkButton);
             contentDiv.appendChild(goToButton);
-            contentDiv.appendChild(fromButton);
-            contentDiv.appendChild(roundrecommButton);
 
             // 将按钮添加到信息窗口内容中
             infoWindow.setContent(contentDiv);
@@ -717,12 +553,12 @@
             });
         }
 
+
         function linkworks() {
             var lng = localStorage.getItem("lng");
             var lat = localStorage.getItem("lat");
             var worksname = localStorage.getItem('worksname');
-            console.log(lng, lat);
-            // var address;
+            console.log(lng, lat, worksname);
 
             var point = new BMap.Point(parseFloat(lng), parseFloat(lat));
             // 在地图上添加一个标记
@@ -730,17 +566,17 @@
             var newMarker = new BMap.Marker(point, { icon: myPurpleIcon });
             // var marker = new BMap.Marker(point);
             map.addOverlay(newMarker);
+            content = worksname;
             // addInfoWindow(newMarker,content, point);
             map.centerAndZoom(point, 15);
-            // var geocoder = new BMap.Geocoder();
-            // geocoder.getLocation(point, function (result) {
-            //     if (result) {
-            //         address = result.address;
-            //         // document.getElementById("centerPoint").value = address;  // 设置起点搜索框
-            //         // document.getElementById("endPoint").value = address;  // 设置中心点搜索框
-            //     }
-            // });
-            addInfoWindow1(newMarker, worksname, point, 1);
+            var geocoder = new BMap.Geocoder();
+            geocoder.getLocation(point, function (result) {
+                if (result) {
+                    var address = result.address;
+                    document.getElementById("centerPoint").value = address;  // 设置起点搜索框
+                    document.getElementById("endPoint").value = address;  // 设置中心点搜索框
+                }
+            });
         }
         // 在页面加载完成时执行 linkworks 函数的标志
         var executeLinkworks = localStorage.getItem("executeLinkworks");
@@ -777,12 +613,12 @@
             for (var i = 0; i < locationsData.length; i++) {
                 var location = locationsData[i];
                 var point = new BMap.Point(location.lng, location.lat);
-                var myPurpleIcon = new BMap.Icon('../imgs/marker.png', new BMap.Size(18, 27), { "imageOffset": new BMap.Size(-18, -22) });
-                var marker = new BMap.Marker(point, { icon: myPurpleIcon });
+                var marker = new BMap.Marker(point);
                 map.addOverlay(marker);
 
                 // 添加信息窗口
-                addInfoWindow1(marker, location.name, point, 0);
+                var content = location.name;
+                addInfoWindow(marker, content, point, location);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
@@ -814,14 +650,12 @@
                 // console.log("绣品信息:", location);
                 var point = new BMap.Point(location.经度, location.纬度);
                 // console.log(point);
-                // var marker = new BMap.Marker(point);
-                var myPurpleIcon = new BMap.Icon('../imgs/marker.png', new BMap.Size(18, 27), { "imageOffset": new BMap.Size(-54, -22) });
-                var marker = new BMap.Marker(point, { icon: myPurpleIcon });
+                var marker = new BMap.Marker(point);
                 map.addOverlay(marker);
 
                 // 添加信息窗口
-                // var content = location.名字;
-                addInfoWindow1(marker, location.名字, point, 0);
+                var content = location.名字;
+                addInfoWindow(marker, content, point, location);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
@@ -853,16 +687,12 @@
                 // console.log("绣品信息:", location);
                 var point = new BMap.Point(location.lng, location.lat);
                 // console.log(point);
-                // var marker = new BMap.Marker(point);
-                // var myPurpleIcon = new BMap.Icon('../imgs/marker.png', new BMap.Size(18, 27), { "imageOffset": new BMap.Size(-36, -22) });
-                // var marker = new BMap.Marker(point, { icon: myPurpleIcon });
-                var myPurpleIcon = new BMap.Icon('../imgs/marker.png', new BMap.Size(18, 27), { "imageOffset": new BMap.Size(-0, -22) });
-                var marker = new BMap.Marker(point, { icon: myPurpleIcon });
+                var marker = new BMap.Marker(point);
                 map.addOverlay(marker);
 
                 // 添加信息窗口
-                // var content = location.name;
-                addInfoWindow1(marker, location.name, point, 0);
+                var content = location.name;
+                addInfoWindow(marker, content, point, location);
             }
 
             // 将地图缩放到合适的级别，显示所有点位
