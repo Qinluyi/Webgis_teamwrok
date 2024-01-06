@@ -11,7 +11,6 @@ var name1=1;
 var name2=2;
 var name3=3;
 var name4 = 4;
-true
 var my_switch = false;//默认是连不上数据库的
 //my_switch = localStorage.getItem("switch"); 
 var element = '';
